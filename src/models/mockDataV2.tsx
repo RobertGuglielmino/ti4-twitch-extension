@@ -31,7 +31,7 @@ export const mockData2: GameDataV2 = {
       [],
       []
     ],
-    "secretObjectives": [[""], [""], [""], [""], [""], [""]],
+    "secretObjectives": [["Become a Martyr"], [""], [""], [""], [""], [""]],
     "commandCounters": [
       { "tactics": 3, "fleet": 3, "strategy": 2 },
       { "tactics": 3, "fleet": 3, "strategy": 2 },

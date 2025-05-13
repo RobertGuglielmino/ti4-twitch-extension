@@ -6,27 +6,44 @@ interface SecretObjItem {
 
 const SecretObjItem = ({ secrets, inHand }: SecretObjItem) => {
 
+
+
     function getUnscoredSecrets() {
-        const secrets = []
+        const unscoredSecrets = [];
         for (let i = 0; i < inHand; i++) {
-            secrets.push(<div className="bg-[url(../assets/overlay_icons/secret.short.jpg)] bg-cover bg-center border-2 rounded opacity-50 h-12 max-w-auto p-1 m-1 font-bold text-black border-red-600">
+            unscoredSecrets.push(<div className="bg-[url(../assets/overlay_icons/secret.short.jpg)] bg-cover bg-center border-2 rounded opacity-50 h-12 max-w-auto p-1 m-1 font-bold text-black border-red-600">
             </div>);
         }
 
         return (<ul>
-            {secrets}
+            {unscoredSecrets}
         </ul>);
     }
+
+    function getUnclaimedSecrets() {
+        const unclaimedSecrets = [];
+        for (let i = 0; i < (3 - secrets.length - inHand); i++) {
+            unclaimedSecrets.push(<div className="bg-slate-950 border-2 rounded opacity-50 h-12 max-w-auto p-1 m-1 font-bold text-black border-slate-700">
+            </div>);
+        }
+
+        return (<ul>
+            {unclaimedSecrets}
+        </ul>);
+    }
+
+    console.log(secrets.length);
+    console.log(inHand);
 
     return (
         <div>
             {secrets.map(secret => (
-                <div className="border-2 rounded h-12 max-w-auto p-1 m-1 font-bold  text-red-100 bg-red-950 border-black">
+                <div className="border-4 rounded h-12 max-w-auto p-1 m-1 flex flex-col capitalize justify-center text-white align-middle bg-red-950 border-black">
                     {secret}
                 </div>
             ))}
             {getUnscoredSecrets()}
-
+            {getUnclaimedSecrets()}
         </div>
     );
 }

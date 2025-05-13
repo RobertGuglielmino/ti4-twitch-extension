@@ -130,10 +130,11 @@ const PlayerHoverCard = ({ player, hoverIcon }: PlayerHoverCardProps) => {
                     <div className="flex flex-col justify-between">
                         <div className="gap-1">
                             <h4 className="font-avalors text-sm uppercase text-gray-400 mb-1">Unit Upgrades</h4>
-                            <TechItem color={'white'} technologies={player.technologies.filter((tech) => TECHNOLOGY_COLOR[tech] === 'white')} />
+                            {player.technologies.map(tech => TECHNOLOGY_COLOR[tech]).includes("white") &&
+                             <TechItem color={'white'} technologies={player.technologies.filter((tech) => TECHNOLOGY_COLOR[tech] === 'white')} />}
                         </div>
                         <h4 className="font-avalors text-sm uppercase text-gray-400 mb-1">Secrets</h4>
-                        <SecretObjItem secrets={player.secretObjectives} inHand={2} />
+                        <SecretObjItem secrets={player.secretObjectives} inHand={1} />
                     </div>
                 </div>
             </div>
