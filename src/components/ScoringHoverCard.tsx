@@ -1,30 +1,34 @@
 
 import { Award } from 'lucide-react';
-import { GameData } from '../utils/interfaces';
+import { GameDataV2 } from '../models/interfaces';
+import { PublicObjective } from '../models/interfaces';
 
 interface ScoringHoverCardProps {
-  data: GameData
+  data: GameDataV2
 }
+
 
 // Scoring hover card component
 const ScoringHoverCard = ({ data }: ScoringHoverCardProps) => {
+
+  const NUMBER_OF_PLAYERS = data.playerData.name.length;
+
   return (
     <div className="absolute right-0 bottom-20 z-50 bg-gray-900 bg-opacity-95 rounded-lg p-3 shadow-xl border border-gray-700 w-120 text-white max-h-240 overflow-y-auto">
       <h3 className="font-bold text-lg mb-2 flex items-center">
         <Award size={18} className="text-yellow-400 mr-2" />
         Objective Scoring
       </h3>
-      
       {/* Objective scoring grid - more compact */}
       <div className="overflow-x-auto mb-3">
         <table className="w-full border-collapse text-xs">
           <thead>
             <tr>
               <th className="font-normal text-gray-400 p-1 border-b border-gray-700 text-left">Objective</th>
-              {data.players.map(player => (
-                <th key={player.id} className="font-normal text-gray-400 p-1 border-b border-gray-700 text-center w-7">
-                  <div className="h-5 w-5 rounded-full mx-auto flex items-center justify-center" style={{ backgroundColor: player.color }}>
-                    <span className="text-xs">{player.name[0]}</span>
+              {data.playerData.name.map((name: string, index: number) => (
+                <th key={index} className="font-normal text-gray-400 p-1 border-b border-gray-700 text-center w-7">
+                  <div className="h-5 w-5 rounded-full mx-auto flex items-center justify-center" style={{ backgroundColor: data.playerData.color[index] }}>
+                    <span className="text-xs">{name[0]}</span>
                   </div>
                 </th>
               ))}
@@ -33,55 +37,55 @@ const ScoringHoverCard = ({ data }: ScoringHoverCardProps) => {
           <tbody>
             {/* Stage I Objectives (1 point) */}
             <tr>
-              <td colSpan={data.players.length + 1} className="text-xs font-bold text-gray-300 p-1 bg-gray-800">
+              <td colSpan={NUMBER_OF_PLAYERS + 1} className="text-xs font-bold text-gray-300 p-1 bg-gray-800">
                 Stage I (1 Point)
               </td>
             </tr>
-            {data.objectives.public.filter(obj => obj.points === 1).map(objective => (
+            {data.objectives.public.filter((obj: PublicObjective) => obj.points === 1).map((objective) => (
               <tr key={objective.id} className="hover:bg-gray-800">
                 <td className="p-1 border-b border-gray-800 text-xs">
                   <div className="font-medium">{objective.name}</div>
                 </td>
-                {data.players.map(player => (
-                  <td key={player.id} className="text-center p-1 border-b border-gray-800">
-                    {objective.scored.includes(player.id) ? 
-                      <span className="text-green-500 text-xs font-bold">✓</span> : 
-                      objective.progress.hasOwnProperty(player.id) ? 
-                        <span className="text-zinc-400 text-xs font-thin">{objective.progress[player.id]}</span> : 
+                {data.playerData.name.map((_: string, index: number) => (
+                   <td key={index} className="text-center p-1 border-b border-gray-800">
+                    {objective.scored.includes(index) ?
+                      <span className="text-green-500 text-xs font-bold">✓</span> :
+                      objective.progress.hasOwnProperty(index) ?
+                        <span className="text-zinc-400 text-xs font-thin">{objective.progress[index]}</span> :
                         <span className="text-gray-700 text-xs">-</span>
                     }
                   </td>
                 ))}
               </tr>
             ))}
-            
+
             {/* Stage II Objectives (2 points) */}
             <tr>
-              <td colSpan={data.players.length + 1} className="text-xs font-bold text-gray-300 p-1 bg-gray-800">
+              <td colSpan={NUMBER_OF_PLAYERS + 1} className="text-xs font-bold text-gray-300 p-1 bg-gray-800">
                 Stage II (2 Points)
               </td>
             </tr>
-            {data.objectives.public.filter(obj => obj.points === 2).map(objective => (
+            {data.objectives.public.filter((obj: PublicObjective) => obj.points === 2).map((objective: any) => (
               <tr key={objective.id} className="hover:bg-gray-800">
                 <td className="p-1 border-b border-gray-800 text-xs">
                   <div className="font-medium">{objective.name}</div>
                 </td>
-                {data.players.map(player => (
-                  <td key={player.id} className="text-center p-1 border-b border-gray-800">
-                    {objective.scored.includes(player.id) ? 
-                      <span className="text-green-500 text-xs font-bold">✓</span> : 
-                      objective.progress.hasOwnProperty(player.id) ? 
-                        <span className="text-zinc-400 text-xs font-thin">{objective.progress[player.id]}</span> : 
+                {data.playerData.name.map((_: string, index: number) => (
+                  <td key={index} className="text-center p-1 border-b border-gray-800">
+                    {objective.scored.includes(index) ?
+                      <span className="text-green-500 text-xs font-bold">✓</span> :
+                      objective.progress.hasOwnProperty(index) ?
+                        <span className="text-zinc-400 text-xs font-thin">{objective.progress[index]}</span> :
                         <span className="text-gray-700 text-xs">-</span>
                     }
                   </td>
                 ))}
               </tr>
             ))}
-            
+
             {/* Mecatol Rex */}
             <tr>
-              <td colSpan={data.players.length + 1} className="text-xs font-bold text-gray-300 p-1 bg-gray-800">
+              <td colSpan={NUMBER_OF_PLAYERS + 1} className="text-xs font-bold text-gray-300 p-1 bg-gray-800">
                 Other
               </td>
             </tr>
@@ -89,10 +93,10 @@ const ScoringHoverCard = ({ data }: ScoringHoverCardProps) => {
               <td className="p-1 border-b border-gray-800 text-xs">
                 <div className="font-medium">Mecatol Rex</div>
               </td>
-              {data.players.map(player => (
-                <td key={player.id} className="text-center p-1 border-b border-gray-800">
-                  {data.objectives.mecatol.scored.hasOwnProperty(player.id) ? 
-                    <span className="text-yellow-600 text-xs font-bold">{data.objectives.mecatol.scored[player.id]}</span> : 
+              {data.playerData.name.map((_: string, index: number) => (
+                <td key={index} className="text-center p-1 border-b border-gray-800">
+                  {data.objectives.mecatol.scored.hasOwnProperty(index) ?
+                    <span className="text-yellow-600 text-xs font-bold">{data.objectives.mecatol.scored[index]}</span> :
                     <span className="text-gray-700 text-xs">-</span>
                   }
                 </td>
@@ -102,10 +106,10 @@ const ScoringHoverCard = ({ data }: ScoringHoverCardProps) => {
               <td className="p-1 border-b border-gray-800 text-xs">
                 <div className="font-medium">Support for the Throne</div>
               </td>
-              {data.players.map(player => (
-                <td key={player.id} className="text-center p-1 border-b border-gray-800">
-                  {data.objectives.mecatol.scored.hasOwnProperty(player.id) ? 
-                    <span className="text-yellow-500 text-xs font-bold">{data.objectives.mecatol.scored[player.id]}</span> : 
+              {data.playerData.name.map((_: string, index: number) => (
+                <td key={index} className="text-center p-1 border-b border-gray-800">
+                  {data.objectives.mecatol.scored.hasOwnProperty(index) ?
+                    <span className="text-yellow-500 text-xs font-bold">{data.objectives.mecatol.scored[index]}</span> :
                     <span className="text-gray-700 text-xs">-</span>
                   }
                 </td>
@@ -115,10 +119,10 @@ const ScoringHoverCard = ({ data }: ScoringHoverCardProps) => {
               <td className="p-1 border-b border-gray-800 text-xs">
                 <div className="font-medium">Secrets</div>
               </td>
-              {data.players.map(player => (
-                <td key={player.id} className="text-center p-1 border-b border-gray-800">
-                  {data.objectives.mecatol.scored.hasOwnProperty(player.id) ? 
-                    <span className="text-red-500 text-xs font-bold">{data.objectives.mecatol.scored[player.id]}</span> : 
+              {data.playerData.name.map((_: string, index: number) => (
+                <td key={index} className="text-center p-1 border-b border-gray-800">
+                  {data.objectives.mecatol.scored.hasOwnProperty(index) ?
+                    <span className="text-red-500 text-xs font-bold">{data.objectives.mecatol.scored[index]}</span> :
                     <span className="text-gray-700 text-xs">-</span>
                   }
                 </td>
@@ -127,7 +131,7 @@ const ScoringHoverCard = ({ data }: ScoringHoverCardProps) => {
           </tbody>
         </table>
       </div>
-      
+
       {/* Active laws - more compact */}
       <div>
         <h4 className="font-bold text-xs uppercase text-gray-400 mb-1 flex items-center">

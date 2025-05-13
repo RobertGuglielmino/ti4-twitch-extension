@@ -1,1 +1,22 @@
 @import "tailwindcss";
+
+@font-face {
+  font-family: 'AvalorsPersonalUseOnly';
+  src: url('@icons/AvalorsPersonalUseOnly.ttf') format('truetype');
+  /* src: url(new URL('../assets/AvalorsPersonalUseOnly.ttf', import.meta.url)) format('truetype'); */
+  font-weight: normal;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'ndastroneer';
+  src: url('@icons/ndastroneer.ttf') format('truetype');
+  /* src: url(new URL('../assets/ndastroneer.ttf', import.meta.url)) format('truetype'); */
+  font-weight: normal;
+  font-style: normal;
+}
+.font-avalors {
+  font-family: 'AvalorsPersonalUseOnly', sans-serif !important;
+}
+.font-astro {
+  font-family: 'ndastroneer', sans-serif !important;
+}

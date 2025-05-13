@@ -1,0 +1,27 @@
+{
+  "files": {
+    "index.html": {
+      "content-type": "text/html"
+    },
+    "viewer.js": {
+      "content-type": "application/javascript"
+    },
+    "style.css": {
+      "content-type": "text/css"
+    },
+    "assets/*": {
+      "content-type": "image/*"
+    }
+  },
+  "viewer_path": "index.html",
+  "asset_hosting": {
+    "mime_types": {
+      ".html": "text/html",
+      ".js": "application/javascript",
+      ".css": "text/css",
+      ".png": "image/png", 
+      ".jpg": "image/jpeg",
+      ".svg": "image/svg+xml"
+    }
+  }
+}

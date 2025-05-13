@@ -15,7 +15,7 @@ import Naalu from "../assets/faction_icons/naalu_icon.png";
 import NaazRohka from "../assets/faction_icons/naazrokha_icon.png";
 import Nekro from "../assets/faction_icons/nekro_icon.png";
 import Nomad from "../assets/faction_icons/nomad_icon.png";
-import Sardakk from "../assets/faction_icons/norr_icon.png";
+import Norr from "../assets/faction_icons/norr_icon.png";
 import Saar from "../assets/faction_icons/saar_icon.png";
 import Sol from "../assets/faction_icons/sol_icon.png";
 import Ul from "../assets/faction_icons/ul_icon.png";
@@ -42,7 +42,7 @@ export const FACTION_ICONS: FactionIconsMap = {
     "NaazRohka": NaazRohka,
     "Nekro": Nekro,
     "Nomad": Nomad,
-    "Sardakk": Sardakk,
+    "Norr": Norr,
     "Saar": Saar,
     "Sol": Sol,
     "Ul": Ul,

@@ -1,5 +1,5 @@
 import { FACTION_ICONS } from "../assets/icons";
-import { Player, StrategyCards } from "../utils/interfaces";
+import { Player, StrategyCards } from "../models/interfaces";
 import PlayerHoverCard from "./PlayerHoverCard";
 
 
@@ -27,6 +27,16 @@ interface PlayerIconProps {
   onMouseLeave: () => void
 }
 
+
+// ONLY NEED THESE
+    // name: string,
+    // active: boolean,
+    // faction: string,
+    // color: string,
+    // victoryPoints: number,
+    // strategyCard: string,
+    // speaker: boolean,
+
 // Player icon component
 const PlayerIcon = ({ player, isActive, isSpeaker, isActivePlayer, onMouseEnter, onMouseLeave }: PlayerIconProps) => {
 
@@ -53,6 +63,8 @@ const PlayerIcon = ({ player, isActive, isSpeaker, isActivePlayer, onMouseEnter,
         />
       </div>
 
+
+    
       <div className="absolute -top-1 -left-1">
         <div
           className="h-6 w-6 rounded-full flex items-center justify-center text-xs border border-gray-700 shadow-md"
