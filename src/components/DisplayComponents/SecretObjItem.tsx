@@ -32,8 +32,7 @@ const SecretObjItem = ({ secrets, inHand }: SecretObjItem) => {
         </ul>);
     }
 
-    console.log(secrets.length);
-    console.log(inHand);
+    // TODO front of card is front of secret 
 
     return (
         <div>

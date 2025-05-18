@@ -4,9 +4,10 @@
 interface TechChipProps {
     name: string,
     color: string,
+    active?: boolean
 }
 
-const TechChip = ({ name, color }: TechChipProps) => {
+const TechChip = ({ name, color, active }: TechChipProps) => {
 
     function getColorStyles(colorInput: string) {
         switch (colorInput) {
@@ -27,7 +28,7 @@ const TechChip = ({ name, color }: TechChipProps) => {
 
     const colorStyle = getColorStyles(color)
 
-    return (<div className={`font-astro border-2 rounded max-h-12 max-w-auto p-1 m-1 ${colorStyle}`}>
+    return (<div className={`font-astro text-xs border-2 rounded h-10 flex flex-col items-center justify-center w-16 p-1 m-1 ${colorStyle} ${active ? "opacity-100" : "opacity-100"}`}>
         {name}
     </div>);
 }

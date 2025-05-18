@@ -10,7 +10,7 @@ const LeaderItem = ({agent, commander, hero}: LeaderItemProps) => {
         <div className="m-1">
             {
                 Object.entries(leaders).map(([leader, available]) => {
-                    return (<div className={`${bgImages[leader]} bg-[length:auto_200%] bg-top-right border-2 rounded-sm p-1 my-1 text-sm font-astro font-bold  ${available ? "text-slate-300 border-slate-300" : " text-gray-400 brightness-50 border-gray-600"}`}>
+                    return (<div className={`${bgImages[leader]} bg-[length:auto_200%] h-12 w-18 flex flex-col justify-center bg-top-right border-2 rounded-sm p-1 my-1 text-lg font-astro font-bold  ${available ? "text-slate-300 border-slate-300" : "text-gray-400 brightness-50 border-gray-600"}`}>
                         {leader.toUpperCase()}
                     </div>);
                 })

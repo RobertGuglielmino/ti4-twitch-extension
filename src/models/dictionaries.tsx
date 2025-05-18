@@ -53,6 +53,9 @@ export const FACTION_WHITELIST = new Set([
 ]);
 export const UNKNOWN_FACTION = "cat";
 
+//tech
+//format by delimiter
+
 export const OBJECTIVE_NAME_ABBREVIATIONS: Record<string, string> = {
     // Public
     "Diversify Research": "2 TECH 2 COLORS",
@@ -266,3 +269,28 @@ export const TECHNOLOGY_COLOR: { [key: string]: string } = {
     "Yin Spinner": "green",
     "War Sun": "white",
 };
+
+export const UNIT_UPGRADES:  string[] = [
+    "Advanced Carrier II",
+    "Carrier II",
+    "Crimson Legionnaire II",
+    "Cruiser II",
+    "Destroyer II",
+    "Dimensional Tear II",
+    "Dreadnought II",
+    "Exotrireme II",
+    "Fighter II",
+    "Floating Factory II",
+    "Hel-Titan II",
+    "Hybrid Crystal Fighter II",
+    "Infantry II",
+    "Letani Warrior II",
+    "Memoria II",
+    "PDS II",
+    "Prototype War Sun II",
+    "Saturn Engine II",
+    "Space Dock II",
+    "Spec Ops II",
+    "Strike Wing Alpha II",
+    "Super-Dreadnought II",
+]

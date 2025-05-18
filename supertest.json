@@ -1,13 +1,124 @@
 {
-  endpoint: 'https://api.twitch.tv/helix/extensions/pubsub',
-  headers: {
-    Authorization: 'Bearer [TOKEN HIDDEN]',
-    'Client-ID': '7t2yby9rut597oiqidb2cu7hvzwwuv',
-    'Content-Type': 'application/json'
+  "playerData": {
+    "name": ["BlueChell", "BlueChell", "BlueChell", "BlueChell", "BlueChell", "BlueChell"],
+    "faction": ["Letnev", "Muaat", "Mahact", "Empyrean", "Norr", "Hacan"],
+    "color": ["White", "Blue", "Purple", "Yellow", "Red", "Green"],
+    "victoryPoints": [3, 8, 3, 3, 3, 3],
+    "strategyCard": [
+      "Warfare",
+      "Construction",
+      "Leadership",
+      "Politics",
+      "Trade",
+      "Technology"
+    ],
+    "strategyCardFaceDown": ["", "Construction", "", "", "", ""],
+    "technologies": [
+      [
+        "Prototype War Sun II",
+        "Psychoarchaeology",
+        "Neural Motivator",
+        "AI Development Algorithm",
+        "Scanlink Drone Network",
+        "Gravity Drive"
+      ],
+      [
+        "Prototype War Sun II",
+        "Psychoarchaeology",
+        "Neural Motivator",
+        "AI Development Algorithm",
+        "Scanlink Drone Network",
+        "Gravity Drive"],
+      [
+        "Prototype War Sun II",
+        "Psychoarchaeology",
+        "Neural Motivator",
+        "AI Development Algorithm",
+        "Scanlink Drone Network",
+        "Gravity Drive"],
+      [
+        "Prototype War Sun II",
+        "Psychoarchaeology",
+        "Neural Motivator",
+        "AI Development Algorithm",
+        "Scanlink Drone Network",
+        "Gravity Drive"],
+      [
+        "Prototype War Sun II",
+        "Psychoarchaeology",
+        "Neural Motivator",
+        "AI Development Algorithm",
+        "Scanlink Drone Network",
+        "Gravity Drive"],
+      [
+        "Prototype War Sun II",
+        "Psychoarchaeology",
+        "Neural Motivator",
+        "AI Development Algorithm",
+        "Scanlink Drone Network",
+        "Gravity Drive"]
+    ],
+    "secretObjectives": [["Become a Martyr", "Become a Martyr", "Become a Martyr"], ["Become a Martyr", "Become a Martyr", "Become a Martyr"], ["Become a Martyr", "Become a Martyr", "Become a Martyr"], ["Become a Martyr", "Become a Martyr", "Become a Martyr"], ["Become a Martyr", "Become a Martyr", "Become a Martyr"], ["Become a Martyr", "Become a Martyr", "Become a Martyr"]],
+    "commandCounters": { "tactics": [3, 3, 3, 3, 3, 3], "fleet": [3, 3, 3, 3, 3, 3], "strategy": [2, 3, 3, 3, 3, 3] },
+    "actionCards": [0, 0, 0, 0, 0, 0],
+    "promissoryNotes": [6, 6, 6, 7, 6, 6],
+    "leaders": { "agent": [true, true, true, true, true, true], "commander": [false, true, true, true, true, true], "hero": [false, true, true, true, true, true] },
+    "active": 5,
+    "speaker": 2
   },
-  payload: {
-    broadcaster_id: '50253428',
-    message: `{"playerData":{"name":["BlueChell","-","-","-","-","-"],"faction":["Letnev","Muaat","Mahact","Empyrean","Norr","Hacan"],"color":["White","Blue","Purple","Yellow","Red","Green"],"victoryPoints":[3,5,3,3,3,3],"strategyCard":["Warfare","Construction","Leadership","Politics","Trade","Technology"],"strategyCardFaceDown":["","Construction","","","",""],"technologies":[[],["Prototype War Sun II","Psychoarchaeology","Neural Motivator","AI Development Algorithm","Scanlink Drone Network"],[],[],[],[]],"secretObjectives":[[""],[""],[""],[""],[""],[""]],"commandCounters":[{"tactics":3,"fleet":3,"strategy":2},{"tactics":3,"fleet":3,"strategy":2},{"tactics":3,"fleet":3,"strategy":2},{"tactics":3,"fleet":3,"strategy":2},{"tactics":3,"fleet":3,"strategy":2},{"tactics":0,"fleet":6,"strategy":2}],"actionCards":[0,0,0,0,0,0],"promissoryNotes":[6,6,6,7,6,6],"leaders":[{"agent":true,"commander":false,"hero":false},{"agent":true,"commander":false,"hero":true},{"agent":true,"commander":true,"hero":true},{"agent":false,"commander":true,"hero":true},{"agent":true,"commander":false,"hero":false},{"agent":false,"commander":true,"hero":false}],"active":5,"speaker":0},"objectives":{"public":[{"id":0,"name":"Explore Deep Space","description":"3 EMPTY SYS","points":1,"scored":[1],"progress":{}},{"id":0,"name":"Negotiate Trade Routes","description":"5 TRADE GOODS","points":1,"scored":[1],"progress":{}},{"id":0,"name":"Command an Armada","description":"8 NON-FGTR SHIPS","points":1,"scored":[1],"progress":{}}],"secret":[{"id":0,"name":"Monopolize Production","description":"4 INDUSTRIAL","points":1,"scored":[1],"progress":{}}],"mecatol":{"name":"Custodians Points","points":1,"scored":[0,0,0,0,0,0]}},"laws":[{"name":"Homeland Defense Act","description":"Homeland Def Act"}],"general":{"round":2,"speaker":"White","activePlayer":"Blue","time":"7970"}}`,
-    target: [ 'broadcast' ]
+  "objectives": {
+    "public1": [
+      {
+        "id": 0,
+        "name": "Explore Deep Space",
+        "description": "3 EMPTY SYS",
+        "points": 1,
+        "scored": [1],
+        "progress": {}
+      },
+      {
+        "id": 0,
+        "name": "Negotiate Trade Routes",
+        "description": "5 TRADE GOODS",
+        "points": 1,
+        "scored": [1],
+        "progress": {}
+      }
+    ],
+    "public2": [
+      {
+        "id": 0,
+        "name": "Command an Armada",
+        "description": "8 NON-FGTR SHIPS",
+        "points": 1,
+        "scored": [1],
+        "progress": {}
+      }
+    ],
+    "secret": [
+      {
+        "id": 0,
+        "name": "Monopolize Production",
+        "description": "4 INDUSTRIAL",
+        "points": 1,
+        "scored": [1],
+        "progress": {}
+      }
+    ],
+    "mecatol": {
+      "name": "Custodians Points",
+      "points": 1,
+      "scored": [0, 0, 0, 0, 0, 0]
+    }
+  },
+  "laws": [
+    { "name": "Homeland Defense Act", "description": "Homeland Def Act" }
+  ],
+  "general": {
+    "round": 2,
+    "speaker": "Purple",
+    "activePlayer": "White",
+    "time": "6563"
   }
 }
+

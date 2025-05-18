@@ -2,6 +2,10 @@
 import { Award } from 'lucide-react';
 import { GameDataV2 } from '../models/interfaces';
 import { PublicObjective } from '../models/interfaces';
+import ScoringRow from './DisplayComponents/ScoringRow';
+import ScoringRowHeader from './DisplayComponents/ScoringRowHeader';
+import { FACTION_ICONS } from '../assets/icons';
+import FactionIcon from './DisplayComponents/FactionIcon';
 
 interface ScoringHoverCardProps {
   data: GameDataV2
@@ -11,149 +15,72 @@ interface ScoringHoverCardProps {
 // Scoring hover card component
 const ScoringHoverCard = ({ data }: ScoringHoverCardProps) => {
 
-  const NUMBER_OF_PLAYERS = data.playerData.name.length;
-
   return (
-    <div className="absolute right-0 bottom-20 z-50 bg-gray-900 bg-opacity-95 rounded-lg p-3 shadow-xl border border-gray-700 w-120 text-white max-h-240 overflow-y-auto">
-      <h3 className="font-bold text-lg mb-2 flex items-center">
-        <Award size={18} className="text-yellow-400 mr-2" />
-        Objective Scoring
-      </h3>
-      {/* Objective scoring grid - more compact */}
-      <div className="overflow-x-auto mb-3">
-        <table className="w-full border-collapse text-xs">
-          <thead>
-            <tr>
-              <th className="font-normal text-gray-400 p-1 border-b border-gray-700 text-left">Objective</th>
-              {data.playerData.name.map((name: string, index: number) => (
-                <th key={index} className="font-normal text-gray-400 p-1 border-b border-gray-700 text-center w-7">
-                  <div className="h-5 w-5 rounded-full mx-auto flex items-center justify-center" style={{ backgroundColor: data.playerData.color[index] }}>
-                    <span className="text-xs">{name[0]}</span>
-                  </div>
-                </th>
-              ))}
-            </tr>
-          </thead>
-          <tbody>
-            {/* Stage I Objectives (1 point) */}
-            <tr>
-              <td colSpan={NUMBER_OF_PLAYERS + 1} className="text-xs font-bold text-gray-300 p-1 bg-gray-800">
-                Stage I (1 Point)
-              </td>
-            </tr>
-            {data.objectives.public.filter((obj: PublicObjective) => obj.points === 1).map((objective) => (
-              <tr key={objective.id} className="hover:bg-gray-800">
-                <td className="p-1 border-b border-gray-800 text-xs">
-                  <div className="font-medium">{objective.name}</div>
-                </td>
-                {data.playerData.name.map((_: string, index: number) => (
-                   <td key={index} className="text-center p-1 border-b border-gray-800">
-                    {objective.scored.includes(index) ?
-                      <span className="text-green-500 text-xs font-bold">✓</span> :
-                      objective.progress.hasOwnProperty(index) ?
-                        <span className="text-zinc-400 text-xs font-thin">{objective.progress[index]}</span> :
-                        <span className="text-gray-700 text-xs">-</span>
-                    }
-                  </td>
+    <>
+
+      <div className="font-xl font-astro absolute right-0 bg-center bottom-16 z-50 rounded-lg p-3 shadow-xl border border-gray-700 w-90 text-white max-h-240 overflow-y-auto">
+        <div className="absolute inset-0 bg-[url(../assets/backgrounds/tile_049.png)] bg-scale-[auto_200px] bg-[length:auto_200%] bg-center brightness-25"></div>
+        <div className="relative z-10">
+
+          <h3 className="font-avalors text-lg mb-2 flex text-center">
+            Objective Scoring
+          </h3>
+          {/* Objective scoring grid - more compact */}
+          <div className="overflow-x-auto mb-3">
+            <table className="w-full border-collapse text-xs">
+              <thead>
+                <tr>
+                  <th className="text-gray-400 font-avalors p-1 border-b border-gray-700 text-left">Objective</th>
+                  {data.playerData.faction.map((faction: string, index: number) => (
+                    <th key={index} className="font-normal text-black p-1 border-b border-gray-700 text-center w-7">
+                      <div className="h-5 w-5 rounded-full mx-auto flex items-center justify-center" style={{ backgroundColor: data.playerData.color[index] }}>
+                        <FactionIcon faction={faction} />
+                      </div>
+                    </th>
+                  ))}
+                </tr>
+              </thead>
+              <tbody>
+                <ScoringRowHeader>{"Stage I (1 Point)"}</ScoringRowHeader>
+                {data.objectives.public1.filter((obj: PublicObjective) => obj.points === 1).map((objective) => (
+                  <ScoringRow playerData={data.playerData} objectiveType={objective}>{objective.name}</ScoringRow>
                 ))}
-              </tr>
-            ))}
 
-            {/* Stage II Objectives (2 points) */}
-            <tr>
-              <td colSpan={NUMBER_OF_PLAYERS + 1} className="text-xs font-bold text-gray-300 p-1 bg-gray-800">
-                Stage II (2 Points)
-              </td>
-            </tr>
-            {data.objectives.public.filter((obj: PublicObjective) => obj.points === 2).map((objective: any) => (
-              <tr key={objective.id} className="hover:bg-gray-800">
-                <td className="p-1 border-b border-gray-800 text-xs">
-                  <div className="font-medium">{objective.name}</div>
-                </td>
-                {data.playerData.name.map((_: string, index: number) => (
-                  <td key={index} className="text-center p-1 border-b border-gray-800">
-                    {objective.scored.includes(index) ?
-                      <span className="text-green-500 text-xs font-bold">✓</span> :
-                      objective.progress.hasOwnProperty(index) ?
-                        <span className="text-zinc-400 text-xs font-thin">{objective.progress[index]}</span> :
-                        <span className="text-gray-700 text-xs">-</span>
-                    }
-                  </td>
+                <ScoringRowHeader>{"Stage II (2 Points)"}</ScoringRowHeader>
+                {data.objectives.public2.filter((obj: PublicObjective) => obj.points === 1).map((objective) => (
+                  <ScoringRow playerData={data.playerData} objectiveType={objective}>{objective.name}</ScoringRow>
                 ))}
-              </tr>
-            ))}
 
-            {/* Mecatol Rex */}
-            <tr>
-              <td colSpan={NUMBER_OF_PLAYERS + 1} className="text-xs font-bold text-gray-300 p-1 bg-gray-800">
-                Other
-              </td>
-            </tr>
-            <tr className="hover:bg-gray-800">
-              <td className="p-1 border-b border-gray-800 text-xs">
-                <div className="font-medium">Mecatol Rex</div>
-              </td>
-              {data.playerData.name.map((_: string, index: number) => (
-                <td key={index} className="text-center p-1 border-b border-gray-800">
-                  {data.objectives.mecatol.scored.hasOwnProperty(index) ?
-                    <span className="text-yellow-600 text-xs font-bold">{data.objectives.mecatol.scored[index]}</span> :
-                    <span className="text-gray-700 text-xs">-</span>
-                  }
-                </td>
-              ))}
-            </tr>
-            <tr className="hover:bg-gray-800">
-              <td className="p-1 border-b border-gray-800 text-xs">
-                <div className="font-medium">Support for the Throne</div>
-              </td>
-              {data.playerData.name.map((_: string, index: number) => (
-                <td key={index} className="text-center p-1 border-b border-gray-800">
-                  {data.objectives.mecatol.scored.hasOwnProperty(index) ?
-                    <span className="text-yellow-500 text-xs font-bold">{data.objectives.mecatol.scored[index]}</span> :
-                    <span className="text-gray-700 text-xs">-</span>
-                  }
-                </td>
-              ))}
-            </tr>
-            <tr className="hover:bg-gray-800">
-              <td className="p-1 border-b border-gray-800 text-xs">
-                <div className="font-medium">Secrets</div>
-              </td>
-              {data.playerData.name.map((_: string, index: number) => (
-                <td key={index} className="text-center p-1 border-b border-gray-800">
-                  {data.objectives.mecatol.scored.hasOwnProperty(index) ?
-                    <span className="text-red-500 text-xs font-bold">{data.objectives.mecatol.scored[index]}</span> :
-                    <span className="text-gray-700 text-xs">-</span>
-                  }
-                </td>
-              ))}
-            </tr>
-          </tbody>
-        </table>
-      </div>
+                <ScoringRowHeader>Bonus Points</ScoringRowHeader>
+                <ScoringRow playerData={data.playerData} objectiveType={data.objectives.mecatol}>Mecatol Rex</ScoringRow>
+                <ScoringRow playerData={data.playerData} objectiveType={data.objectives.mecatol}>Support for the Throne</ScoringRow>
+                <ScoringRow playerData={data.playerData} objectiveType={data.objectives.mecatol}>Secrets</ScoringRow>
+                <ScoringRow playerData={data.playerData} objectiveType={data.objectives.mecatol}>Agendas</ScoringRow>
+                <ScoringRow playerData={data.playerData} objectiveType={data.objectives.mecatol}>Relics</ScoringRow>
 
-      {/* Active laws - more compact */}
-      <div>
-        <h4 className="font-bold text-xs uppercase text-gray-400 mb-1 flex items-center">
-          {/* <BookOpen size={12} className="mr-1 text-blue-400" /> */}
-          Active Laws
-        </h4>
-        <div className="bg-gray-800 rounded p-2 text-xs">
-          {data.laws.length > 0 ? (
-            <ul className="text-gray-300">
-              {data.laws.map((law, idx) => (
-                <li key={idx} className="mb-1 last:mb-0">
-                  <span className="font-semibold text-blue-400">{law.name}:</span> {law.description}
-                  {law.electedPlayer && <span className="text-yellow-400 ml-1">(Elected: {law.electedPlayer})</span>}
-                </li>
-              ))}
-            </ul>
-          ) : (
-            <p className="text-gray-500">No active laws</p>
-          )}
+                <ScoringRowHeader>Active Laws</ScoringRowHeader>
+                {data.laws.length > 0 ? (
+                  <tr className="text-gray-300">
+                    {data.laws.map((law, idx) => (
+                      <td key={idx} className="mb-1 last:mb-0">
+                        <span className="font-semibold text-blue-400">{law.name}:</span>
+                        {law.electedPlayer && <span className="text-yellow-400 ml-1">(Elected: {law.electedPlayer})</span>}
+                      </td>
+                    ))}
+                  </tr>
+                ) : (
+                  <p className="text-gray-500">No active laws</p>
+                )}
+              </tbody>
+            </table>
+          </div>
+
+          {/* Active laws - more compact */}
+          <div>
+          </div>
         </div>
       </div>
-    </div>
+    </>
   );
 };
 

@@ -54,7 +54,6 @@ const PlayerIcon = ({ player, isActive, isSpeaker, isActivePlayer, onMouseEnter,
         className={`flex items-center justify-center h-16 w-16 rounded-full cursor-pointer transition-all duration-150 shadow-lg ${isActive ? 'ring-2 ring-white' : ''} ${isActivePlayer ? 'ring-4 ring-green-500' : ''}`}
         style={{ backgroundColor: player.color }}
       >
-        {/* Use placeholder API for development, would be replaced with actual custom images */}
         <img
           src={playerFactionIcon}
           alt={player.faction}

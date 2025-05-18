@@ -31,10 +31,10 @@ export interface PlayerArrayV2 {
     strategyCardFaceDown: string[],
     technologies: string[][],
     secretObjectives: string[][],
-    commandCounters: { tactics: number, fleet: number, strategy: number }[],
+    commandCounters: { tactics: number[], fleet: number[], strategy: number[] },
     actionCards: number[],
     promissoryNotes: number[],
-    leaders: { agent: boolean, commander: boolean, hero: boolean }[]
+    leaders: { agent: boolean[], commander: boolean[], hero: boolean[] },
     active: number,
     speaker: number,
 }
@@ -70,12 +70,19 @@ export interface Player {
 }
 
 export interface Objectives {
-    public: PublicObjective[],
+    public1: PublicObjective[],
+    public2: PublicObjective[],
     secret: any[],
     mecatol: MecatolRexObjective
 }
 
-export interface PublicObjective {
+export interface Objective {
+    name: string,
+    points: number,
+    scored: { [key: number]: number }
+}
+
+export interface PublicObjective extends Objective {
     id: number,
     name: string,
     description: string,
@@ -84,7 +91,7 @@ export interface PublicObjective {
     progress: { [key: number]: string }
 }
 
-export interface SecretObjective {
+export interface SecretObjective extends Objective {
     id: number,
     name: string,
     description: string,
@@ -93,7 +100,7 @@ export interface SecretObjective {
     progress: { [key: number]: string }
 }
 
-export interface MecatolRexObjective {
+export interface MecatolRexObjective extends Objective {
     name: string,
     points: number,
     scored: { [key: number]: number }

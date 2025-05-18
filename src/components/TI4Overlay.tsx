@@ -8,7 +8,38 @@ import { Player } from '../models/interfaces';
 // import { mockData } from '../models/mockData';
 import { mockData2 } from '../models/mockDataV2';
 
+//TODO
+/*
 
+format cc tokens over bg
+X   resize leaders         (make responsive)
+X   order unit upgrades    (by length)
+add faction tech section/markers 
+secret obj up bg 
+
+X   objectivel popup brightness/bg separation
+add obj progress
+X   all types of guac
+
+X   format incoming tech/progress from server
+payload size test
+server authenticate home
+
+
+config/videoconfig/pics/ submissions tuff
+
+
+MAYBE
+clean code 
+
+
+BONUS
+ color filter on player parts
+ color on border
+
+
+
+*/
 
 // Main overlay component
 const TI4Overlay = () => {
@@ -16,18 +47,17 @@ const TI4Overlay = () => {
   const [activeHover, setActiveHover] = useState(HOVER_STATES.NONE);
   const [minimized, setMinimized] = useState(false);
   
-  window.Twitch.ext.listen(
-    "broadcast",
-    (_: string, contentType: string, message: string) => {
-      // verify content type
-      if (contentType !== "application/json") {
-        console.debug(`Unexpected contentType "${contentType}"`);
-        return;
-      }
-      
-      setData(JSON.parse(message));
-    },
-  );
+  // window.Twitch.ext.listen(
+  //   "broadcast",
+  //   (_: string, contentType: string, message: string) => {
+  //     // verify content type
+  //     if (contentType !== "application/json") {
+  //       console.debug(`Unexpected contentType "${contentType}"`);
+  //       return;
+  //     }
+  //     setData(JSON.parse(message));
+  //   },
+  // );
 
   function getPlayerDataAtIndex(index: number): Player {
     const playerData = data.playerData;
@@ -43,10 +73,18 @@ const TI4Overlay = () => {
       speaker: playerData.speaker === index,
       technologies: playerData.technologies[index],
       secretObjectives: playerData.secretObjectives[index],
-      commandCounters: playerData.commandCounters[index],
+      commandCounters: {
+        tactics: playerData.commandCounters.tactics[index],
+        fleet: playerData.commandCounters.fleet[index],
+        strategy: playerData.commandCounters.strategy[index],
+      },
       actionCards: playerData.actionCards[index],
       promissoryNotes: playerData.promissoryNotes[index],
-      leaders: playerData.leaders[index]
+      leaders: {
+        agent: playerData.leaders.agent[index],
+        commander: playerData.leaders.commander[index],
+        hero: playerData.leaders.hero[index],
+      },
     };
   }
 
@@ -62,7 +100,7 @@ const TI4Overlay = () => {
 
 
       {/* Main overlay container */}
-      <div className={`bg-gray-900 bg-opacity-90 rounded-lg shadow-lg border border-gray-700 h-50 max-w-screen-xl w-full transition-all duration-300 ${minimized ? 'max-h-11 overflow-hidden' : ' max-h-40 '}`}>
+      <div className={`bg-gray-900 bg-opacity-90 rounded-lg shadow-lg border border-gray-700 h-50 max-w-screen-xl w-auto transition-all duration-300 ${minimized ? 'max-h-11 overflow-hidden' : ' max-h-40 '}`}>
         {/* Top status bar */}
         <div className="bg-gray-800 rounded-t-lg p-2 text-white text-sm flex justify-between items-center border-b border-gray-700">
           <div className="flex items-center">
@@ -89,7 +127,7 @@ const TI4Overlay = () => {
         </div>
 
         {/* Main content area */}
-        <div className="p-4">
+        <div className="p-4 font-astro">
           {/* Player icons row */}
           <div className="flex justify-between items-center">
             <div className="flex space-x-6">
