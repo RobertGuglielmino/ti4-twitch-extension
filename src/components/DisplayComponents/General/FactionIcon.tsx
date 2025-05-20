@@ -1,4 +1,4 @@
-import { FACTION_ICONS } from "../../assets/icons";
+import { FACTION_ICONS } from "../../../assets/icons";
 
 interface FactionIconProps {
     faction: string,

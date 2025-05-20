@@ -1,12 +1,10 @@
 import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react";
 import tailwindcss from "@tailwindcss/vite";
-
 import zipPack from "vite-plugin-zip-pack";
 import { resolve } from "path";
 import { viteStaticCopy } from "vite-plugin-static-copy";
 
-// https://vite.dev/config/
 export default defineConfig({
   base: './',
   plugins: [
@@ -15,11 +13,7 @@ export default defineConfig({
     viteStaticCopy({
       targets: [
         {
-          src: 'src/assets/*',
-          dest: 'assets'
-        },
-        {
-          src: 'twitch-config.json', // We'll create this file
+          src: 'twitch-config.json',
           dest: '.'
         }
       ]
@@ -35,15 +29,15 @@ export default defineConfig({
         viewer: resolve(__dirname, "index.html"),
       },
       output: {
-        // Keep your existing naming
         entryFileNames: 'viewer.js',
-        assetFileNames: (assetInfo: any) => {
-          if (assetInfo.name!.endsWith('.css')) {
+        assetFileNames: (assetInfo) => {
+          if (assetInfo.name.endsWith('.css')) {
             return 'style.css';
           }
-          return 'assets/[name][extname]';
+          // Ensure all assets go to the assets directory with their full path preserved
+          return 'assets/[name]-[hash][extname]';
         },
-      }
+      },
     },
     cssCodeSplit: false,
     cssTarget: "chrome61",
@@ -51,11 +45,12 @@ export default defineConfig({
     sourcemap: false,
     emptyOutDir: true,
     outDir: "dist",
+    manifest: true,
   },
   optimizeDeps: {
     include: ["react", "react-dom"],
   },
-  assetsInclude: ['**/*.ttf'],
+  assetsInclude: ['**/*.ttf', '**/*.jpg', '**/*.jpeg', '**/*.png', '**/*.gif', '**/*.svg', '**/*.webp'],
   resolve: {
     alias: {
       "@": resolve(__dirname, "./src"),

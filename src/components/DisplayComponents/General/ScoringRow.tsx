@@ -1,12 +1,12 @@
-import { Objective, PlayerArrayV2 } from "../../models/interfaces"
+import {  PlayerArrayV2, ProgressObjective } from "../../../models/interfaces"
 
 interface ScoringRowProps {
     playerData: PlayerArrayV2,
-    objectiveType: Objective,
+    objectiveType: ProgressObjective,
     children: any
 }
 
-const ScoringRow = ({playerData, objectiveType, children}: ScoringRowProps) => {
+const ScoringRow = ({ playerData, objectiveType, children }: ScoringRowProps) => {
 
     return (<>
         <tr className="hover:bg-gray-800">
@@ -15,15 +15,29 @@ const ScoringRow = ({playerData, objectiveType, children}: ScoringRowProps) => {
             </td>
             {playerData.name.map((_: string, index: number) => (
                 <td key={index} className="text-center p-1 border-b border-gray-800">
-                    {objectiveType.scored.hasOwnProperty(index) ?
-                        <span className="text-yellow-600 text-xs font-bold">{objectiveType.scored[index]}</span> :
-                        <span className="text-gray-700 text-xs">-</span>
-                    }
+                    {getObjFormat(objectiveType, index)}
                 </td>
             ))}
         </tr>
     </>)
 }
+
+function getObjFormat(objectiveType: ProgressObjective, index: number) {
+    if (objectiveType.scored.hasOwnProperty(index) && objectiveType.scored[index] != 0) {
+        return <span className="text-green-600 text-sm font-bold">{objectiveType.scored[index]}</span>;
+    } else if (objectiveType.progress.hasOwnProperty(index) && !noScoreFormats.includes(objectiveType.progress[index])) {
+        return <span className="text-zinc-400 text-xs font-thin">{objectiveType.progress[index]}</span>;
+    } else {
+        return <span className="text-gray-700 text-xs">-</span>;
+    }
+}
+
+const noScoreFormats = [
+    "0",
+    "0/0",
+    "0/0/0",
+    "0/0/0/0"
+]
 
 // {data.playerData.name.map((_: string, index: number) => (
 //     <td key={index} className="text-center p-1 border-b border-gray-800">

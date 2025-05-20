@@ -1,11 +1,8 @@
-
-import { Award } from 'lucide-react';
 import { GameDataV2 } from '../models/interfaces';
-import { PublicObjective } from '../models/interfaces';
-import ScoringRow from './DisplayComponents/ScoringRow';
-import ScoringRowHeader from './DisplayComponents/ScoringRowHeader';
-import { FACTION_ICONS } from '../assets/icons';
-import FactionIcon from './DisplayComponents/FactionIcon';
+import { ProgressObjective } from '../models/interfaces';
+import ScoringRow from './DisplayComponents/General/ScoringRow';
+import ScoringRowHeader from './DisplayComponents/General/ScoringRowHeader';
+import FactionIcon from './DisplayComponents/General/FactionIcon';
 
 interface ScoringHoverCardProps {
   data: GameDataV2
@@ -42,21 +39,21 @@ const ScoringHoverCard = ({ data }: ScoringHoverCardProps) => {
               </thead>
               <tbody>
                 <ScoringRowHeader>{"Stage I (1 Point)"}</ScoringRowHeader>
-                {data.objectives.public1.filter((obj: PublicObjective) => obj.points === 1).map((objective) => (
+                {data.objectives.public1.filter((obj: ProgressObjective) => obj.points === 1).map((objective) => (
                   <ScoringRow playerData={data.playerData} objectiveType={objective}>{objective.name}</ScoringRow>
                 ))}
 
                 <ScoringRowHeader>{"Stage II (2 Points)"}</ScoringRowHeader>
-                {data.objectives.public2.filter((obj: PublicObjective) => obj.points === 1).map((objective) => (
+                {data.objectives.public2.filter((obj: ProgressObjective) => obj.points === 1).map((objective) => (
                   <ScoringRow playerData={data.playerData} objectiveType={objective}>{objective.name}</ScoringRow>
                 ))}
 
                 <ScoringRowHeader>Bonus Points</ScoringRowHeader>
-                <ScoringRow playerData={data.playerData} objectiveType={data.objectives.mecatol}>Mecatol Rex</ScoringRow>
+                {/* <ScoringRow playerData={data.playerData} objectiveType={data.objectives.mecatol}>Mecatol Rex</ScoringRow>
                 <ScoringRow playerData={data.playerData} objectiveType={data.objectives.mecatol}>Support for the Throne</ScoringRow>
                 <ScoringRow playerData={data.playerData} objectiveType={data.objectives.mecatol}>Secrets</ScoringRow>
                 <ScoringRow playerData={data.playerData} objectiveType={data.objectives.mecatol}>Agendas</ScoringRow>
-                <ScoringRow playerData={data.playerData} objectiveType={data.objectives.mecatol}>Relics</ScoringRow>
+                <ScoringRow playerData={data.playerData} objectiveType={data.objectives.mecatol}>Relics</ScoringRow> */}
 
                 <ScoringRowHeader>Active Laws</ScoringRowHeader>
                 {data.laws.length > 0 ? (
@@ -73,10 +70,6 @@ const ScoringHoverCard = ({ data }: ScoringHoverCardProps) => {
                 )}
               </tbody>
             </table>
-          </div>
-
-          {/* Active laws - more compact */}
-          <div>
           </div>
         </div>
       </div>

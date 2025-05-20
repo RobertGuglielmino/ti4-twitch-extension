@@ -28,13 +28,20 @@ export interface PlayerArrayV2 {
     color: string[], //can maybe remove?
     victoryPoints: number[],
     strategyCard: string[],
-    strategyCardFaceDown: string[],
-    technologies: string[][],
+    strategyCardsFaceDown: string[],
+    technologies: {
+        blue: boolean[][],
+        red: boolean[][],
+        yellow: boolean[][],
+        green: boolean[][],
+        unit: boolean[][],
+        faction: boolean[][]
+    },
     secretObjectives: string[][],
     commandCounters: { tactics: number[], fleet: number[], strategy: number[] },
     actionCards: number[],
     promissoryNotes: number[],
-    leaders: { agent: boolean[], commander: boolean[], hero: boolean[] },
+    leaders: { commander: boolean[], hero: boolean[], agent: boolean[] },
     active: number,
     speaker: number,
 }
@@ -61,7 +68,14 @@ export interface Player {
     strategyCard: string,
     strategyCardsFaceDown: string,
     speaker: boolean,
-    technologies: string[],
+    technologies: {
+        blue: boolean[],
+        red: boolean[],
+        yellow: boolean[],
+        green: boolean[],
+        unit: boolean[],
+        faction: boolean[]
+    }
     secretObjectives: string[],
     commandCounters: { tactics: number, fleet: number, strategy: number },
     actionCards: number,
@@ -70,10 +84,12 @@ export interface Player {
 }
 
 export interface Objectives {
-    public1: PublicObjective[],
-    public2: PublicObjective[],
+    public1: ProgressObjective[],
+    public2: ProgressObjective[],
     secret: any[],
-    mecatol: MecatolRexObjective
+    mecatol: MecatolRexObjective,
+    agenda: [],
+    relics: []
 }
 
 export interface Objective {
@@ -82,23 +98,15 @@ export interface Objective {
     scored: { [key: number]: number }
 }
 
-export interface PublicObjective extends Objective {
+export interface ProgressObjective extends Objective {
     id: number,
     name: string,
     description: string,
     points: number,
     scored: number[],
-    progress: { [key: number]: string }
+    progress: string[]
 }
 
-export interface SecretObjective extends Objective {
-    id: number,
-    name: string,
-    description: string,
-    points: number,
-    scored: number[],
-    progress: { [key: number]: string }
-}
 
 export interface MecatolRexObjective extends Objective {
     name: string,

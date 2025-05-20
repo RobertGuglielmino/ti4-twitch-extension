@@ -5,40 +5,23 @@ import ScoringHoverCard from './ScoringHoverCard';
 import { HOVER_STATES } from '../models/enums';
 import { Player } from '../models/interfaces';
 // import '../models/mockTwitchExt';
-// import { mockData } from '../models/mockData';
 import { mockData2 } from '../models/mockDataV2';
 
 //TODO
 /*
+clean code s 
 
-format cc tokens over bg
-X   resize leaders         (make responsive)
-X   order unit upgrades    (by length)
 add faction tech section/markers 
-secret obj up bg 
 
-X   objectivel popup brightness/bg separation
-add obj progress
-X   all types of guac
+turn into exe
 
-X   format incoming tech/progress from server
-payload size test
-server authenticate home
+config/videoconfig/ submissions tuff
 
-
-config/videoconfig/pics/ submissions tuff
-
-
-MAYBE
-clean code 
 
 
 BONUS
  color filter on player parts
  color on border
-
-
-
 */
 
 // Main overlay component
@@ -46,18 +29,18 @@ const TI4Overlay = () => {
   const [data, setData] = useState(mockData2);
   const [activeHover, setActiveHover] = useState(HOVER_STATES.NONE);
   const [minimized, setMinimized] = useState(false);
-  
-  // window.Twitch.ext.listen(
-  //   "broadcast",
-  //   (_: string, contentType: string, message: string) => {
-  //     // verify content type
-  //     if (contentType !== "application/json") {
-  //       console.debug(`Unexpected contentType "${contentType}"`);
-  //       return;
-  //     }
-  //     setData(JSON.parse(message));
-  //   },
-  // );
+
+  window.Twitch.ext.listen(
+    "broadcast",
+    (_: string, contentType: string, message: string) => {
+      // verify content type
+      if (contentType !== "application/json") {
+        console.debug(`Unexpected contentType "${contentType}"`);
+        return;
+      }
+      setData(JSON.parse(message));
+    },
+  );
 
   function getPlayerDataAtIndex(index: number): Player {
     const playerData = data.playerData;
@@ -69,9 +52,17 @@ const TI4Overlay = () => {
       color: playerData.color[index],
       victoryPoints: playerData.victoryPoints[index],
       strategyCard: playerData.strategyCard[index],
-      strategyCardsFaceDown: playerData.strategyCardFaceDown[index],
+      strategyCardsFaceDown: playerData.strategyCardsFaceDown[index],
       speaker: playerData.speaker === index,
-      technologies: playerData.technologies[index],
+      technologies: {
+        blue: playerData.technologies.blue[index],
+        red: playerData.technologies.red[index],
+        yellow: playerData.technologies.yellow[index],
+        green: playerData.technologies.green[index],
+        unit: playerData.technologies.unit[index],
+        faction: playerData.technologies.faction[index],
+      },
+      // playerData.technologies[index],
       secretObjectives: playerData.secretObjectives[index],
       commandCounters: {
         tactics: playerData.commandCounters.tactics[index],

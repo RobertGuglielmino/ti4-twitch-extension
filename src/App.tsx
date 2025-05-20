@@ -6,9 +6,6 @@ import './utils/twitch'; // Initialize mock Twitch helper
 
 function App() {
 
-  
-  
-
   return (
     <>
       <TI4Overlay />

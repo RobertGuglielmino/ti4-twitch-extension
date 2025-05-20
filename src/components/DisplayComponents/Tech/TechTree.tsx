@@ -14,8 +14,6 @@ const TechTree = ({ color, techsResearched }: TechTreeProps) => {
     return (<div className="flex flex-row items-center">
         {techs.map((techLevel) => (<div className="w-full flex flex-col items-center justify-center">
             {techLevel.map((tech) => {
-                console.log(techIndex);
-                // console.log(techsResearched[techIndex]);
                 if (techsResearched[techIndex] === true) {
                     techIndex += 1;
                     return (<TechChip color={color} name={tech} />);
