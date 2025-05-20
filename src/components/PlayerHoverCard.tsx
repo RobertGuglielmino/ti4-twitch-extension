@@ -11,20 +11,17 @@ import UnitUpgrades from "./DisplayComponents/Tech/UnitUpgrades";
 import TechTree from "./DisplayComponents/Tech/TechTree"
 import SectionHeader from "./DisplayComponents/General/SectionHeader";
 import CCSheet from "./DisplayComponents/Trade/CCSheet";
+import FactionTechs from "./DisplayComponents/Tech/FactionTechs";
+import { FACTION_TECHNOLOGIES } from "../models/dictionaries";
 
 
 const PlayerHoverCard = ({ player, hoverIcon }: PlayerHoverCardProps) => {
 
-    // const techColors = {
-    //     "blue": [true, true, true, false, true, true],
-    //     "red": [true, false, false, false, true, false],
-    //     "yellow": [false, false, false, false, false, false],
-    //     "green": [true, false, false, false, true, false]
-    // };
+    const techColors = ["blue","red","yellow","green"];
 
     return (
         <div className="border-red-400 text-center font-astro border-2 absolute left-0 bottom-16 z-50 rounded-lg p-3 shadow-xl border border-gray-700 w-120 text-white">
-            <div className="absolute inset-0 bg-[url(../assets/backgrounds/tile_049.png)] bg-scale-[auto_200px] bg-[length:auto_150%] bg-center brightness-25"></div>
+            <div className="absolute inset-0 bg-[url(@icons/backgrounds/tile_049.png)] bg-scale-[auto_200px] bg-[length:auto_150%] bg-center brightness-25"></div>
             <div className="relative z-10">
                 <div className="flex items-center mb-3">
                     <div className="h-10 w-10 rounded-full mr-2 flex items-center justify-center" style={{ backgroundColor: player.color }}>
@@ -48,8 +45,8 @@ const PlayerHoverCard = ({ player, hoverIcon }: PlayerHoverCardProps) => {
                         <div className="w-auto">
                             <SectionHeader>Trade</SectionHeader>
                             <div className="grid grid-cols-2 w-auto gap-1">
-                                <ActionCards>2</ActionCards>
-                                <Promissory>2</Promissory>
+                                <ActionCards>{player.actionCards}</ActionCards>
+                                <Promissory>{player.promissoryNotes}</Promissory>
                                 <Commodities>0/2</Commodities>
                                 <TradeGoods>3</TradeGoods>
                             </div>
@@ -68,15 +65,15 @@ const PlayerHoverCard = ({ player, hoverIcon }: PlayerHoverCardProps) => {
                     <div className="col-span-2">
                         <SectionHeader>Technologies</SectionHeader>
                         {
-                            Object.entries(player.technologies).map(([k, v]) => (v.includes(true) && <TechTree color={k} techsResearched={v} />))
+                            Object.entries(player.technologies).map(([k, v]) => 
+                                (techColors.includes(k) && v.includes(true) && <TechTree color={k} techsResearched={v} />))
                         }
                     </div>
 
                     <div className="flex flex-col justify-between gap-1">
                         <SectionHeader>Faction Techs</SectionHeader>
                         <div className="flex flex-row flex-wrap">
-                            {player.technologies.faction.map(tech => tech === true) &&
-                                <UnitUpgrades techs={player.technologies.faction} />}
+                            {<FactionTechs techs={player.technologies.faction} factionTechInfo={FACTION_TECHNOLOGIES[player.faction.toLowerCase()]}/>}
                         </div>
 
                         <SectionHeader>Unit Upgrades</SectionHeader>

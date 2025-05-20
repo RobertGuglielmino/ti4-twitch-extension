@@ -24,7 +24,7 @@ const ScoringRow = ({ playerData, objectiveType, children }: ScoringRowProps) =>
 
 function getObjFormat(objectiveType: ProgressObjective, index: number) {
     if (objectiveType.scored.hasOwnProperty(index) && objectiveType.scored[index] != 0) {
-        return <span className="text-green-600 text-sm font-bold">{objectiveType.scored[index]}</span>;
+        return <span className="text-green-600 text-sm font-bold">✔</span>;
     } else if (objectiveType.progress.hasOwnProperty(index) && !noScoreFormats.includes(objectiveType.progress[index])) {
         return <span className="text-zinc-400 text-xs font-thin">{objectiveType.progress[index]}</span>;
     } else {

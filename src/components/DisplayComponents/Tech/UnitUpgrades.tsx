@@ -2,7 +2,6 @@
 import carrierIcon from "@icons/units/unit_c_Carrier.png";
 import dreadnoughtIcon from "@icons/units/unit_d_Dreadnought.png";
 import fighterIcon from "@icons/units/unit_f_Fighter.png";
-import flagshipIcon from "@icons/units/unit_h_Flagship.png";
 import infantryIcon from "@icons/units/unit_i_Infantry.png";
 import pdsIcon from "@icons/units/unit_p_PDS.png";
 import cruiserIcon from "@icons/units/unit_r_Cruiser.png";
@@ -57,8 +56,6 @@ function getUpgradeIcon(colorInput: string) {
             return dreadnoughtIcon;
         case "Fighter II":
             return fighterIcon;
-        case "":
-            return flagshipIcon;
         case "Infantry II":
             return infantryIcon;
         case "PDS II":
@@ -67,7 +64,7 @@ function getUpgradeIcon(colorInput: string) {
             return cruiserIcon;
         case "Space Dock II":
             return spacedockIcon;
-        case "yellow":
+        case "War Sun":
             return warsunIcon;
         case "Destroyer II":
             return destroyerIcon;

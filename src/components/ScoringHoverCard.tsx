@@ -16,7 +16,7 @@ const ScoringHoverCard = ({ data }: ScoringHoverCardProps) => {
     <>
 
       <div className="font-xl font-astro absolute right-0 bg-center bottom-16 z-50 rounded-lg p-3 shadow-xl border border-gray-700 w-90 text-white max-h-240 overflow-y-auto">
-        <div className="absolute inset-0 bg-[url(../assets/backgrounds/tile_049.png)] bg-scale-[auto_200px] bg-[length:auto_200%] bg-center brightness-25"></div>
+        <div className="absolute inset-0 bg-[url(@icons/backgrounds/tile_046.png)] bg-scale-[auto_200px] bg-[length:auto_200%] bg-center brightness-25"></div>
         <div className="relative z-10">
 
           <h3 className="font-avalors text-lg mb-2 flex text-center">

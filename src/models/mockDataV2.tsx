@@ -3,20 +3,20 @@ import { GameDataV2 } from "./interfaces";
 export const mockData2: GameDataV2 = {
   "playerData": {
     "name": [
-      "-",
-      "-",
-      "-",
-      "-",
-      "-",
-      "-"
+      "Robert",
+      "Darrell",
+      "Elspeth",
+      "Matt",
+      "Hunter",
+      "Peter"
     ],
     "faction": [
       "Hacan",
       "Yin",
       "Mahact",
-      "-",
-      "-",
-      "-"
+      "Xxcha",
+      "Mentak",
+      "Ul"
     ],
     "color": [
       "White",
@@ -46,12 +46,12 @@ export const mockData2: GameDataV2 = {
     "technologies": {
       "blue": [
         [
+          false,
+          false,
+          false,
           true,
           true,
-          true,
-          true,
-          true,
-          true
+          false
         ],
         [
           true,
@@ -96,12 +96,12 @@ export const mockData2: GameDataV2 = {
       ],
       "red": [
         [
+          false,
           true,
-          true,
-          true,
-          true,
-          true,
-          true
+          false,
+          false,
+          false,
+          false
         ],
         [
           true,
@@ -146,12 +146,12 @@ export const mockData2: GameDataV2 = {
       ],
       "yellow": [
         [
-          true,
-          true,
-          true,
-          true,
-          true,
-          true
+          false,
+          false,
+          false,
+          false,
+          false,
+          false
         ],
         [
           true,
@@ -198,10 +198,10 @@ export const mockData2: GameDataV2 = {
         [
           true,
           true,
-          true,
-          true,
-          true,
-          true
+          false,
+          false,
+          false,
+          false
         ],
         [
           true,
@@ -246,6 +246,7 @@ export const mockData2: GameDataV2 = {
       ],
       "unit": [
         [
+          true,
           true,
           true,
           true,
@@ -391,15 +392,15 @@ export const mockData2: GameDataV2 = {
         ]
       ],
       "faction": [
-        [],
-        [],
-        [],
-        [],
-        [],
-        []
+        [false, true],
+        [true, true],
+        [true, true],
+        [true, true],
+        [true, true],
+        [true, true],
       ]
     },
-    "secretObjectives": [["Become a Martyr", "Become a Martyr", "Become a Martyr"], ["Become a Martyr", "Become a Martyr", "Become a Martyr"], ["Become a Martyr", "Become a Martyr", "Become a Martyr"], ["Become a Martyr", "Become a Martyr", "Become a Martyr"], ["Become a Martyr", "Become a Martyr", "Become a Martyr"], ["Become a Martyr", "Become a Martyr", "Become a Martyr"]],
+    "secretObjectives": [["Become a Martyr"], ["Become a Martyr"], ["Become a Martyr"], ["Become a Martyr"], ["Become a Martyr"], [ "Become a Martyr"]],
     "commandCounters": {
       "tactics": [
         3,

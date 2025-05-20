@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Award, Star, Shield, Zap, Database, ChevronUp, ChevronDown } from 'lucide-react';
+import { Award,  Shield, Zap, Database, ChevronUp, ChevronDown } from 'lucide-react';
 import PlayerIcon from './PlayerIcon';
 import ScoringHoverCard from './ScoringHoverCard';
 import { HOVER_STATES } from '../models/enums';
@@ -9,9 +9,6 @@ import { mockData2 } from '../models/mockDataV2';
 
 //TODO
 /*
-clean code s 
-
-add faction tech section/markers 
 
 turn into exe
 
@@ -30,17 +27,17 @@ const TI4Overlay = () => {
   const [activeHover, setActiveHover] = useState(HOVER_STATES.NONE);
   const [minimized, setMinimized] = useState(false);
 
-  window.Twitch.ext.listen(
-    "broadcast",
-    (_: string, contentType: string, message: string) => {
-      // verify content type
-      if (contentType !== "application/json") {
-        console.debug(`Unexpected contentType "${contentType}"`);
-        return;
-      }
-      setData(JSON.parse(message));
-    },
-  );
+  // window.Twitch.ext.listen(
+  //   "broadcast",
+  //   (_: string, contentType: string, message: string) => {
+  //     // verify content type
+  //     if (contentType !== "application/json") {
+  //       console.debug(`Unexpected contentType "${contentType}"`);
+  //       return;
+  //     }
+  //     setData(JSON.parse(message));
+  //   },
+  // );
 
   function getPlayerDataAtIndex(index: number): Player {
     const playerData = data.playerData;
@@ -102,7 +99,6 @@ const TI4Overlay = () => {
 
           <div className="flex items-center space-x-4">
             <div className="flex items-center bg-yellow-900 bg-opacity-50 px-3 py-1 rounded-lg">
-              <Star size={16} className="mr-1 text-yellow-400" />
               <span className="font-bold">Speaker: {data.playerData.name[data.playerData.speaker]}</span>
             </div>
             <div className="flex items-center">

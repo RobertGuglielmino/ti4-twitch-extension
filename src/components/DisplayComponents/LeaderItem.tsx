@@ -4,7 +4,7 @@ interface LeaderItemProps { agent: boolean, commander: boolean, hero: boolean }
 const LeaderItem = ({agent, commander, hero}: LeaderItemProps) => {
 
     const leaders = {agent, "CMNDR": commander, hero};
-    const bgImages: any = {agent: "bg-[url(../assets/backgrounds/agent.png)]", "CMNDR": "bg-[url(../assets/backgrounds/commander.png)]", hero: "bg-[url(../assets/backgrounds/hero.png)]" }
+    const bgImages: any = {agent: "bg-[url(@icons/backgrounds/agent.png)]", "CMNDR": "bg-[url(@icons/backgrounds/commander.png)]", hero: "bg-[url(@icons/backgrounds/hero.png)]" }
 
     return (
         <div className="m-1">

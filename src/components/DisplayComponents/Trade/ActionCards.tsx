@@ -1,13 +1,15 @@
 interface ActionCardsProps {
-    children: any
+    children: React.ReactNode
 }
 
 const ActionCards = ({ children }: ActionCardsProps) => {
-
     return (
-            <div className="bg-[url(../assets/overlay_icons/action.short.jpg)] w-auto font-astro bg-contain bg-no-repeat bg-center opacity-50 size-full p-1 m-1 font-bold text-center text-black">
+        <div className="relative inline-block px-2">
+            <div className="absolute inset-0 bg-[url(@icons/overlay_icons/action.short.jpg)] bg-center bg-no-repeat bg-contain opacity-60"></div>
+            <div className="relative z-10 inline-block font-astro p-1 m-1 font-bold text-center">
                 {children}
             </div>
+        </div>
     )
 }
 

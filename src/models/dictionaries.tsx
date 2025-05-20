@@ -11,14 +11,14 @@ export const COLOR_NAME_TO_HEX = {
     "-": "unset",
 };
 export const ALT_COLOR_NAME_TO_HEX = {
-  white: "#BBBBBB",
-  blue: "#07B2FF",
-  purple: "#7400B7",
-  yellow: "#D6B700",
-  red: "#CB0000",
-  green: "#007306",
-  orange: "#F3631C",
-  pink: "#F46FCD",
+    white: "#BBBBBB",
+    blue: "#07B2FF",
+    purple: "#7400B7",
+    yellow: "#D6B700",
+    red: "#CB0000",
+    green: "#007306",
+    orange: "#F3631C",
+    pink: "#F46FCD",
 };
 export const UNKNOWN_COLOR_NAME = "-";
 export const UNKNOWN_COLOR_HEX = "#ffffff";
@@ -52,9 +52,6 @@ export const FACTION_WHITELIST = new Set([
     "yssaril",
 ]);
 export const UNKNOWN_FACTION = "cat";
-
-//tech
-//format by delimiter
 
 export const OBJECTIVE_NAME_ABBREVIATIONS: Record<string, string> = {
     // Public
@@ -270,7 +267,7 @@ export const TECHNOLOGY_COLOR: { [key: string]: string } = {
     "War Sun": "white",
 };
 
-export const UNIT_UPGRADES:  string[] = [
+export const UNIT_UPGRADES: string[] = [
     // "Advanced Carrier II",
     "Carrier II",
     // "Crimson Legionnaire II",
@@ -294,3 +291,106 @@ export const UNIT_UPGRADES:  string[] = [
     // "Strike Wing Alpha II",
     // "Super-Dreadnought II",
 ]
+
+export const FACTION_TECHNOLOGIES: {[key: string]:{[key: string]: string}} = {
+    "arborec": {
+        "Bioplasmosis": "green",
+        "Letani Warrior II": "white",
+    },
+    "argent": {
+        "Aerie Hololattice": "yellow",
+        "Strike Wing Alpha II": "white",
+    },
+    "creuss": {
+        "Dimensional Splicer": "red",
+        "Wormhole Generator": "blue",
+    },
+    "empyrean": {
+        "Aetherstream": "blue",
+        "Voidwatch": "green",
+    },
+    "hacan": {
+        "Production Biomes": "green",
+        "Quantum Datahub": "yellow",
+    },
+    "jolnar": {
+        "E-res Siphons": "yellow",
+        "Spacial Conduit Cylinder": "blue",
+    },
+    "keleres": {
+        "Agency Supply Network": "yellow",
+        "I.I.H.Q. Modernization": "yellow",
+    },
+    "l1z1x": {
+        "Inheritance Systems": "yellow",
+        "Super-Dreadnought II": "white",
+    },
+    "letnev": {
+        "L4 Disruptors": "yellow",
+        "Non-Euclidean Shielding": "red",
+    },
+    "mahact": {
+        "Crimson Legionnaire II": "white",
+        "Genetic Recombination": "green",
+    },
+    "mentak": {
+        "Mirror Computing": "yellow",
+        "Salvage Operations": "yellow",
+    },
+    "muaat": {
+        "Magmus Reactor": "red",
+        "Prototype War Sun II": "white",
+    },
+    "naalu": {
+        "Hybrid Crystal Fighter II": "white",
+        "Neuroglaive": "green",
+    },
+    "naazrokha": {
+        "Pre-Fab Arcologies": "green",
+        "Supercharge": "red",
+    },
+    "nekro": {
+        "Valefar Assimilator X": "white",
+        "Valefar Assimilator Y": "white",
+    },
+    "nomad": {
+        "Memoria II": "white",
+        "Temporal Command Suite": "yellow",
+    },
+    "norr": {
+        "Exotrireme II": "white",
+        "Valkyrie Particle Weave": "red",
+    },
+    "saar": {
+        "Chaos Mapping": "blue",
+        "Floating Factory II": "white",
+    },
+    "sol": {
+        "Advanced Carrier II": "white",
+        "Spec Ops II": "white",
+    },
+    "ul": {
+        "Hel-Titan II": "white",
+        "Saturn Engine II": "white",
+    },
+    "vuilraith": {
+        "Dimensional Tear II": "white",
+        "Vortex": "red",
+    },
+    "winnu": {
+        "Hegemonic Trade Policy": "yellow",
+        "Lazax Gate Folding": "blue",
+    },
+    "xxcha": {
+        "Instinct Training": "green",
+        "Nullification Field": "yellow",
+    },
+    "yin": {
+        "Impulse Core": "yellow",
+        "Yin Spinner": "green",
+    },
+    "yssaril": {
+        "Mageon Implants": "green",
+        "Transparasteel Plating": "green",
+    },
+}

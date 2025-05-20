@@ -7,7 +7,7 @@ interface TechChipProps {
     active?: boolean
 }
 
-const TechChip = ({ name, color, active }: TechChipProps) => {
+const TechChip = ({ name, color, active = true }: TechChipProps) => {
 
     function getColorStyles(colorInput: string) {
         switch (colorInput) {
@@ -28,7 +28,7 @@ const TechChip = ({ name, color, active }: TechChipProps) => {
 
     const colorStyle = getColorStyles(color)
 
-    return (<div className={`font-astro text-xs border-2 rounded h-10 flex flex-col items-center justify-center w-16 p-1 m-1 ${colorStyle} ${active ? "opacity-100" : "opacity-100"}`}>
+    return (<div className={`font-astro text-xs border-2 rounded h-10 flex flex-col items-center justify-center w-16 p-1 m-1 ${colorStyle} ${active ? "opacity-100" : "opacity-25"}`}>
         {name}
     </div>);
 }

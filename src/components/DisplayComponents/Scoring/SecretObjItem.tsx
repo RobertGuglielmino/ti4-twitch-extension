@@ -48,7 +48,7 @@ const SecretObjItem = ({ secrets, inHand }: SecretObjItem) => {
     function getUnclaimedSecrets() {
         const unclaimedSecrets = [];
         for (let i = 0; i < (3 - secrets.length - inHand); i++) {
-            unclaimedSecrets.push(<div className="bg-slate-950 border-2 rounded opacity-50 h-12 max-w-auto p-1 m-1 font-bold text-black border-slate-700">
+            unclaimedSecrets.push(<div className="bg-slate-950 border-2 rounded opacity-50 h-12 w-full p-1 m-1 font-bold text-black border-slate-700">
             </div>);
         }
 
