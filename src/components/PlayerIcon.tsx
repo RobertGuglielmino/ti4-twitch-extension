@@ -40,8 +40,8 @@ interface PlayerIconProps {
 // Player icon component
 const PlayerIcon = ({ player, isActive, isSpeaker, isActivePlayer, onMouseEnter, onMouseLeave }: PlayerIconProps) => {
 
-  const playerFactionIcon = FACTION_ICONS[player.faction]; 
-
+  const normalizedFaction = player.faction.charAt(0).toUpperCase() + player.faction.slice(1).toLowerCase();
+  const playerFactionIcon = FACTION_ICONS[normalizedFaction]; 
 
   return (
     <div

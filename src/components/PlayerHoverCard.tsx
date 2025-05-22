@@ -1,5 +1,5 @@
 
-import { Player } from "../models/interfaces";
+import { Player, ProgressObjective } from "../models/interfaces";
 import OverlayNumber from "./DisplayComponents/General/OverlayNumber";
 import LeaderItem from "./DisplayComponents/LeaderItem";
 import SecretObjItem from "./DisplayComponents/Scoring/SecretObjItem";
@@ -12,7 +12,9 @@ import TechTree from "./DisplayComponents/Tech/TechTree"
 import SectionHeader from "./DisplayComponents/General/SectionHeader";
 import CCSheet from "./DisplayComponents/Trade/CCSheet";
 import FactionTechs from "./DisplayComponents/Tech/FactionTechs";
-import { FACTION_TECHNOLOGIES } from "../models/dictionaries";
+import { FACTION_ABBREV_TO_FULL, FACTION_TECHNOLOGIES } from "../models/dictionaries";
+import ScoringRowHeader from "./DisplayComponents/General/ScoringRowHeader";
+import ScoringRow from "./DisplayComponents/General/ScoringRow";
 
 
 const PlayerHoverCard = ({ player, hoverIcon }: PlayerHoverCardProps) => {
@@ -33,23 +35,36 @@ const PlayerHoverCard = ({ player, hoverIcon }: PlayerHoverCardProps) => {
                     </div>
                     <div className="flex-1 min-w-0">
                         <h3 className="font-bold font-astro text-lg truncate">{player.name}</h3>
-                        <p className="text-md text-gray-300 truncate font-avalors">{player.faction.toUpperCase()}</p>
+                        <p className="text-md text-gray-300 truncate font-avalors">{FACTION_ABBREV_TO_FULL[player.faction.toLowerCase()]}</p>
                     </div>
                     <div className="bg-gray-800 px-2 py-1 rounded-lg flex items-center border-2 border-yellow-600 ml-2">
                         <OverlayNumber>{player.victoryPoints}</OverlayNumber>
                     </div>
                 </div>
 
-                <div className="flex flew-row gap-3 justify-around">
-                    <div className="flex flex-col gap-2">
+                <div className="flex flew-row gap-3 justify-evenly">
+                    <div className="flex flex-col">
                         <div className="w-auto">
                             <SectionHeader>Trade</SectionHeader>
-                            <div className="grid grid-cols-2 w-auto gap-1">
+                            <div className="flex flex-row w-auto gap-4">
                                 <ActionCards>{player.actionCards}</ActionCards>
                                 <Promissory>{player.promissoryNotes}</Promissory>
-                                <Commodities>0/2</Commodities>
-                                <TradeGoods>3</TradeGoods>
+                                <Commodities>
+                                    <span>
+                                        {player.commodities} 
+                                    </span>
+                                    <span className="text-sm text-gray-500">
+                                        {` / ${player.maxCommodities}`}
+                                    </span>
+                                    </Commodities>
+                                <TradeGoods>{player.tradeGoods}</TradeGoods>
                             </div>
+                            {/* <div className="grid grid-cols-2 w-auto gap-1">
+                                <ActionCards>{player.actionCards}</ActionCards>
+                                <Promissory>{player.promissoryNotes}</Promissory>
+                                <Commodities>{player.commodities}/{player.maxCommodities}</Commodities>
+                                <TradeGoods>{player.tradeGoods}</TradeGoods>
+                            </div> */}
                         </div>
 
                         <SectionHeader>Counters</SectionHeader>
@@ -61,18 +76,19 @@ const PlayerHoverCard = ({ player, hoverIcon }: PlayerHoverCardProps) => {
                         <LeaderItem {...player.leaders} />
                     </div>
                 </div>
+
                 <div className="grid grid-cols-3 mb-3">
                     <div className="col-span-2">
                         <SectionHeader>Technologies</SectionHeader>
                         {
                             Object.entries(player.technologies).map(([k, v]) => 
-                                (techColors.includes(k) && v.includes(true) && <TechTree color={k} techsResearched={v} />))
+                                (techColors.includes(k) && v.includes(true) && <TechTree key={k} color={k} techsResearched={v} />))
                         }
                     </div>
 
                     <div className="flex flex-col justify-between gap-1">
                         <SectionHeader>Faction Techs</SectionHeader>
-                        <div className="flex flex-row flex-wrap">
+                        <div className="flex flex-row justify-center flex-wrap">
                             {<FactionTechs techs={player.technologies.faction} factionTechInfo={FACTION_TECHNOLOGIES[player.faction.toLowerCase()]}/>}
                         </div>
 
@@ -120,19 +136,6 @@ interface PlayerHoverCardProps {
 //     yellow: "#f1c40f"   // Cybernetic
 // };
 
-
-
-// name: string,
-// faction: string,
-// color: string,
-// victoryPoints: number,
-// strategyCard: string,
-// technologies: string[],
-// secretObjectives: string[],
-// commandCounters: { tactics: number, fleet: number, strategy: number },
-// actionCards: number,
-// promissoryNotes: number,
-// leaders: { commander: boolean, hero: boolean, agent: boolean }
 
 
 

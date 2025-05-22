@@ -39,6 +39,9 @@ export interface PlayerArrayV2 {
     },
     secretObjectives: string[][],
     commandCounters: { tactics: number[], fleet: number[], strategy: number[] },
+    commodities: number[],
+    tradeGoods: number[],
+    maxCommodities: number[],
     actionCards: number[],
     promissoryNotes: number[],
     leaders: { commander: boolean[], hero: boolean[], agent: boolean[] },
@@ -78,6 +81,9 @@ export interface Player {
     }
     secretObjectives: string[],
     commandCounters: { tactics: number, fleet: number, strategy: number },
+    commodities: number,
+    tradeGoods: number,
+    maxCommodities: number,
     actionCards: number,
     promissoryNotes: number,
     leaders: { commander: boolean, hero: boolean, agent: boolean }
@@ -86,33 +92,24 @@ export interface Player {
 export interface Objectives {
     public1: ProgressObjective[],
     public2: ProgressObjective[],
-    secret: any[],
-    mecatol: MecatolRexObjective,
-    agenda: [],
-    relics: []
+    secret: Objective,
+    mecatol: Objective,
+    agenda: Objective[],
+    relics: Objective[],
 }
 
 export interface Objective {
     name: string,
     points: number,
-    scored: { [key: number]: number }
+    description: string,
+    scored: number[]
 }
 
 export interface ProgressObjective extends Objective {
     id: number,
-    name: string,
-    description: string,
-    points: number,
-    scored: number[],
     progress: string[]
 }
 
-
-export interface MecatolRexObjective extends Objective {
-    name: string,
-    points: number,
-    scored: { [key: number]: number }
-}
 
 export interface Law {
     name: string,

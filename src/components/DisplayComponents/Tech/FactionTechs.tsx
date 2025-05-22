@@ -11,7 +11,7 @@ const FactionTechs = ({ techs, factionTechInfo }: UnitUpgradesProps) => {
     }
     return (<>
         {Object.entries(factionTechInfo).map(([tech, color], index) => {
-            return (<TechChip name={tech} color={color} active={techs[index]} />);
+            return (<TechChip key={tech} name={tech} color={color} active={techs[index]} />);
         })}
     </>);
 }

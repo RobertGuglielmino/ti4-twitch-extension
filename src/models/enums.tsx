@@ -1,5 +1,5 @@
 export enum HOVER_STATES {
-    NONE = 0,
+    NONE = -1,
     PLAYER_1 = 0,
     PLAYER_2 = 1,
     PLAYER_3 = 2,

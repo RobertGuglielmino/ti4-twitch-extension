@@ -11,17 +11,20 @@
     "inline": "node scripts/inline-assets.js",
     "lint": "eslint .",
     "preview": "vite preview",
-    "deploy": "npm run build && npm run zip"
+    "deploy": "npm run build && npm run zip",
+    "preview:config": "npm run build && vite preview --open /config.html"
   },
   "dependencies": {
     "@tailwindcss/vite": "^4.1.6",
     "lucide-react": "^0.503.0",
+    "pako": "^2.1.0",
     "path": "^0.12.7",
     "react": "^19.0.0",
     "react-dom": "^19.0.0"
   },
   "devDependencies": {
     "@eslint/js": "^9.22.0",
+    "@types/pako": "^2.0.3",
     "@types/react": "^19.0.10",
     "@types/react-dom": "^19.0.4",
     "@vitejs/plugin-react": "^4.3.4",

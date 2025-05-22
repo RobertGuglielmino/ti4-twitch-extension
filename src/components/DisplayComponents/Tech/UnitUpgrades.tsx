@@ -20,7 +20,7 @@ const UnitUpgrades = ({ techs }: UnitUpgradesProps) => {
         {UNIT_UPGRADES.map((unit, index) => {
             if (techs[index]) {
                 const icon = getUpgradeIcon(unit);
-                return (<div className="size-1/4 m-1">
+                return (<div key={unit} className="size-10 m-1">
                     <img
                         src={icon}
                         alt={unit}

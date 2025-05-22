@@ -47,14 +47,14 @@ function getRadialBG(colorInput: string) {
             <div className={`absolute inset-0 ${getRadialBG(color)} radial-mask`}></div>
             <div className={`absolute inset-0 ${getTechBG(color)} size-auto w-auto bg-center bg-no-repeat bg-contain opacity-40`}></div>
             <div className="relative z-10 flex flex-row items-center">
-                {techs.map((techLevel) => (<div className="w-full flex flex-col items-center justify-center">
+                {techs.map((techLevel) => (<div key={techLevel[0]} className="w-full flex flex-col items-center justify-center">
                     {techLevel.map((tech) => {
                         if (techsResearched[techIndex] === true) {
                             techIndex += 1;
-                            return (<TechChip color={color} name={tech} />);
+                            return (<TechChip key={tech} color={color} name={tech} />);
                         } else {
                             techIndex += 1;
-                            return (<div className="p-1 border-2 rounded h-10 w-16 m-1 text-slate-300 bg-slate-950 border-slate-950 opacity-50">
+                            return (<div key={tech} className="p-1 border-2 rounded h-10 w-16 m-1 text-slate-300 bg-slate-950 border-slate-950 opacity-50">
                            
                             </div>);
                         }

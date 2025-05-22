@@ -1,14 +1,16 @@
 import { useState } from 'react';
-import { Award,  Shield, Zap, Database, ChevronUp, ChevronDown } from 'lucide-react';
+import { Award, Shield, Zap, Database, ChevronUp, ChevronDown } from 'lucide-react';
 import PlayerIcon from './PlayerIcon';
 import ScoringHoverCard from './ScoringHoverCard';
 import { HOVER_STATES } from '../models/enums';
 import { Player } from '../models/interfaces';
-// import '../models/mockTwitchExt';
 import { mockData2 } from '../models/mockDataV2';
+import pako from 'pako';
 
 //TODO
 /*
+
+ensure data from buddyu to app
 
 turn into exe
 
@@ -27,6 +29,8 @@ const TI4Overlay = () => {
   const [activeHover, setActiveHover] = useState(HOVER_STATES.NONE);
   const [minimized, setMinimized] = useState(false);
 
+  
+
   // window.Twitch.ext.listen(
   //   "broadcast",
   //   (_: string, contentType: string, message: string) => {
@@ -35,9 +39,44 @@ const TI4Overlay = () => {
   //       console.debug(`Unexpected contentType "${contentType}"`);
   //       return;
   //     }
-  //     setData(JSON.parse(message));
+      
+  //     // Process the message with decompression if needed
+  //     const processedData = handlePubSubMessage(message);
+  //     if (processedData) {
+  //       setData(processedData);
+  //     }
   //   },
   // );
+
+  // Add the decompression function
+  function handlePubSubMessage(message: string) {
+    try {
+      const parsedMessage = JSON.parse(message);
+      
+      // Check if the message is compressed
+      if (parsedMessage.compressed) {
+        // Decompress the data
+        const compressedData = parsedMessage.data;
+        const binaryData = atob(compressedData); // Convert base64 to binary
+        
+        // Convert binary string to Uint8Array
+        const charData = binaryData.split('').map(x => x.charCodeAt(0));
+        const binData = new Uint8Array(charData);
+        
+        // Decompress using pako
+        const decompressedData = pako.inflate(binData, { to: 'string' });
+        
+        // Parse the JSON data
+        return JSON.parse(decompressedData);
+      } else {
+        // Message is not compressed
+        return parsedMessage;
+      }
+    } catch (error) {
+      console.error('Error processing message:', error);
+      return null;
+    }
+  }
 
   function getPlayerDataAtIndex(index: number): Player {
     const playerData = data.playerData;
@@ -66,6 +105,9 @@ const TI4Overlay = () => {
         fleet: playerData.commandCounters.fleet[index],
         strategy: playerData.commandCounters.strategy[index],
       },
+      commodities: playerData.commodities[index],
+      tradeGoods: playerData.tradeGoods[index],
+      maxCommodities: playerData.maxCommodities[index],
       actionCards: playerData.actionCards[index],
       promissoryNotes: playerData.promissoryNotes[index],
       leaders: {
@@ -97,7 +139,7 @@ const TI4Overlay = () => {
             <span className="ml-4 text-gray-400">Round {data.general.round}</span>
           </div>
 
-          <div className="flex items-center space-x-4">
+          <div className="flex items-center px-2 space-x-4">
             <div className="flex items-center bg-yellow-900 bg-opacity-50 px-3 py-1 rounded-lg">
               <span className="font-bold">Speaker: {data.playerData.name[data.playerData.speaker]}</span>
             </div>

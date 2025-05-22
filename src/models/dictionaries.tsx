@@ -26,7 +26,6 @@ export const UNKNOWN_COLOR_HEX = "#ffffff";
 export const FACTION_WHITELIST = new Set([
     "arborec",
     "argent",
-    "bobert",
     "creuss",
     "empyrean",
     "hacan",
@@ -51,6 +50,37 @@ export const FACTION_WHITELIST = new Set([
     "yin",
     "yssaril",
 ]);
+
+export const VICTORY_POINT_LAWS = ["Mutiny", "Seed of an Empire"];
+
+export const FACTION_ABBREV_TO_FULL: {[key: string]: string} = {
+    "arborec": "The Arborec",
+    "argent": "The Argent Flight",
+    "creuss": "The Ghosts of Creuss",
+    "empyrean": "The Empyrean",
+    "hacan": "The Emirates of Hacan",
+    "jolnar": "The Universities of Jol-Nar",
+    "keleres": "The Council Keleres",
+    "l1z1x": "The L1z1x Mindnet",
+    "letnev": "The Barony of Letnev",
+    "mahact": "The Mahact Gene-Sorcerers",
+    "mentak": "The Mentak Coalition",
+    "muaat": "The Embers of Muaat",
+    "naalu": "The Naalu Collective",
+    "naaz-rokha": "The Naaz-Rokha Alliance",
+    "nekro": "The Nekro Virus",
+    "nomad": "The Nomad",
+    "norr": "Sardakk N'orr",
+    "saar": "The Clan of Saar",
+    "sol": "The Federation of Sol",
+    "ul": "The Titans of Ul",
+    "vuilraith": "The Vuil'raith Cabal",
+    "winnu": "The Winnu",
+    "xxcha": "The Xxcha Kingdom",
+    "yin": "The Yin Brotherhood",
+    "yssaril": "The Yssaril Tribes"
+};
+
 export const UNKNOWN_FACTION = "cat";
 
 export const OBJECTIVE_NAME_ABBREVIATIONS: Record<string, string> = {
@@ -290,23 +320,24 @@ export const UNIT_UPGRADES: string[] = [
     // "Spec Ops II",
     // "Strike Wing Alpha II",
     // "Super-Dreadnought II",
+    "War Sun",
 ]
 
 export const FACTION_TECHNOLOGIES: {[key: string]:{[key: string]: string}} = {
     "arborec": {
-        "Bioplasmosis": "green",
+        "Bio- plasmosis": "green",
         "Letani Warrior II": "white",
     },
     "argent": {
         "Aerie Hololattice": "yellow",
-        "Strike Wing Alpha II": "white",
+        "StrikeWing Alpha II": "white",
     },
     "creuss": {
-        "Dimensional Splicer": "red",
+        "Dimension'l Splicer": "red",
         "Wormhole Generator": "blue",
     },
     "empyrean": {
-        "Aetherstream": "blue",
+        "Aether stream": "blue",
         "Voidwatch": "green",
     },
     "hacan": {
@@ -315,23 +346,23 @@ export const FACTION_TECHNOLOGIES: {[key: string]:{[key: string]: string}} = {
     },
     "jolnar": {
         "E-res Siphons": "yellow",
-        "Spacial Conduit Cylinder": "blue",
+        "Spacial Conduit": "blue",
     },
     "keleres": {
-        "Agency Supply Network": "yellow",
-        "I.I.H.Q. Modernization": "yellow",
+        "Agency Supply": "yellow",
+        "I.I.H.Q. Modernize": "yellow",
     },
     "l1z1x": {
         "Inheritance Systems": "yellow",
-        "Super-Dreadnought II": "white",
+        "Super-Dread II": "white",
     },
     "letnev": {
         "L4 Disruptors": "yellow",
-        "Non-Euclidean Shielding": "red",
+        "N.E.S.": "red",
     },
     "mahact": {
-        "Crimson Legionnaire II": "white",
-        "Genetic Recombination": "green",
+        "Crimson Legion. II": "white",
+        "Genetic Recomb.": "green",
     },
     "mentak": {
         "Mirror Computing": "yellow",
@@ -339,27 +370,27 @@ export const FACTION_TECHNOLOGIES: {[key: string]:{[key: string]: string}} = {
     },
     "muaat": {
         "Magmus Reactor": "red",
-        "Prototype War Sun II": "white",
+        "Proto WarSun II": "white",
     },
     "naalu": {
-        "Hybrid Crystal Fighter II": "white",
-        "Neuroglaive": "green",
+        "H.C. Fighter II": "white",
+        "Neuro- glaive": "green",
     },
     "naazrokha": {
         "Pre-Fab Arcologies": "green",
-        "Supercharge": "red",
+        "Super- charge": "red",
     },
     "nekro": {
-        "Valefar Assimilator X": "white",
-        "Valefar Assimilator Y": "white",
+        "Valefar X": "white",
+        "Valefar Y": "white",
     },
     "nomad": {
         "Memoria II": "white",
-        "Temporal Command Suite": "yellow",
+        "Temporal Command": "yellow",
     },
     "norr": {
         "Exotrireme II": "white",
-        "Valkyrie Particle Weave": "red",
+        "Particle Weave": "red",
     },
     "saar": {
         "Chaos Mapping": "blue",
@@ -374,16 +405,16 @@ export const FACTION_TECHNOLOGIES: {[key: string]:{[key: string]: string}} = {
         "Saturn Engine II": "white",
     },
     "vuilraith": {
-        "Dimensional Tear II": "white",
+        "Dimension Tear II": "white",
         "Vortex": "red",
     },
     "winnu": {
-        "Hegemonic Trade Policy": "yellow",
-        "Lazax Gate Folding": "blue",
+        "Hegemonic Trade": "yellow",
+        "Lazax Gates": "blue",
     },
     "xxcha": {
         "Instinct Training": "green",
-        "Nullification Field": "yellow",
+        "Null Field": "yellow",
     },
     "yin": {
         "Impulse Core": "yellow",
@@ -391,6 +422,6 @@ export const FACTION_TECHNOLOGIES: {[key: string]:{[key: string]: string}} = {
     },
     "yssaril": {
         "Mageon Implants": "green",
-        "Transparasteel Plating": "green",
+        "T.P.S. Plating": "green",
     },
 }

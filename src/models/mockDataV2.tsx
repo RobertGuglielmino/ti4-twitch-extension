@@ -4,18 +4,18 @@ export const mockData2: GameDataV2 = {
   "playerData": {
     "name": [
       "Robert",
-      "Darrell",
-      "Elspeth",
       "Matt",
       "Hunter",
+      "Darrell",
+      "Elspeth",
       "Peter"
     ],
     "faction": [
-      "Hacan",
-      "Yin",
-      "Mahact",
-      "Xxcha",
       "Mentak",
+      "Arborec",
+      "Creuss",
+      "Naaz-Rokha",
+      "Nomad",
       "Ul"
     ],
     "color": [
@@ -27,77 +27,84 @@ export const mockData2: GameDataV2 = {
       "Green"
     ],
     "victoryPoints": [
-      0,
-      0,
-      0,
-      0,
-      0,
-      0
+      5,
+      6,
+      7,
+      1,
+      1,
+      1
     ],
     "strategyCard": [
       "Warfare",
-      "Construction",
       "Leadership",
-      "Politics",
       "Trade",
+      "Politics",
+      "Construction",
       "Technology"
     ],
-    "strategyCardsFaceDown": ["", "Construction", "", "", "", ""],
+    "strategyCardsFaceDown": [
+      "",
+      "",
+      "",
+      "",
+      "",
+      ""
+    ],
     "technologies": {
       "blue": [
         [
           false,
           false,
           false,
-          true,
-          true,
+          false,
+          false,
           false
         ],
         [
           true,
+          false,
           true,
-          true,
-          true,
-          true,
-          true
-        ],
-        [
-          true,
-          true,
-          true,
-          true,
+          false,
           true,
           true
         ],
         [
-          true,
-          true,
-          true,
-          true,
-          true,
-          true
+          false,
+          false,
+          false,
+          false,
+          false,
+          false
         ],
         [
-          true,
-          true,
-          true,
-          true,
-          true,
-          true
+          false,
+          false,
+          false,
+          false,
+          false,
+          false
         ],
         [
-          true,
-          true,
-          true,
-          true,
-          true,
-          true
+          false,
+          false,
+          false,
+          false,
+          false,
+          false
+        ],
+        [
+          false,
+          false,
+          false,
+          false,
+          false,
+          false
         ]
       ],
       "red": [
         [
           false,
-          true,
+          false,
           false,
           false,
           false,
@@ -112,36 +119,36 @@ export const mockData2: GameDataV2 = {
           true
         ],
         [
-          true,
-          true,
-          true,
-          true,
-          true,
-          true
+          false,
+          false,
+          false,
+          false,
+          false,
+          false
         ],
         [
-          true,
-          true,
-          true,
-          true,
-          true,
-          true
+          false,
+          false,
+          false,
+          false,
+          false,
+          false
         ],
         [
-          true,
-          true,
-          true,
-          true,
-          true,
-          true
+          false,
+          false,
+          false,
+          false,
+          false,
+          false
         ],
         [
-          true,
-          true,
-          true,
-          true,
-          true,
-          true
+          false,
+          false,
+          false,
+          false,
+          false,
+          false
         ]
       ],
       "yellow": [
@@ -162,271 +169,631 @@ export const mockData2: GameDataV2 = {
           true
         ],
         [
-          true,
-          true,
-          true,
-          true,
-          true,
-          true
-        ],
-        [
-          true,
-          true,
-          true,
-          true,
-          true,
-          true
-        ],
-        [
-          true,
-          true,
-          true,
-          true,
-          true,
-          true
-        ],
-        [
-          true,
-          true,
-          true,
-          true,
-          true,
-          true
-        ]
-      ],
-      "green": [
-        [
-          true,
-          true,
+          false,
+          false,
           false,
           false,
           false,
           false
         ],
         [
+          false,
+          false,
+          false,
+          false,
+          false,
+          false
+        ],
+        [
+          false,
+          false,
+          false,
+          false,
+          false,
+          false
+        ],
+        [
+          false,
+          false,
+          false,
+          false,
+          false,
+          false
+        ]
+      ],
+      "green": [
+        [
+          false,
+          false,
+          false,
+          false,
+          false,
+          false
+        ],
+        [
+          false,
           true,
           true,
-          true,
-          true,
+          false,
           true,
           true
         ],
         [
-          true,
-          true,
-          true,
-          true,
-          true,
-          true
+          false,
+          false,
+          false,
+          false,
+          false,
+          false
         ],
         [
-          true,
-          true,
-          true,
-          true,
-          true,
-          true
+          false,
+          false,
+          false,
+          false,
+          false,
+          false
         ],
         [
-          true,
-          true,
-          true,
-          true,
-          true,
-          true
+          false,
+          false,
+          false,
+          false,
+          false,
+          false
         ],
         [
-          true,
-          true,
-          true,
-          true,
-          true,
-          true
+          false,
+          false,
+          false,
+          false,
+          false,
+          false
         ]
       ],
       "unit": [
         [
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false
+        ],
+        [
+          false,
+          true,
+          false,
+          false,
+          false,
+          false,
+          true,
+          false,
+          true,
+          false,
+          false,
+          false,
           true,
           true,
+          false,
           true,
+          false,
+          false,
           true,
-          true,
-          true,
-          true,
-          true,
-          true,
-          true,
-          true,
-          true,
-          true,
-          true,
-          true,
-          true,
-          true,
-          true,
-          true,
-          true,
-          true,
-          true,
+          false,
+          false,
+          false,
           true
         ],
         [
-          true,
-          true,
-          true,
-          true,
-          true,
-          true,
-          true,
-          true,
-          true,
-          true,
-          true,
-          true,
-          true,
-          true,
-          true,
-          true,
-          true,
-          true,
-          true,
-          true,
-          true,
-          true
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false
         ],
         [
-          true,
-          true,
-          true,
-          true,
-          true,
-          true,
-          true,
-          true,
-          true,
-          true,
-          true,
-          true,
-          true,
-          true,
-          true,
-          true,
-          true,
-          true,
-          true,
-          true,
-          true,
-          true
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false
         ],
         [
-          true,
-          true,
-          true,
-          true,
-          true,
-          true,
-          true,
-          true,
-          true,
-          true,
-          true,
-          true,
-          true,
-          true,
-          true,
-          true,
-          true,
-          true,
-          true,
-          true,
-          true,
-          true
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false
         ],
         [
-          true,
-          true,
-          true,
-          true,
-          true,
-          true,
-          true,
-          true,
-          true,
-          true,
-          true,
-          true,
-          true,
-          true,
-          true,
-          true,
-          true,
-          true,
-          true,
-          true,
-          true,
-          true
-        ],
-        [
-          true,
-          true,
-          true,
-          true,
-          true,
-          true,
-          true,
-          true,
-          true,
-          true,
-          true,
-          true,
-          true,
-          true,
-          true,
-          true,
-          true,
-          true,
-          true,
-          true,
-          true,
-          true
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false
         ]
       ],
       "faction": [
-        [false, true],
-        [true, true],
-        [true, true],
-        [true, true],
-        [true, true],
-        [true, true],
+        [
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false
+        ],
+        [
+          false,
+          false,
+          false,
+          false,
+          true,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          true,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          true,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false
+        ],
+        [
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false
+        ],
+        [
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false
+        ],
+        [
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false
+        ],
+        [
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false
+        ]
       ]
     },
-    "secretObjectives": [["Become a Martyr"], ["Become a Martyr"], ["Become a Martyr"], ["Become a Martyr"], ["Become a Martyr"], [ "Become a Martyr"]],
+    "secretObjectives": [
+      [],
+      [
+        "Mine Rare Minerals"
+      ],
+      [
+        "Stake Your Claim",
+        "Stake Your Claim",
+        "Stake Your Claim"
+      ],
+      [],
+      [],
+      []
+    ],
     "commandCounters": {
       "tactics": [
         3,
+        1,
         3,
         3,
-        0,
-        0,
-        0
+        3,
+        3
       ],
       "fleet": [
         3,
+        4,
         3,
         3,
-        0,
-        0,
-        0
+        3,
+        3
       ],
       "strategy": [
         2,
+        3,
         2,
         2,
-        0,
-        0,
-        0
+        2,
+        2
       ]
     },
+    "commodities": [
+      0,
+      1,
+      0,
+      0,
+      0,
+      0
+    ],
+    "tradeGoods": [
+      0,
+      3,
+      0,
+      0,
+      0,
+      0
+    ],
+    "maxCommodities": [
+      2,
+      3,
+      4,
+      3,
+      4,
+      2
+    ],
     "actionCards": [
       0,
       0,
@@ -437,11 +804,11 @@ export const mockData2: GameDataV2 = {
     ],
     "promissoryNotes": [
       6,
-      6,
-      6,
       5,
       5,
-      5
+      6,
+      6,
+      6
     ],
     "leaders": {
       "agent": [
@@ -453,51 +820,43 @@ export const mockData2: GameDataV2 = {
         true
       ],
       "commander": [
-        true,
-        true,
-        true,
-        true,
-        true,
-        true
+        false,
+        false,
+        false,
+        false,
+        false,
+        false
       ],
       "hero": [
+        false,
         true,
-        true,
-        true,
-        true,
-        true,
-        true
+        false,
+        false,
+        false,
+        false
       ]
     },
     "active": 5,
-    "speaker": 2
+    "speaker": 1
   },
   "objectives": {
     "public1": [
       {
         "id": 0,
-        "name": "Sway the Council",
-        "description": "8 INFLUENCE",
+        "name": "Found Research Outposts",
+        "description": "3 TECH SPECIALTY",
         "points": 1,
-        "scored": [1],
-        "progress": [
-          "2/0",
-          "4/0",
-          "5/0",
-          "0/0",
-          "0/0",
-          "0/0"
-        ]
-      },
-      {
-        "id": 0,
-        "name": "Develop Weaponry",
-        "description": "2 UNIT UPGRADES",
-        "points": 1,
-        "scored": [],
+        "scored": [
+          0,
+          1,
+          0,
+          0,
+          0,
+          0
+        ],
         "progress": [
           "0",
-          "2",
+          "0",
           "0",
           "0",
           "0",
@@ -506,32 +865,24 @@ export const mockData2: GameDataV2 = {
       },
       {
         "id": 0,
-        "name": "Lead From the Front",
-        "description": "3 COMMAND TOKENS",
+        "name": "Expand Borders",
+        "description": "6 NON-HOME PLANET",
         "points": 1,
-        "scored": [],
+        "scored": [
+          1,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
         "progress": [
-          "5",
-          "5",
-          "5",
+          "0",
+          "0",
+          "0",
           "0",
           "0",
           "0"
-        ]
-      },
-      {
-        "id": 0,
-        "name": "Amass Wealth",
-        "description": "3 INF 3 RES 3 TG",
-        "points": 1,
-        "scored": [],
-        "progress": [
-          "2/3/0",
-          "4/4/0",
-          "5/3/0",
-          "0/0/0",
-          "0/0/0",
-          "0/0/0"
         ]
       },
       {
@@ -539,194 +890,289 @@ export const mockData2: GameDataV2 = {
         "name": "Diversify Research",
         "description": "2 TECH 2 COLORS",
         "points": 1,
-        "scored": [],
+        "scored": [
+          0,
+          1,
+          1,
+          0,
+          0,
+          0
+        ],
         "progress": [
-          "1/0/1/0",
-          "0/0/1/0",
-          "0/1/1/0",
-          "0/0/0/0",
-          "0/0/0/0",
-          "0/0/0/0"
+          "0/0/1/1",
+          "4/5/6/6",
+          "1/0/0/0",
+          "0/1/0/1",
+          "1/0/0/0",
+          "1/0/1/0"
         ]
       },
+      {
+        "id": 0,
+        "name": "Sway the Council",
+        "description": "8 INFLUENCE",
+        "points": 1,
+        "scored": [
+          0,
+          1,
+          1,
+          0,
+          0,
+          0
+        ],
+        "progress": [
+          "1/0",
+          "2/3",
+          "2/0",
+          "3/0",
+          "4/0",
+          "1/0"
+        ]
+      },
+      {
+        "id": 0,
+        "name": "Amass Wealth",
+        "description": "3 INF 3 RES 3 TG",
+        "points": 1,
+        "scored": [
+          1,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "progress": [
+          "1/4/0",
+          "2/3/3",
+          "2/4/0",
+          "3/3/0",
+          "4/4/0",
+          "1/4/0"
+        ]
+      }
     ],
     "public2": [
       {
         "id": 0,
-        "name": "Command an Armada",
-        "description": "8 NON-FGTR SHIPS",
-        "points": 1,
-        "scored": [],
+        "name": "Found a Golden Age",
+        "description": "16 RESOURCES",
+        "points": 2,
+        "scored": [
+          0,
+          0,
+          1,
+          0,
+          0,
+          0
+        ],
         "progress": [
+          "4/0",
+          "3/3",
+          "4/0",
+          "3/0",
+          "4/0",
+          "4/0"
+        ]
+      },
+      {
+        "id": 0,
+        "name": "Conquer the Weak",
+        "description": "1 OPPONENT HOME",
+        "points": 2,
+        "scored": [
+          0,
+          1,
+          0,
+          0,
+          0,
+          0
+        ],
+        "progress": [
+          "0",
+          "0",
+          "0",
+          "0",
+          "0",
+          "0"
+        ]
+      },
+      {
+        "id": 0,
+        "name": "Manipulate Galactic Law",
+        "description": "16 INFLUENCE",
+        "points": 2,
+        "scored": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "progress": [
+          "1/0",
+          "2/3",
+          "2/0",
+          "3/0",
+          "4/0",
+          "1/0"
+        ]
+      },
+      {
+        "id": 0,
+        "name": "Revolutionize Warfare",
+        "description": "3 UNIT UPGRADES",
+        "points": 2,
+        "scored": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "progress": [
+          "0",
+          "8",
+          "0",
+          "0",
+          "0",
+          "0"
+        ]
+      },
+      {
+        "id": 0,
+        "name": "Centralize Galactic Trade",
+        "description": "10 TRADE GOODS",
+        "points": 2,
+        "scored": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "progress": [
+          "0",
           "3",
-          "3",
-          "3",
+          "0",
           "0",
           "0",
           "0"
         ]
       }
     ],
-    "secret": [],
-    "mecatol": {
-      "name": "Custodians Points",
+    "secret": {
+      "name": "Secret Objectives",
+      "description": "",
       "points": 1,
       "scored": [
         0,
-        0,
-        0,
+        1,
+        1,
         0,
         0,
         0
       ]
     },
-    "agenda": [],
-    "relics": []
+    "mecatol": {
+      "name": "Custodians Points",
+      "description": "",
+      "points": 1,
+      "scored": [
+        0,
+        1,
+        1,
+        0,
+        0,
+        0
+      ]
+    },
+    "agenda": [
+      {
+        "name": "Mutiny",
+        "description": "",
+        "points": 1,
+        "scored": [
+          1,
+          1,
+          1,
+          1,
+          1,
+          1
+        ]
+      },
+      {
+        "name": "Seed of an Empire",
+        "description": "",
+        "points": 1,
+        "scored": [
+          0,
+          1,
+          0,
+          0,
+          0,
+          0
+        ]
+      }
+    ],
+    "relics": [
+      {
+        "name": "Shard of the Throne",
+        "description": "",
+        "points": 1,
+        "scored": [
+          0,
+          1,
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      {
+        "name": "The Crown of Emphidia",
+        "description": "",
+        "points": 1,
+        "scored": [
+          0,
+          1,
+          0,
+          0,
+          0,
+          0
+        ]
+      }
+    ]
   },
-  "laws": [],
+  "laws": [
+    {
+      "name": "Political Censure",
+      "description": "Pol Censure"
+    },
+    {
+      "name": "Judicial Abolishment",
+      "description": "Judicial Abolishment"
+    },
+    {
+      "name": "Mutiny",
+      "description": "Mutiny"
+    },
+    {
+      "name": "Seed of an Empire",
+      "description": "Seed of an Empire"
+    },
+    {
+      "name": "Minister of Peace",
+      "description": "Min of Peace"
+    }
+  ],
   "general": {
-    "round": 4,
-    "speaker": "Purple",
+    "round": 9,
+    "speaker": "Blue",
     "activePlayer": "White",
-    "time": "3836"
+    "time": "14418"
   }
 }
-
-
-// Mock data - would be replaced by Google Sheets integration
-// export const mockData2: GameDataV2 = {
-//   "playerData": {
-//     "name": ["BlueChell", "BlueChell", "BlueChell", "BlueChell", "BlueChell", "BlueChell"],
-//     "faction": ["Letnev", "Muaat", "Mahact", "Empyrean", "Norr", "Hacan"],
-//     "color": ["White", "Blue", "Purple", "Yellow", "Red", "Green"],
-//     "victoryPoints": [3, 8, 3, 3, 3, 3],
-//     "strategyCard": [
-//       "Warfare",
-//       "Construction",
-//       "Leadership",
-//       "Politics",
-//       "Trade",
-//       "Technology"
-//     ],
-//     "strategyCardFaceDown": ["", "Construction", "", "", "", ""],
-//     "technologies": [
-//       [
-//         "Carrier II",
-//         "Fighter II",
-//         "Infantry II",  
-//         "Psychoarchaeology",
-//         "Neural Motivator",
-//         "AI Development Algorithm",
-//         "Scanlink Drone Network",
-//         "Gravity Drive"
-//       ],
-//       [
-//         "Carrier II",
-//         "Fighter II",
-//         "Infantry II",  
-//         "Psychoarchaeology",
-//         "Neural Motivator",
-//         "AI Development Algorithm",
-//         "Scanlink Drone Network",
-//         "Gravity Drive"],
-//       [
-//         "Carrier II",
-//         "Fighter II",
-//         "Infantry II",  
-//         "Psychoarchaeology",
-//         "Neural Motivator",
-//         "AI Development Algorithm",
-//         "Scanlink Drone Network",
-//         "Gravity Drive"],
-//       [
-//         "Carrier II",
-//         "Fighter II",
-//         "Infantry II",  
-//         "Psychoarchaeology",
-//         "Neural Motivator",
-//         "AI Development Algorithm",
-//         "Scanlink Drone Network",
-//         "Gravity Drive"],
-//       [
-//         "Carrier II",
-//         "Fighter II",
-//         "Infantry II",  
-//         "Psychoarchaeology",
-//         "Neural Motivator",
-//         "AI Development Algorithm",
-//         "Scanlink Drone Network",
-//         "Gravity Drive"],
-//       [
-//         "Carrier II",
-//         "Fighter II",
-//         "Infantry II",  
-//         "Psychoarchaeology",
-//         "Neural Motivator",
-//         "AI Development Algorithm",
-//         "Scanlink Drone Network",
-//         "Gravity Drive"]
-//     ],
-//     "secretObjectives": [["Become a Martyr", "Become a Martyr", "Become a Martyr"], ["Become a Martyr", "Become a Martyr", "Become a Martyr"], ["Become a Martyr", "Become a Martyr", "Become a Martyr"], ["Become a Martyr", "Become a Martyr", "Become a Martyr"], ["Become a Martyr", "Become a Martyr", "Become a Martyr"], ["Become a Martyr", "Become a Martyr", "Become a Martyr"]],
-//     "commandCounters": { "tactics": [3, 3, 3, 3, 3, 3], "fleet": [3, 3, 3, 3, 3, 3], "strategy": [2, 3, 3, 3, 3, 3] },
-//     "actionCards": [0, 0, 0, 0, 0, 0],
-//     "promissoryNotes": [6, 6, 6, 7, 6, 6],
-//     "leaders": { "agent": [true, true, true, true, true, true], "commander": [true, true, true, true, true, true], "hero": [true, true, true, true, true, true] },
-//     "active": 5,
-//     "speaker": 2
-//   },
-//   "objectives": {
-//     "public1": [
-//       {
-//         "id": 0,
-//         "name": "Explore Deep Space",
-//         "description": "3 EMPTY SYS",
-//         "points": 1,
-//         "scored": [1],
-//         "progress": {}
-//       },
-//       {
-//         "id": 0,
-//         "name": "Negotiate Trade Routes",
-//         "description": "5 TRADE GOODS",
-//         "points": 1,
-//         "scored": [1],
-//         "progress": {}
-//       }
-//     ],
-//     "public2": [
-//       {
-//         "id": 0,
-//         "name": "Command an Armada",
-//         "description": "8 NON-FGTR SHIPS",
-//         "points": 1,
-//         "scored": [1],
-//         "progress": {}
-//       }
-//     ],
-//     "secret": [
-//       {
-//         "id": 0,
-//         "name": "Monopolize Production",
-//         "description": "4 INDUSTRIAL",
-//         "points": 1,
-//         "scored": [1],
-//         "progress": {}
-//       }
-//     ],
-//     "mecatol": {
-//       "name": "Custodians Points",
-//       "points": 1,
-//       "scored": [0, 0, 0, 0, 0, 0]
-//     }
-//   },
-//   "laws": [
-//     { "name": "Homeland Defense Act", "description": "Homeland Def Act" }
-//   ],
-//   "general": {
-//     "round": 2,
-//     "speaker": "Purple",
-//     "activePlayer": "White",
-//     "time": "6563"
-//   }
-// }
-

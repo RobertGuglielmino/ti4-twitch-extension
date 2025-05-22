@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -9,73 +10,8 @@
   <script src="https://cdn.tailwindcss.com"></script>
 </head>
 <body>
-  <div id="root"></div>
-  
-  <script>
-    const ConfigPage = () => {
-      const [filename, setFilename] = React.useState('');
-      const [savedConfig, setSavedConfig] = React.useState(null);
-
-      React.useEffect(() => {
-        // Initialize Twitch extension
-        window.Twitch.ext.onAuthorized((auth) => {
-          // Get existing configuration
-          window.Twitch.ext.configuration.onChanged(() => {
-            if (window.Twitch.ext.configuration.broadcaster) {
-              const config = JSON.parse(window.Twitch.ext.configuration.broadcaster.content || '{}');
-              setSavedConfig(config);
-              setFilename(config.filename || '');
-            }
-          });
-        });
-      }, []);
-
-      const saveConfiguration = () => {
-        const config = { filename };
-        
-        window.Twitch.ext.configuration.set(
-          'broadcaster',
-          '0.0.1',
-          JSON.stringify(config)
-        );
-        
-        setSavedConfig(config);
-      };
-
-      return (
-        <div className="p-4">
-          <h1 className="text-xl font-bold mb-4">Extension Configuration</h1>
-          
-          <div className="mb-4">
-            <label className="block text-sm font-medium mb-2">
-              Filename:
-            </label>
-            <input
-              type="text"
-              value={filename}
-              onChange={(e) => setFilename(e.target.value)}
-              className="border rounded px-3 py-2 w-full"
-              placeholder="Enter filename"
-            />
-          </div>
-          
-          <button
-            onClick={saveConfiguration}
-            className="bg-purple-600 text-white px-4 py-2 rounded hover:bg-purple-700"
-          >
-            Save Configuration
-          </button>
-          
-          {savedConfig && (
-            <div className="mt-4 text-green-600">
-              Configuration saved successfully!
-            </div>
-          )}
-        </div>
-      );
-    };
-
-    ReactDOM.render(<ConfigPage />, document.getElementById('root'));
-  </script>
+  <div id="root">yes</div>
+    <script type="module" src="/src/configMain.tsx"></script>
 </body>
 </html>
+

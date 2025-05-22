@@ -27,6 +27,7 @@ export default defineConfig({
     rollupOptions: {
       input: {
         viewer: resolve(__dirname, "index.html"),
+        config: resolve(__dirname, "src/config.html"),
       },
       output: {
         entryFileNames: 'viewer.js',
@@ -58,3 +59,4 @@ export default defineConfig({
     },
   },
 });
+
