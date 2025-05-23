@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Award, Shield, Zap, Database, ChevronUp, ChevronDown } from 'lucide-react';
 import PlayerIcon from './PlayerIcon';
 import ScoringHoverCard from './ScoringHoverCard';
@@ -9,14 +9,9 @@ import pako from 'pako';
 
 //TODO
 /*
-
-ensure data from buddyu to app
-
 turn into exe
 
 config/videoconfig/ submissions tuff
-
-
 
 BONUS
  color filter on player parts
@@ -29,24 +24,24 @@ const TI4Overlay = () => {
   const [activeHover, setActiveHover] = useState(HOVER_STATES.NONE);
   const [minimized, setMinimized] = useState(false);
 
-  
-
-  // window.Twitch.ext.listen(
-  //   "broadcast",
-  //   (_: string, contentType: string, message: string) => {
-  //     // verify content type
-  //     if (contentType !== "application/json") {
-  //       console.debug(`Unexpected contentType "${contentType}"`);
-  //       return;
-  //     }
-      
-  //     // Process the message with decompression if needed
-  //     const processedData = handlePubSubMessage(message);
-  //     if (processedData) {
-  //       setData(processedData);
-  //     }
-  //   },
-  // );
+    useEffect(() => {
+      window.Twitch.ext.listen(
+        "broadcast",
+        (_: string, contentType: string, message: string) => {
+          // verify content type
+          if (contentType !== "application/json") {
+            console.debug(`Unexpected contentType "${contentType}"`);
+            return;
+          }
+          
+          // Process the message with decompression if needed
+          const processedData = handlePubSubMessage(message);
+          if (processedData) {
+            setData(processedData);
+          }
+        },
+      );
+    }, []);
 
   // Add the decompression function
   function handlePubSubMessage(message: string) {

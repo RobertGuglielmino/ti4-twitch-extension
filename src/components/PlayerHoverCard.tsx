@@ -1,5 +1,5 @@
 
-import { Player, ProgressObjective } from "../models/interfaces";
+import { Player } from "../models/interfaces";
 import OverlayNumber from "./DisplayComponents/General/OverlayNumber";
 import LeaderItem from "./DisplayComponents/LeaderItem";
 import SecretObjItem from "./DisplayComponents/Scoring/SecretObjItem";
@@ -13,8 +13,6 @@ import SectionHeader from "./DisplayComponents/General/SectionHeader";
 import CCSheet from "./DisplayComponents/Trade/CCSheet";
 import FactionTechs from "./DisplayComponents/Tech/FactionTechs";
 import { FACTION_ABBREV_TO_FULL, FACTION_TECHNOLOGIES } from "../models/dictionaries";
-import ScoringRowHeader from "./DisplayComponents/General/ScoringRowHeader";
-import ScoringRow from "./DisplayComponents/General/ScoringRow";
 
 
 const PlayerHoverCard = ({ player, hoverIcon }: PlayerHoverCardProps) => {

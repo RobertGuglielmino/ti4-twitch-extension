@@ -1,5 +1,4 @@
-import React from "react";
-import { Objective, PlayerArrayV2, ProgressObjective } from "../../../models/interfaces"
+import { Objective, PlayerArrayV2 } from "../../../models/interfaces"
 
 interface SecretScoringRowProps {
     playerData: PlayerArrayV2,
