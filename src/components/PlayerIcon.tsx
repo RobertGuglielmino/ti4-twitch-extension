@@ -2,9 +2,6 @@ import { FACTION_ICONS } from "../assets/icons";
 import { Player, StrategyCards } from "../models/interfaces";
 import PlayerHoverCard from "./PlayerHoverCard";
 
-
-
-// Strategy card icons and colors
 const strategyCards: StrategyCards = {
   "Leadership": { icon: "👑", color: "#f39c12" },
   "Diplomacy": { icon: "🤝", color: "#27ae60" },
@@ -17,7 +14,6 @@ const strategyCards: StrategyCards = {
 };
 
 
-// Define technology colors
 interface PlayerIconProps {
   player: Player,
   isActive: boolean,
@@ -27,15 +23,6 @@ interface PlayerIconProps {
   onMouseLeave: () => void
 }
 
-
-// ONLY NEED THESE
-    // name: string,
-    // active: boolean,
-    // faction: string,
-    // color: string,
-    // victoryPoints: number,
-    // strategyCard: string,
-    // speaker: boolean,
 
 // Player icon component
 const PlayerIcon = ({ player, isActive, isSpeaker, isActivePlayer, onMouseEnter, onMouseLeave }: PlayerIconProps) => {
@@ -49,7 +36,6 @@ const PlayerIcon = ({ player, isActive, isSpeaker, isActivePlayer, onMouseEnter,
       onMouseEnter={onMouseEnter}
       onMouseLeave={onMouseLeave}
     >
-      {/* Main player icon */}
       <div
         className={`flex items-center justify-center h-16 w-16 rounded-full cursor-pointer transition-all duration-150 shadow-lg ${isActive ? 'ring-2 ring-white' : ''} ${isActivePlayer ? 'ring-4 ring-green-500' : ''}`}
         style={{ backgroundColor: player.color }}

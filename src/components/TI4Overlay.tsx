@@ -3,9 +3,100 @@ import { Award, Shield, Zap, Database, ChevronUp, ChevronDown } from 'lucide-rea
 import PlayerIcon from './PlayerIcon';
 import ScoringHoverCard from './ScoringHoverCard';
 import { HOVER_STATES } from '../models/enums';
-import { Player } from '../models/interfaces';
+import {  Player } from '../models/interfaces';
 import { mockData2 } from '../models/mockDataV2';
 import pako from 'pako';
+import { z } from 'zod';
+
+// Define zod schema based on GameDataV2 interface
+const gameDataSchema = z.object({
+  playerData: z.object({
+    name: z.array(z.string()),
+    faction: z.array(z.string()),
+    color: z.array(z.string()),
+    victoryPoints: z.array(z.number()),
+    strategyCard: z.array(z.string()),
+    strategyCardsFaceDown: z.array(z.string()),
+    technologies: z.object({
+      blue: z.array(z.array(z.boolean())),
+      red: z.array(z.array(z.boolean())),
+      yellow: z.array(z.array(z.boolean())),
+      green: z.array(z.array(z.boolean())),
+      unit: z.array(z.array(z.boolean())),
+      faction: z.array(z.array(z.boolean()))
+    }),
+    secretObjectives: z.array(z.array(z.string())),
+    commandCounters: z.object({
+      tactics: z.array(z.number()),
+      fleet: z.array(z.number()),
+      strategy: z.array(z.number())
+    }),
+    commodities: z.array(z.number()),
+    tradeGoods: z.array(z.number()),
+    maxCommodities: z.array(z.number()),
+    actionCards: z.array(z.number()),
+    promissoryNotes: z.array(z.number()),
+    leaders: z.object({
+      agent: z.array(z.boolean()),
+      commander: z.array(z.boolean()),
+      hero: z.array(z.boolean())
+    }),
+    active: z.number(),
+    speaker: z.number()
+  }),
+  objectives: z.object({
+    public1: z.array(z.object({
+      id: z.number(),
+      name: z.string(),
+      description: z.string(),
+      points: z.number(),
+      scored: z.array(z.number()),
+      progress: z.array(z.string())
+    })),
+    public2: z.array(z.object({
+      id: z.number(),
+      name: z.string(),
+      description: z.string(),
+      points: z.number(),
+      scored: z.array(z.number()),
+      progress: z.array(z.string())
+    })),
+    secret: z.object({
+      name: z.string(),
+      description: z.string(),
+      points: z.number(),
+      scored: z.array(z.number())
+    }),
+    mecatol: z.object({
+      name: z.string(),
+      description: z.string(),
+      points: z.number(),
+      scored: z.array(z.number())
+    }),
+    agenda: z.array(z.object({
+      name: z.string(),
+      description: z.string(),
+      points: z.number(),
+      scored: z.array(z.number())
+    })),
+    relics: z.array(z.object({
+      name: z.string(),
+      description: z.string(),
+      points: z.number(),
+      scored: z.array(z.number())
+    }))
+  }),
+  laws: z.array(z.object({
+    name: z.string(),
+    description: z.string()
+  })),
+  general: z.object({
+    round: z.number(),
+    speaker: z.string(),
+    activePlayer: z.string(),
+    time: z.string()
+  })
+});
 
 //TODO
 /*
@@ -28,7 +119,6 @@ const TI4Overlay = () => {
       window.Twitch.ext.listen(
         "broadcast",
         (_: string, contentType: string, message: string) => {
-          // verify content type
           if (contentType !== "application/json") {
             console.debug(`Unexpected contentType "${contentType}"`);
             return;
@@ -37,7 +127,13 @@ const TI4Overlay = () => {
           // Process the message with decompression if needed
           const processedData = handlePubSubMessage(message);
           if (processedData) {
-            setData(processedData);
+            // Validate data with zod before setting state
+            try {
+              const validatedData = gameDataSchema.parse(processedData);
+              setData(validatedData);
+            } catch (error) {
+              console.error('Invalid data format:', error);
+            }
           }
         },
       );
@@ -50,21 +146,16 @@ const TI4Overlay = () => {
       
       // Check if the message is compressed
       if (parsedMessage.compressed) {
-        // Decompress the data
         const compressedData = parsedMessage.data;
-        const binaryData = atob(compressedData); // Convert base64 to binary
+        const binaryData = atob(compressedData); 
         
-        // Convert binary string to Uint8Array
         const charData = binaryData.split('').map(x => x.charCodeAt(0));
         const binData = new Uint8Array(charData);
         
-        // Decompress using pako
         const decompressedData = pako.inflate(binData, { to: 'string' });
         
-        // Parse the JSON data
         return JSON.parse(decompressedData);
       } else {
-        // Message is not compressed
         return parsedMessage;
       }
     } catch (error) {
@@ -146,7 +237,6 @@ const TI4Overlay = () => {
               <Database size={16} className="mr-1 text-purple-400" />
               <span>Last Updated: {new Date().toLocaleTimeString()}</span>
             </div>
-
           </div>
         </div>
 
@@ -189,24 +279,9 @@ const TI4Overlay = () => {
   );
 };
 
-// Get victory point target
 function getVictoryTarget() {
-  return 10; // Default is 10, could be customizable
+  return 10; 
 };
 
-// Function to determine the leader
-// const getLeader = (players: Player[]) => {
-//   if (!players || players.length === 0) return "None";
-
-//   const sortedPlayers = [...players].sort((a, b) => b.victoryPoints - a.victoryPoints);
-//   const leader = sortedPlayers[0];
-
-//   // Check if there's a tie
-//   const isTie = sortedPlayers.filter(p => p.victoryPoints === leader.victoryPoints).length > 1;
-
-//   return isTie
-//     ? `Tie at ${leader.victoryPoints} VP`
-//     : `${leader.name} (${leader.victoryPoints} VP)`;
-// };
 
 export default TI4Overlay;
