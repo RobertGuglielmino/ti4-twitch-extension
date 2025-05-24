@@ -9,6 +9,9 @@ interface SecretObjItem {
 const SecretObjItem = ({ secrets, inHand }: SecretObjItem) => {
     function getScoredSecrets() {
         const scoredSecrets = [];
+        if (secrets === undefined) {
+            return (<></>);
+        }
         for (let i = 0; i < secrets.length; i++) {
             scoredSecrets.push(<div key={i} className="relative border-2 rounded h-12 w-full m-1 border-red-700">
                 <img
@@ -29,6 +32,9 @@ const SecretObjItem = ({ secrets, inHand }: SecretObjItem) => {
 
     function getUnscoredSecrets() {
         const unscoredSecrets = [];
+        if (secrets === undefined) {
+            return (<></>);
+        }
         for (let i = 0; i < inHand; i++) {
             unscoredSecrets.push(<div key={i} className="relative border-2 rounded h-12 w-full m-1 border-red-950">
                 <img
@@ -46,6 +52,9 @@ const SecretObjItem = ({ secrets, inHand }: SecretObjItem) => {
 
     function getUnclaimedSecrets() {
         const unclaimedSecrets = [];
+        if (secrets === undefined) {
+            return (<></>);
+        }
         for (let i = 0; i < (3 - secrets.length - inHand); i++) {
             unclaimedSecrets.push(<div key={i} className="bg-slate-950 border-2 rounded opacity-50 h-12 w-full p-1 m-1 font-bold text-black border-slate-700">
             </div>);
