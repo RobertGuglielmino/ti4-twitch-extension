@@ -316,112 +316,119 @@ export const UNIT_UPGRADES: string[] = [
     "PDS II",
     // "Prototype War Sun II",
     // "Saturn Engine II",
-    "Space Dock II",
+    "SpaceDock II",
     // "Spec Ops II",
     // "Strike Wing Alpha II",
     // "Super-Dreadnought II",
-    "War Sun",
+    "WarSun",
 ]
 
-export const FACTION_TECHNOLOGIES: {[key: string]:{[key: string]: string}} = {
-    "arborec": {
-        "Bio- plasmosis": "green",
-        "Letani Warrior II": "white",
-    },
-    "argent": {
-        "Aerie Hololattice": "yellow",
-        "StrikeWing Alpha II": "white",
-    },
-    "creuss": {
-        "Dimension'l Splicer": "red",
-        "Wormhole Generator": "blue",
-    },
-    "empyrean": {
-        "Aether stream": "blue",
-        "Voidwatch": "green",
-    },
-    "hacan": {
-        "Production Biomes": "green",
-        "Quantum Datahub": "yellow",
-    },
-    "jolnar": {
-        "E-res Siphons": "yellow",
-        "Spacial Conduit": "blue",
-    },
-    "keleres": {
-        "Agency Supply": "yellow",
-        "I.I.H.Q. Modernize": "yellow",
-    },
-    "l1z1x": {
-        "Inheritance Systems": "yellow",
-        "Super-Dread II": "white",
-    },
-    "letnev": {
-        "L4 Disruptors": "yellow",
-        "N.E.S.": "red",
-    },
-    "mahact": {
-        "Crimson Legion. II": "white",
-        "Genetic Recomb.": "green",
-    },
-    "mentak": {
-        "Mirror Computing": "yellow",
-        "Salvage Operations": "yellow",
-    },
-    "muaat": {
-        "Magmus Reactor": "red",
-        "Proto WarSun II": "white",
-    },
-    "naalu": {
-        "H.C. Fighter II": "white",
-        "Neuro- glaive": "green",
-    },
-    "naazrokha": {
-        "Pre-Fab Arcologies": "green",
-        "Super- charge": "red",
-    },
-    "nekro": {
-        "Valefar X": "white",
-        "Valefar Y": "white",
-    },
-    "nomad": {
-        "Memoria II": "white",
-        "Temporal Command": "yellow",
-    },
-    "norr": {
-        "Exotrireme II": "white",
-        "Particle Weave": "red",
-    },
-    "saar": {
-        "Chaos Mapping": "blue",
-        "Floating Factory II": "white",
-    },
-    "sol": {
-        "Advanced Carrier II": "white",
-        "Spec Ops II": "white",
-    },
-    "ul": {
-        "Hel-Titan II": "white",
-        "Saturn Engine II": "white",
-    },
-    "vuilraith": {
-        "Dimension Tear II": "white",
-        "Vortex": "red",
-    },
-    "winnu": {
-        "Hegemonic Trade": "yellow",
-        "Lazax Gates": "blue",
-    },
-    "xxcha": {
-        "Instinct Training": "green",
-        "Null Field": "yellow",
-    },
-    "yin": {
-        "Impulse Core": "yellow",
-        "Yin Spinner": "green",
-    },
-    "yssaril": {
-        "Mageon Implants": "green",
-        "T.P.S. Plating": "green",
-    },
+export type FactionTech = {
+    name: string;
+    color: string;
+    level: number;
+    unit?: string;
+};
+
+export const FACTION_TECHNOLOGIES: {[key: string]: FactionTech[]} = {
+    "arborec": [
+        { name: "Bioplasmosis", color: "green", level: 2 },
+        { name: "Letani Warrior II", color: "white", level: 1, unit: "infantry" }
+    ],
+    "argent": [
+        { name: "Aerie Hololattice", color: "yellow", level: 2 },
+        { name: "Strike Wing Alpha II", color: "white", level: 1, unit: "fighter" }
+    ],
+    "creuss": [
+        { name: "Dimensional Splicer", color: "red", level: 2 },
+        { name: "Wormhole Generator", color: "blue", level: 2 }
+    ],
+    "empyrean": [
+        { name: "Aetherstream", color: "blue", level: 2 },
+        { name: "Voidwatch", color: "green", level: 2 }
+    ],
+    "hacan": [
+        { name: "Production Biomes", color: "green", level: 2 },
+        { name: "Quantum Datahub Node", color: "yellow", level: 2 }
+    ],
+    "jolnar": [
+        { name: "E-res Siphons", color: "yellow", level: 2 },
+        { name: "Spacial Conduit Cylinder", color: "blue", level: 2 }
+    ],
+    "keleres": [
+        { name: "Agency Supply Network", color: "yellow", level: 2 },
+        { name: "I.I.H.Q. Modernization", color: "yellow", level: 2 }
+    ],
+    "l1z1x": [
+        { name: "Inheritance Systems", color: "yellow", level: 2 },
+        { name: "Super-Dreadnought II", color: "white", level: 1, unit: "dreadnought" }
+    ],
+    "letnev": [
+        { name: "L4 Disruptors", color: "yellow", level: 2 },
+        { name: "Non-Euclidean Shielding", color: "red", level: 2 }
+    ],
+    "mahact": [
+        { name: "Crimson Legionnaire II", color: "white", level: 1, unit: "infantry" },
+        { name: "Genetic Recombination", color: "green", level: 2 }
+    ],
+    "mentak": [
+        { name: "Mirror Computing", color: "yellow", level: 2 },
+        { name: "Salvage Operations", color: "yellow", level: 2 }
+    ],
+    "muaat": [
+        { name: "Magmus Reactor", color: "red", level: 2 },
+        { name: "Prototype War Sun II", color: "white", level: 1, unit: "warsun" }
+    ],
+    "naalu": [
+        { name: "Hybrid Crystal Fighter II", color: "white", level: 1, unit: "fighter" },
+        { name: "Neuroglaive", color: "green", level: 2 }
+    ],
+    "naazrokha": [
+        { name: "Pre-Fab Arcologies", color: "green", level: 2 },
+        { name: "Supercharge", color: "red", level: 2 }
+    ],
+    "nekro": [
+        { name: "Valefar Assimilator X", color: "white", level: 2 },
+        { name: "Valefar Assimilator Y", color: "white", level: 2 }
+    ],
+    "nomad": [
+        { name: "Memoria II", color: "white", level: 1, unit: "flagship" },
+        { name: "Temporal Command Suite", color: "yellow", level: 2 }
+    ],
+    "norr": [
+        { name: "Exotrireme II", color: "white", level: 1, unit: "dreadnought" },
+        { name: "Valkyrie Particle Weave", color: "red", level: 2 }
+    ],
+    "saar": [
+        { name: "Chaos Mapping", color: "blue", level: 2 },
+        { name: "Floating Factory II", color: "white", level: 1, unit: "spacedock" }
+    ],
+    "sol": [
+        { name: "Advanced Carrier II", color: "white", level: 1, unit: "carrier" },
+        { name: "Spec Ops II", color: "white", level: 1, unit: "infantry" }
+    ],
+    "ul": [
+        { name: "Hel-Titan II", color: "white", level: 1, unit: "pds" },
+        { name: "Saturn Engine II", color: "white", level: 1, unit: "carrier" }
+    ],
+    "vuilraith": [
+        { name: "Dimensional Tear II", color: "white", level: 1, unit: "spacedock" },
+        { name: "Vortex", color: "red", level: 2 }
+    ],
+    "winnu": [
+        { name: "Hegemonic Trade Policy", color: "yellow", level: 2 },
+        { name: "Lazax Gate Folding", color: "blue", level: 2 }
+    ],
+    "xxcha": [
+        { name: "Instinct Training", color: "green", level: 2 },
+        { name: "Nullification Field", color: "yellow", level: 2 }
+    ],
+    "yin": [
+        { name: "Impulse Core", color: "yellow", level: 2 },
+        { name: "Yin Spinner", color: "green", level: 2 }
+    ],
+    "yssaril": [
+        { name: "Mageon Implants", color: "green", level: 2 },
+        { name: "Transparasteel Plating", color: "green", level: 2 }
+    ]
 }

@@ -8,19 +8,18 @@ import ActionCards from "./Trade/ActionCards";
 import Commodities from "./Trade/Commodities";
 import TradeGoods from "./Trade/TradeGoods";
 import UnitUpgrades from "./Tech/UnitUpgrades";
-import TechTree from "./Tech/TechTree"
 import SectionHeader from "../ObjectivePage/TableItems/SectionHeader";
 import CCSheet from "./Trade/CCSheet";
-import FactionTechs from "./Tech/FactionTechs";
-import { FACTION_ABBREV_TO_FULL, FACTION_TECHNOLOGIES } from "../../../models/dictionaries";
+import { FACTION_ABBREV_TO_FULL } from "../../../models/dictionaries";
+import TechTreeV2 from "./Tech/TechTreeV2";
 
 const PlayerHoverCard = ({ player, hoverIcon, getImageSrc }: PlayerHoverCardProps) => {
 
     const techColors = ["blue","red","yellow","green"];
 
     return (
-        <div className="border-red-400 text-center font-astro border-2 absolute left-0 bottom-16 z-50 rounded-lg p-3 shadow-xl border border-gray-700 w-120 max-h-[100vh] text-white">
-            <div className="absolute inset-0 bg-[url(@icons/backgrounds/tile_049.png)] bg-scale-[auto_200px] bg-[length:auto_150%] bg-center brightness-25"></div>
+        <div className="border-red-400 text-center font-astro border-2 absolute left-0 bottom-16 z-50 rounded-lg p-3 shadow-xl border border-gray-700 w-150 max-h-[100vh] text-white">
+            <div className="absolute inset-0 bg-[url(@icons/backgrounds/tile_049.png)] bg-scale-[auto_200px] bg-[length:auto_300%] bg-center brightness-25"></div>
             <div className="relative z-10">
                 <div className="flex items-center mb-3">
                     <div className="h-10 w-10 rounded-full mr-2 flex items-center justify-center" style={{ backgroundColor: player.color }}>
@@ -39,7 +38,7 @@ const PlayerHoverCard = ({ player, hoverIcon, getImageSrc }: PlayerHoverCardProp
                     </div>
                 </div>
 
-                <div className="flex flew-row gap-3 justify-evenly">
+                <div className="flex flew-row gap-8 justify-evenly">
                     <div className="flex flex-col">
                         <div className="w-auto">
                             <SectionHeader>Trade</SectionHeader>
@@ -50,8 +49,8 @@ const PlayerHoverCard = ({ player, hoverIcon, getImageSrc }: PlayerHoverCardProp
                                     <span>
                                         {player.commodities} 
                                     </span>
-                                    <span className="text-sm text-gray-500">
-                                        {` / ${player.maxCommodities}`}
+                                    <span className="text-gray-500">
+                                        {`/${player.maxCommodities}`}
                                     </span>
                                     </Commodities>
                                 <TradeGoods getImageSrc={(id) => getImageSrc(id)}>{player.tradeGoods}</TradeGoods>
@@ -72,32 +71,51 @@ const PlayerHoverCard = ({ player, hoverIcon, getImageSrc }: PlayerHoverCardProp
                         <SectionHeader>Leaders</SectionHeader>
                         <LeaderItem getImageSrc={(id: string) => getImageSrc(id)} {...player.leaders} />
                     </div>
-                </div>
-
-                <div className="grid grid-cols-3 mb-3">
-                    <div className="col-span-2">
-                        <SectionHeader>Technologies</SectionHeader>
-                        {
-                            Object.entries(player.technologies).map(([k, v]) => 
-                                (techColors.includes(k) && v.includes(true) && <TechTree getImageSrc={(id) => getImageSrc(id)} key={k} color={k} techsResearched={v} />))
-                        }
-                    </div>
-
-                    <div className="flex flex-col justify-between gap-1">
-                        <SectionHeader>Faction Techs</SectionHeader>
-                        <div className="flex flex-row justify-center flex-wrap">
-                            {<FactionTechs getImageSrc={(id) => getImageSrc(id)} techs={player.technologies.faction} factionTechInfo={FACTION_TECHNOLOGIES[player.faction.toLowerCase()]}/>}
-                        </div>
-
-                        <SectionHeader>Unit Upgrades</SectionHeader>
-                        <div className="flex flex-row flex-wrap">
-                            {player.technologies.unit.map(tech => tech === true) &&
-                                <UnitUpgrades getImageSrc={(id) => getImageSrc(id)} techs={player.technologies.unit} />}
-                        </div>
-
+                    <div>
+                        
                         <SectionHeader>Secrets</SectionHeader>
                         <SecretObjItem getImageSrc={(id) => getImageSrc(id)} secrets={player.secretObjectives} inHand={1} />
                     </div>
+                    <div className="w-auto shrink">
+                        
+                        <SectionHeader>Unit Upgrades</SectionHeader>
+                        <div className="flex flex-row flex-wrap w-auto">
+                            {player.technologies.unit.map(tech => tech === true) &&
+                                <UnitUpgrades getImageSrc={(id) => getImageSrc(id)} techs={player.technologies.unit} faction={player.faction} factionTechs={player.technologies.faction} />}
+                        </div>
+                    </div>
+                    <div>
+                        
+                        {/* <SectionHeader>Faction Techs</SectionHeader>
+                        <div className="flex flex-row justify-center flex-wrap">
+                            {<FactionTechs getImageSrc={(id) => getImageSrc(id)} techs={player.technologies.faction} factionTechInfo={FACTION_TECHNOLOGIES[player.faction.toLowerCase()]}/>}
+                        </div> */}
+                    </div>
+                </div>
+
+                <div className="grid grid-cols-3 mb-3">
+                    <div className="col-span-3">
+                        <SectionHeader>Technologies</SectionHeader>
+                        <div className="flex flex-row gap-2">
+
+                        {
+                            Object.entries(player.technologies).map(([k, v]) => 
+                                (techColors.includes(k) &&<TechTreeV2 
+                                    getImageSrc={(id) => getImageSrc(id)} 
+                                    key={k} 
+                                    color={k} 
+                                    techsResearched={v} 
+                                    faction={player.faction}
+                                    factionTechs={player.technologies.faction}
+                                />))
+                        }
+                        </div>
+                    </div>
+
+                    {/* <div className="flex flex-col justify-between gap-1">
+
+
+                    </div> */}
                 </div>
             </div>
         </div>

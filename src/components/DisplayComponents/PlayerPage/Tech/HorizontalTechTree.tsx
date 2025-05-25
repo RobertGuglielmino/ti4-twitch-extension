@@ -2,10 +2,11 @@ import TechChip from "./TechChip";
 
 interface TechTreeProps {
     color: string,
-    techsResearched: boolean[]
+    techsResearched: boolean[],
+    getImageSrc: (id: string) => string | undefined,
 }
 
-const HorizontaTechTree = ({ color, techsResearched }: TechTreeProps) => {
+const HorizontalTechTree = ({ color, techsResearched }: TechTreeProps) => {
 
     const techs = getTechs(color).reverse();
 
@@ -30,7 +31,7 @@ const HorizontaTechTree = ({ color, techsResearched }: TechTreeProps) => {
     </div>);
 }
 
-export default HorizontaTechTree;
+export default HorizontalTechTree;
 
 
 function getTechs(colorInput: string): string[][] {

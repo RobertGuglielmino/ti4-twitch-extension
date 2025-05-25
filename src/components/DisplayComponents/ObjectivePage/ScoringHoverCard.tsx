@@ -19,7 +19,7 @@ const ScoringHoverCard = ({ getImageSrc, data }: ScoringHoverCardProps) => {
   return (
     <>
 
-      <div className="font-xl font-astro absolute right-0 bg-center bottom-16 z-50 rounded-lg p-3 shadow-xl border border-gray-700 w-135 text-white max-h-240 overflow-y-auto">
+      <div className="font-xl font-astro absolute right-0 bg-center bottom-8 z-50 rounded-lg p-3 shadow-xl border border-gray-700 w-135 text-white max-h-240 overflow-y-auto">
         <div className="absolute inset-0 bg-[url(@icons/backgrounds/tile_046.png)] bg-scale-[auto_200px] bg-[length:auto_200%] bg-center brightness-25"></div>
         <div className="relative z-10">
 
@@ -27,7 +27,7 @@ const ScoringHoverCard = ({ getImageSrc, data }: ScoringHoverCardProps) => {
             Objective Scoring
           </div>
 
-          <div className="overflow-x-auto mb-3">
+          <div className="overflow-x-auto">
             <table className="w-full border-collapse text-xs">
               <thead>
                 <tr>
@@ -62,11 +62,11 @@ const ScoringHoverCard = ({ getImageSrc, data }: ScoringHoverCardProps) => {
               <div className="w-1/2 pr-2">
                 <div className=" font-avalors text-center">Active Laws</div>
                 {data.laws.length > 0 ? (
-                  <div className="flex flex-wrap justify-center items-center gap-2">
+                  <div className="flex flex-wrap justify-center items-center gap-1">
                     {data.laws.map((law, idx) => {
                       let isVictoryPointLaw = VICTORY_POINT_LAWS.includes(law.name);
                       if (isVictoryPointLaw) {
-                        return (<div key={idx} className={`p-1 w-auto text-xs rounded-md border border-yellow-400 bg-yellow-400`}>
+                        return (<div key={idx} className={`p-1 w-auto text-xs rounded-md border-1 border-yellow-400 bg-yellow-400`}>
                           <LawVP getImageSrc={(id) => getImageSrc(id)} name={law.name}  data={data} />
                         </div>);
                       } else {
@@ -91,9 +91,9 @@ const ScoringHoverCard = ({ getImageSrc, data }: ScoringHoverCardProps) => {
                           .find(([_, value]) => value === 1)?.[0];
 
                         return (
-                          <div key={relic.name} className="flex flex-col w-auto items-center bg-amber-950 rounded-md m-1 border border-amber-500">
-                            <div className="font-semibold w-auto text-amber-500 text-sm text-center">{relic.name}</div>
-                            <div className="font-semiboldw-auto text-sm text-center text-wrap">{data.playerData.name[parseInt(ownerIndex!)]}</div>
+                          <div key={relic.name} className="flex flex-col w-auto items-center bg-amber-950 rounded-md m-1 p-1 border border-amber-500">
+                            <div className="font-semibold w-auto text-amber-500 text-xs text-center">{relic.name}</div>
+                            <div className="font-semiboldw-auto text-xs text-center text-wrap">{data.playerData.name[parseInt(ownerIndex!)]}</div>
 
                           </div>
                         );

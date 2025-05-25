@@ -13,21 +13,23 @@ const SecretObjItem = ({ getImageSrc, secrets, inHand }: SecretObjItem) => {
             return (<></>);
         }
         for (let i = 0; i < secrets.length; i++) {
-            scoredSecrets.push(<div key={i} className="relative border-2 rounded h-12 w-full m-1 border-red-700">
-                <img
-                    src={getImageSrc("secret_front")}
-                    alt=""
-                    className="w-full h-full object-cover opacity-50"
-                />
-                <div className="absolute inset-0 flex items-center justify-center">
-                    <span className="font-bold text-white">{secrets[i]}</span>
+            scoredSecrets.push(
+                <div key={i} className="relative h-12 w-18 flex flex-col justify-center bg-top-right border-2 rounded-sm p-1 my-1 border-red-700 overflow-hidden">
+                    <img
+                        src={getImageSrc("secret_front")}
+                        alt=""
+                        className="absolute top-0 right-0 w-[150%] h-[150%] object-cover opacity-50 origin-top-right"
+                    />
+                    <div className="relative z-10 flex items-center justify-center">
+                        <span className="font-bold text-white text-xs">{secrets[i]}</span>
+                    </div>
                 </div>
-            </div>);
+            );
         }
 
-        return (<ul>
+        return (<div className="flex flex-col">
             {scoredSecrets}
-        </ul>);
+        </div>);
     }
 
     function getUnscoredSecrets() {
@@ -36,18 +38,20 @@ const SecretObjItem = ({ getImageSrc, secrets, inHand }: SecretObjItem) => {
             return (<></>);
         }
         for (let i = 0; i < inHand; i++) {
-            unscoredSecrets.push(<div key={i} className="relative border-2 rounded h-12 w-full m-1 border-red-950">
-                <img
-                    src={getImageSrc("secret")}
-                    alt=""
-                    className="w-full h-full object-cover opacity-50"
-                />
-            </div>);
+            unscoredSecrets.push(
+                <div key={i} className="relative h-12 w-18 flex flex-col justify-center bg-top-right border-2 rounded-sm p-1 my-1 border-red-950">
+                    <img
+                        src={getImageSrc("secret")}
+                        alt=""
+                        className="absolute inset-0 w-full h-full object-cover opacity-50"
+                    />
+                </div>
+            );
         }
 
-        return (<ul>
+        return (<div className="flex flex-col">
             {unscoredSecrets}
-        </ul>);
+        </div>);
     }
 
     function getUnclaimedSecrets() {
@@ -56,13 +60,15 @@ const SecretObjItem = ({ getImageSrc, secrets, inHand }: SecretObjItem) => {
             return (<></>);
         }
         for (let i = 0; i < (3 - secrets.length - inHand); i++) {
-            unclaimedSecrets.push(<div key={i} className="bg-slate-950 border-2 rounded opacity-50 h-12 w-full p-1 m-1 font-bold text-black border-slate-700">
-            </div>);
+            unclaimedSecrets.push(
+                <div key={i} className="relative h-12 w-18 flex flex-col justify-center bg-top-right border-2 rounded-sm p-1 my-1 bg-slate-950 opacity-50 border-slate-700">
+                </div>
+            );
         }
 
-        return (<ul>
+        return (<div className="flex flex-col">
             {unclaimedSecrets}
-        </ul>);
+        </div>);
     }
 
     // TODO front of card is front of secret 

@@ -1,23 +1,65 @@
 
-import { UNIT_UPGRADES } from "../../../../models/dictionaries";
+import { FACTION_TECHNOLOGIES, UNIT_UPGRADES } from "../../../../models/dictionaries";
 
 interface UnitUpgradesProps {
     getImageSrc: (id: string) => string | undefined,
-    techs: boolean[]
+    techs: boolean[],
+    faction?: string,
+    factionTechs?: boolean[]
 }
 
-const UnitUpgrades = ({ getImageSrc, techs }: UnitUpgradesProps) => {
+const UnitUpgrades = ({ getImageSrc, techs, faction, factionTechs }: UnitUpgradesProps) => {
+    const factionTechInfo = faction ? FACTION_TECHNOLOGIES[faction.toLowerCase()] : null;
+
+    const hasStandardUpgrades = techs && techs.some(tech => tech);
+    const hasFactionUnitUpgrades = factionTechInfo && factionTechs &&
+        factionTechInfo.some((tech, index) => factionTechs[index] && tech.unit);
+
+    if (!hasStandardUpgrades && !hasFactionUnitUpgrades) {
+        return null;
+    }
 
     return (<>
-        {UNIT_UPGRADES.map((unit, index) => {
+        {/* Regular unit upgrades */}
+        {techs && UNIT_UPGRADES.map((unit, index) => {
             if (techs[index]) {
-                return (<div key={unit} className="size-10 m-1">
-                    <img
-                        src={getImageSrc(unit.split(" ")[0].toLowerCase())}
-                        alt={unit}
-                    />
-                </div>);
+                return (
+                    <div key={unit} className="size-10 m-1 relative">
+                        <img
+                            src={getImageSrc(unit.split(" ")[0].toLowerCase())}
+                            alt={unit}
+                            className="max-w-full max-h-full"
+                        />
+                    </div>
+                );
             }
+            return null;
+        })}
+
+
+        {/* Faction-specific unit upgrades */}
+        {factionTechInfo && factionTechs && factionTechInfo.map((tech, index) => {
+            if (factionTechs[index] && tech.unit) {
+                return (
+                    <div key={tech.name} className="size-10 m-1 relative">
+                        <div className="absolute inset-0 z-0 flex items-center justify-center opacity-70">
+                            <img
+                                src={getImageSrc(faction!.toLowerCase())}
+                                alt={faction}
+                                className="max-w-full max-h-full"
+                            />
+                        </div>
+                        <div className="relative z-10">
+                            <img
+                                src={getImageSrc(tech.unit.toLowerCase())}
+                                alt={tech.name}
+                                className="max-w-full max-h-full"
+                            />
+                        </div>
+                    </div>
+                );
+            }
+            return null;
         })}
     </>);
 }

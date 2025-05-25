@@ -78,9 +78,9 @@ export const preload_images: ImageItem[] = [
     alt: 'agent'
   },
   {
-    id: 'commander',
+    id: 'cmndr',
     src: commanderImg,
-    alt: 'commander'
+    alt: 'cmndr'
   },
   {
     id: 'hero',
@@ -258,12 +258,12 @@ export const preload_images: ImageItem[] = [
     alt: 'cruiser'
   },
   {
-    id: 'space_dock',
+    id: 'spacedock',
     src: spaceDockImg,
-    alt: 'space_dock'
+    alt: 'spacedock'
   },
   {
-    id: 'war_sun',
+    id: 'warsun',
     src: warSunImg,
     alt: 'war_sun'
   },
