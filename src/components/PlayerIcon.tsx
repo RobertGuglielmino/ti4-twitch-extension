@@ -1,5 +1,5 @@
 import { Player, StrategyCards } from "../models/interfaces";
-import PlayerHoverCard from "./PlayerHoverCard";
+import PlayerHoverCard from "./DisplayComponents/PlayerPage/PlayerHoverCard";
 
 const strategyCards: StrategyCards = {
   "Leadership": { icon: "👑", color: "#f39c12" },

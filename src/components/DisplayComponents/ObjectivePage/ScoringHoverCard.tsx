@@ -1,12 +1,12 @@
-import { GameDataV2, Objective } from '../models/interfaces';
-import { ProgressObjective } from '../models/interfaces';
-import ScoringRow from './DisplayComponents/General/ScoringRow';
-import ScoringRowHeader from './DisplayComponents/General/ScoringRowHeader';
-import FactionIcon from './DisplayComponents/General/FactionIcon';
-import MecatolScoringRow from './DisplayComponents/General/MecatolScoringRow';
-import SecretScoringRow from './DisplayComponents/General/SecretScoringRow';
-import { VICTORY_POINT_LAWS } from '../models/dictionaries';
-import LawVP from './DisplayComponents/General/LawVP';
+import { GameDataV2, Objective } from '../../../models/interfaces';
+import { ProgressObjective } from '../../../models/interfaces';
+import ScoringRow from './TableItems/ScoringRow';
+import ScoringRowHeader from './TableItems/ScoringRowHeader';
+import FactionIcon from '../General/FactionIcon';
+import MecatolScoringRow from './TableItems/MecatolScoringRow';
+import SecretScoringRow from './TableItems/SecretScoringRow';
+import { VICTORY_POINT_LAWS } from '../../../models/dictionaries';
+import LawVP from './TableItems/LawVP';
 
 interface ScoringHoverCardProps {
   data: GameDataV2,
@@ -67,7 +67,7 @@ const ScoringHoverCard = ({ getImageSrc, data }: ScoringHoverCardProps) => {
                       let isVictoryPointLaw = VICTORY_POINT_LAWS.includes(law.name);
                       if (isVictoryPointLaw) {
                         return (<div key={idx} className={`p-1 w-auto text-xs rounded-md border border-yellow-400 bg-yellow-400`}>
-                          <LawVP getImageSrc={(id) => getImageSrc(id)} name={law.name} agendas={data.objectives.agenda} data={data} />
+                          <LawVP getImageSrc={(id) => getImageSrc(id)} name={law.name}  data={data} />
                         </div>);
                       } else {
                         return (<div key={idx} className={`p-1 w-auto text-xs rounded-md border-1 border-blue-800 bg-gray-950`}>

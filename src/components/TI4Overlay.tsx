@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { Award, Shield, Zap, Database, ChevronUp, ChevronDown } from 'lucide-react';
 import PlayerIcon from './PlayerIcon';
-import ScoringHoverCard from './ScoringHoverCard';
+import ScoringHoverCard from './DisplayComponents/ObjectivePage/ScoringHoverCard';
 import { HOVER_STATES } from '../models/enums';
 import { Player } from '../models/interfaces';
 import { mockData2 } from '../models/mockDataV2';

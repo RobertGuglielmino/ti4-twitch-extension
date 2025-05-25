@@ -1,4 +1,4 @@
-import OverlayNumber from "../General/OverlayNumber";
+import OverlayNumber from "../../General/OverlayNumber";
 
 interface CCTokenItemProps {
     tokenType: string,

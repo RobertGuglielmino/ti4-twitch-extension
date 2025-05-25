@@ -27,8 +27,8 @@ export default defineConfig({
     rollupOptions: {
       input: {
         viewer: resolve(__dirname, "index.html"),
-        config: resolve(__dirname, "src/config.html"),
-        video_index: resolve(__dirname, "src/video_index.html"),
+        config: resolve(__dirname, "config.html"),
+        video_index: resolve(__dirname, "video_index.html"),
       },
       output: {
         entryFileNames: 'viewer.js',

@@ -1,4 +1,4 @@
-import { Player } from "../../../models/interfaces";
+import { Player } from "../../../../models/interfaces";
 import CCTokenItem from "./CCTokenItem";
 
 interface CCSheetProps {

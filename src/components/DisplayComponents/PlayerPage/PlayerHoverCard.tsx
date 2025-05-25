@@ -1,18 +1,18 @@
 
-import { Player } from "../models/interfaces";
-import OverlayNumber from "./DisplayComponents/General/OverlayNumber";
-import LeaderItem from "./DisplayComponents/LeaderItem";
-import SecretObjItem from "./DisplayComponents/Scoring/SecretObjItem";
-import Promissory from "./DisplayComponents/Trade/Promissory";
-import ActionCards from "./DisplayComponents/Trade/ActionCards";
-import Commodities from "./DisplayComponents/Trade/Commodities";
-import TradeGoods from "./DisplayComponents/Trade/TradeGoods";
-import UnitUpgrades from "./DisplayComponents/Tech/UnitUpgrades";
-import TechTree from "./DisplayComponents/Tech/TechTree"
-import SectionHeader from "./DisplayComponents/General/SectionHeader";
-import CCSheet from "./DisplayComponents/Trade/CCSheet";
-import FactionTechs from "./DisplayComponents/Tech/FactionTechs";
-import { FACTION_ABBREV_TO_FULL, FACTION_TECHNOLOGIES } from "../models/dictionaries";
+import { Player } from "../../../models/interfaces";
+import OverlayNumber from "../General/OverlayNumber";
+import LeaderItem from "./Leaders/LeaderItem";
+import SecretObjItem from "./Secret/SecretObjItem";
+import Promissory from "./Trade/Promissory";
+import ActionCards from "./Trade/ActionCards";
+import Commodities from "./Trade/Commodities";
+import TradeGoods from "./Trade/TradeGoods";
+import UnitUpgrades from "./Tech/UnitUpgrades";
+import TechTree from "./Tech/TechTree"
+import SectionHeader from "../ObjectivePage/TableItems/SectionHeader";
+import CCSheet from "./Trade/CCSheet";
+import FactionTechs from "./Tech/FactionTechs";
+import { FACTION_ABBREV_TO_FULL, FACTION_TECHNOLOGIES } from "../../../models/dictionaries";
 
 const PlayerHoverCard = ({ player, hoverIcon, getImageSrc }: PlayerHoverCardProps) => {
 

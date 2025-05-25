@@ -1,5 +1,5 @@
 
-import { UNIT_UPGRADES } from "../../../models/dictionaries";
+import { UNIT_UPGRADES } from "../../../../models/dictionaries";
 
 interface UnitUpgradesProps {
     getImageSrc: (id: string) => string | undefined,
