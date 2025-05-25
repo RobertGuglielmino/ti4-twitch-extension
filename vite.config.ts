@@ -28,6 +28,7 @@ export default defineConfig({
       input: {
         viewer: resolve(__dirname, "index.html"),
         config: resolve(__dirname, "src/config.html"),
+        video_index: resolve(__dirname, "src/video_index.html"),
       },
       output: {
         entryFileNames: 'viewer.js',

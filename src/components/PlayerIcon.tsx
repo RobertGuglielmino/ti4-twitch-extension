@@ -1,5 +1,6 @@
 import { FACTION_ICONS } from "../assets/icons";
 import { Player, StrategyCards } from "../models/interfaces";
+import useImageLoader from "../utils/useImageLoader";
 import PlayerHoverCard from "./PlayerHoverCard";
 
 const strategyCards: StrategyCards = {
@@ -19,16 +20,17 @@ interface PlayerIconProps {
   isActive: boolean,
   isSpeaker: boolean,
   isActivePlayer: boolean,
+  getImageSrc: (id: string) => string | undefined,
+  isImageLoaded: (id: string) => boolean,
   onMouseEnter: () => void,
   onMouseLeave: () => void
 }
 
 
 // Player icon component
-const PlayerIcon = ({ player, isActive, isSpeaker, isActivePlayer, onMouseEnter, onMouseLeave }: PlayerIconProps) => {
+const PlayerIcon = ({ player, isActive, isSpeaker, isActivePlayer, getImageSrc, isImageLoaded, onMouseEnter, onMouseLeave }: PlayerIconProps) => {
 
   const normalizedFaction = player.faction.charAt(0).toUpperCase() + player.faction.slice(1).toLowerCase();
-  const playerFactionIcon = FACTION_ICONS[normalizedFaction]; 
 
   return (
     <div
@@ -41,7 +43,7 @@ const PlayerIcon = ({ player, isActive, isSpeaker, isActivePlayer, onMouseEnter,
         style={{ backgroundColor: player.color }}
       >
         <img
-          src={playerFactionIcon}
+          src={getImageSrc(player.faction.toLowerCase())}
           alt={player.faction}
           className="w-12 h-12 object-contain"
           title={player.faction}
@@ -73,7 +75,7 @@ const PlayerIcon = ({ player, isActive, isSpeaker, isActivePlayer, onMouseEnter,
 
       {/* Hover card */}
       {isActive && (
-        <PlayerHoverCard player={player} hoverIcon={playerFactionIcon}/>
+        <PlayerHoverCard player={player} hoverIcon={player.faction.toLowerCase()} getImageSrc={(id) => getImageSrc(id)} isImageLoaded={(id) => isImageLoaded(id)} />
       )}
     </div>
   );

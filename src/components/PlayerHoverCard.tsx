@@ -14,19 +14,18 @@ import CCSheet from "./DisplayComponents/Trade/CCSheet";
 import FactionTechs from "./DisplayComponents/Tech/FactionTechs";
 import { FACTION_ABBREV_TO_FULL, FACTION_TECHNOLOGIES } from "../models/dictionaries";
 
-
-const PlayerHoverCard = ({ player, hoverIcon }: PlayerHoverCardProps) => {
+const PlayerHoverCard = ({ player, hoverIcon, getImageSrc }: PlayerHoverCardProps) => {
 
     const techColors = ["blue","red","yellow","green"];
 
     return (
-        <div className="border-red-400 text-center font-astro border-2 absolute left-0 bottom-16 z-50 rounded-lg p-3 shadow-xl border border-gray-700 w-120 text-white">
+        <div className="border-red-400 text-center font-astro border-2 absolute left-0 bottom-16 z-50 rounded-lg p-3 shadow-xl border border-gray-700 w-120 max-h-[100vh] text-white">
             <div className="absolute inset-0 bg-[url(@icons/backgrounds/tile_049.png)] bg-scale-[auto_200px] bg-[length:auto_150%] bg-center brightness-25"></div>
             <div className="relative z-10">
                 <div className="flex items-center mb-3">
                     <div className="h-10 w-10 rounded-full mr-2 flex items-center justify-center" style={{ backgroundColor: player.color }}>
                         <img
-                            src={hoverIcon}
+                            src={getImageSrc(hoverIcon)}
                             alt={player.faction}
                             className="w-8 h-8 object-contain"
                         />
@@ -45,9 +44,9 @@ const PlayerHoverCard = ({ player, hoverIcon }: PlayerHoverCardProps) => {
                         <div className="w-auto">
                             <SectionHeader>Trade</SectionHeader>
                             <div className="flex flex-row w-auto gap-4">
-                                <ActionCards>{player.actionCards}</ActionCards>
-                                <Promissory>{player.promissoryNotes}</Promissory>
-                                <Commodities>
+                                <ActionCards getImageSrc={(id) => getImageSrc(id)}>{player.actionCards}</ActionCards>
+                                <Promissory getImageSrc={(id) => getImageSrc(id)}>{player.promissoryNotes}</Promissory>
+                                <Commodities getImageSrc={(id) => getImageSrc(id)}>
                                     <span>
                                         {player.commodities} 
                                     </span>
@@ -55,7 +54,7 @@ const PlayerHoverCard = ({ player, hoverIcon }: PlayerHoverCardProps) => {
                                         {` / ${player.maxCommodities}`}
                                     </span>
                                     </Commodities>
-                                <TradeGoods>{player.tradeGoods}</TradeGoods>
+                                <TradeGoods getImageSrc={(id) => getImageSrc(id)}>{player.tradeGoods}</TradeGoods>
                             </div>
                             {/* <div className="grid grid-cols-2 w-auto gap-1">
                                 <ActionCards>{player.actionCards}</ActionCards>
@@ -66,12 +65,12 @@ const PlayerHoverCard = ({ player, hoverIcon }: PlayerHoverCardProps) => {
                         </div>
 
                         <SectionHeader>Counters</SectionHeader>
-                        <CCSheet player={player} />
+                        <CCSheet getImageSrc={(id) => getImageSrc(id)} player={player} />
                     </div>
 
                     <div className="flex flex-col items-center">
                         <SectionHeader>Leaders</SectionHeader>
-                        <LeaderItem {...player.leaders} />
+                        <LeaderItem getImageSrc={(id: string) => getImageSrc(id)} {...player.leaders} />
                     </div>
                 </div>
 
@@ -80,24 +79,24 @@ const PlayerHoverCard = ({ player, hoverIcon }: PlayerHoverCardProps) => {
                         <SectionHeader>Technologies</SectionHeader>
                         {
                             Object.entries(player.technologies).map(([k, v]) => 
-                                (techColors.includes(k) && v.includes(true) && <TechTree key={k} color={k} techsResearched={v} />))
+                                (techColors.includes(k) && v.includes(true) && <TechTree getImageSrc={(id) => getImageSrc(id)} key={k} color={k} techsResearched={v} />))
                         }
                     </div>
 
                     <div className="flex flex-col justify-between gap-1">
                         <SectionHeader>Faction Techs</SectionHeader>
                         <div className="flex flex-row justify-center flex-wrap">
-                            {<FactionTechs techs={player.technologies.faction} factionTechInfo={FACTION_TECHNOLOGIES[player.faction.toLowerCase()]}/>}
+                            {<FactionTechs getImageSrc={(id) => getImageSrc(id)} techs={player.technologies.faction} factionTechInfo={FACTION_TECHNOLOGIES[player.faction.toLowerCase()]}/>}
                         </div>
 
                         <SectionHeader>Unit Upgrades</SectionHeader>
                         <div className="flex flex-row flex-wrap">
                             {player.technologies.unit.map(tech => tech === true) &&
-                                <UnitUpgrades techs={player.technologies.unit} />}
+                                <UnitUpgrades getImageSrc={(id) => getImageSrc(id)} techs={player.technologies.unit} />}
                         </div>
 
                         <SectionHeader>Secrets</SectionHeader>
-                        <SecretObjItem secrets={player.secretObjectives} inHand={1} />
+                        <SecretObjItem getImageSrc={(id) => getImageSrc(id)} secrets={player.secretObjectives} inHand={1} />
                     </div>
                 </div>
             </div>
@@ -122,6 +121,8 @@ const PlayerHoverCard = ({ player, hoverIcon }: PlayerHoverCardProps) => {
 interface PlayerHoverCardProps {
     player: Player,
     hoverIcon: any,
+    getImageSrc: (id: string) => string | undefined,
+    isImageLoaded: (id: string) => boolean,
 }
 
 // interface TechnologyColors {

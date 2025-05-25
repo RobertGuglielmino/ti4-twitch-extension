@@ -1,13 +1,12 @@
-import trade from "@icons/overlay_icons/tradegood_1.png";
-
 interface TradeGoodsProps {
+    getImageSrc: (id: string) => string | undefined,
     children: React.ReactNode
 }
 
-const TradeGoods = ({ children }: TradeGoodsProps) => {
+const TradeGoods = ({ getImageSrc, children }: TradeGoodsProps) => {
     return (
         <div className="flex flex-col items-center w-1/4">
-            <img src={trade} alt="trade" className="object-contain h-8"/>
+            <img src={getImageSrc("tradegood")} alt="trade" className="object-contain h-8"/>
             <div className="relative z-10 inline-block font-astro p-1 m-1 font-bold text-center">
                 {children}
             </div>

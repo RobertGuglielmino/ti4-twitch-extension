@@ -24,7 +24,7 @@ const SecretScoringRow = ({ playerData,  bonusObjective }: SecretScoringRowProps
 
     function getObjFormatBonus(objectiveType: Objective, index: number) {
         if (objectiveType.scored.hasOwnProperty(index) && objectiveType.scored[index] != 0) {
-            const numScored = playerData.secretObjectives[index].length;
+            const numScored = playerData.secretObjectives[index]?.length || 0;
             return <span className="text-green-600 text-sm font-bold">{numScored}</span>;
         } else {
             return <span className="text-gray-700 text-xs">-</span>;

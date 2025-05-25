@@ -1,5 +1,6 @@
 
-interface LeaderItemProps { agent: boolean, commander: boolean, hero: boolean }
+interface LeaderItemProps { agent: boolean, commander: boolean, hero: boolean, getImageSrc: (id: string) => string | undefined
+ }
 
 const LeaderItem = ({agent, commander, hero}: LeaderItemProps) => {
 

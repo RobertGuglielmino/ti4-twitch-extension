@@ -1,12 +1,12 @@
 import { Player } from "../../../models/interfaces";
-import playerSheet from "../../../assets/backgrounds/player-sheets.png";
 import CCTokenItem from "./CCTokenItem";
 
 interface CCSheetProps {
+    getImageSrc: (id: string) => string | undefined,
     player: Player
 }
 
-const CCSheet = ({player}: CCSheetProps) => {
+const CCSheet = ({getImageSrc, player}: CCSheetProps) => {
 
     const textItems = [
         {
@@ -32,7 +32,7 @@ const CCSheet = ({player}: CCSheetProps) => {
     return (
         <div className="relative w-50">
             <img
-                src={playerSheet}
+                src={getImageSrc("player_sheet")}
                 className={`object-cover opacity-50`}
             />
 

@@ -3,12 +3,14 @@ import { Award, Shield, Zap, Database, ChevronUp, ChevronDown } from 'lucide-rea
 import PlayerIcon from './PlayerIcon';
 import ScoringHoverCard from './ScoringHoverCard';
 import { HOVER_STATES } from '../models/enums';
-import {  Player } from '../models/interfaces';
+import { Player, ProgressObjective } from '../models/interfaces';
 import { mockData2 } from '../models/mockDataV2';
 import pako from 'pako';
 import { z } from 'zod';
+import useImageBus, { UseImageBusReturn } from '../utils/useImageBus';
+import { preload_images } from '../models/image_items';
 
-// Define zod schema based on GameDataV2 interface
+// Define zod schema based on GameDataV2 interface with nullable values
 const gameDataSchema = z.object({
   playerData: z.object({
     name: z.array(z.string()),
@@ -85,6 +87,7 @@ const gameDataSchema = z.object({
       points: z.number(),
       scored: z.array(z.number())
     }))
+
   }),
   laws: z.array(z.object({
     name: z.string(),
@@ -98,62 +101,57 @@ const gameDataSchema = z.object({
   })
 });
 
-//TODO
-/*
-turn into exe
-
-config/videoconfig/ submissions tuff
-
-BONUS
- color filter on player parts
- color on border
-*/
 
 // Main overlay component
 const TI4Overlay = () => {
   const [data, setData] = useState(mockData2);
   const [activeHover, setActiveHover] = useState(HOVER_STATES.NONE);
   const [minimized, setMinimized] = useState(false);
+  const {
+    getImageSrc,
+    isImageLoaded
+  }: UseImageBusReturn = useImageBus(preload_images);
 
-    useEffect(() => {
-      window.Twitch.ext.listen(
-        "broadcast",
-        (_: string, contentType: string, message: string) => {
-          if (contentType !== "application/json") {
-            console.debug(`Unexpected contentType "${contentType}"`);
-            return;
+  useEffect(() => {
+    window.Twitch.ext.listen(
+      "broadcast",
+      (_: string, contentType: string, message: string) => {
+        if (contentType !== "application/json") {
+          console.debug(`Unexpected contentType "${contentType}"`);
+          return;
+        }
+
+        // Process the message with decompression if needed
+        const processedData = handlePubSubMessage(message);
+        if (processedData) {
+          // Validate data with zod before setting state
+          try {
+            const validatedData = gameDataSchema.parse(processedData);
+            // Filter out null values from public1 and public2 arrays
+            setData(validatedData);
+          } catch (error) {
+            console.error('Invalid data format:', error);
           }
-          
-          // Process the message with decompression if needed
-          const processedData = handlePubSubMessage(message);
-          if (processedData) {
-            // Validate data with zod before setting state
-            try {
-              const validatedData = gameDataSchema.parse(processedData);
-              setData(validatedData);
-            } catch (error) {
-              console.error('Invalid data format:', error);
-            }
-          }
-        },
-      );
-    }, []);
+        }
+      },
+    );
+  }, []);
 
   // Add the decompression function
   function handlePubSubMessage(message: string) {
     try {
       const parsedMessage = JSON.parse(message);
-      
+
       // Check if the message is compressed
       if (parsedMessage.compressed) {
         const compressedData = parsedMessage.data;
-        const binaryData = atob(compressedData); 
-        
+        const binaryData = atob(compressedData);
+
         const charData = binaryData.split('').map(x => x.charCodeAt(0));
         const binData = new Uint8Array(charData);
-        
+
         const decompressedData = pako.inflate(binData, { to: 'string' });
-        
+
         return JSON.parse(decompressedData);
       } else {
         return parsedMessage;
@@ -252,6 +250,8 @@ const TI4Overlay = () => {
                   isActive={activeHover === index}
                   isSpeaker={name === data.general.speaker}
                   isActivePlayer={data.playerData.color[index] === data.general.activePlayer}
+                  getImageSrc={(id) => getImageSrc(id)}
+                  isImageLoaded={(id) => isImageLoaded(id)}
                   onMouseEnter={() => setActiveHover(index)}
                   onMouseLeave={() => setActiveHover(HOVER_STATES.NONE)}
                 />
@@ -269,7 +269,7 @@ const TI4Overlay = () => {
                 {getVictoryTarget()}
               </div>
               {activeHover === HOVER_STATES.OBJECTIVE && (
-                <ScoringHoverCard data={data} />
+                <ScoringHoverCard getImageSrc={(id) => getImageSrc(id)} data={data} />
               )}
             </div>
           </div>
@@ -280,7 +280,7 @@ const TI4Overlay = () => {
 };
 
 function getVictoryTarget() {
-  return 10; 
+  return 10;
 };
 
 

@@ -8,16 +8,3 @@ const ObjectiveProgress = (input: string) => {
 }
 
 export default ObjectiveProgress;
-
-
-
-// export type UpdatorObjectiveProgressType = Array<{
-//   name: string;
-//   abbr: string;
-//   stage: number;
-//   progress: {
-//     header: string;
-//     values: Array<{ value: string | number | boolean; success: boolean }>;
-//     scoredBy: Array<number>;
-//   };
-// }>;

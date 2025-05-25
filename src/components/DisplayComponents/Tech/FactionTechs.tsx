@@ -1,6 +1,7 @@
 import TechChip from "./TechChip";
 
 interface UnitUpgradesProps {
+    getImageSrc: (id: string) => string | undefined,
     techs: boolean[],
     factionTechInfo: {[key: string]: string}
 }

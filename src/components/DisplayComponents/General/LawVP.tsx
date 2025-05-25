@@ -4,10 +4,11 @@ import FactionIcon from "./FactionIcon";
 interface LawVPProps {
     name: string,
     agendas: Objective[],
+    getImageSrc: (id: string) => string | undefined,
     data: GameDataV2
 }
 
-const LawVP = ({ name, agendas, data }: LawVPProps) => {
+const LawVP = ({ name, agendas, getImageSrc, data }: LawVPProps) => {
 
     function normalizedFactionFromIndex(index: number) {
         return data.playerData.faction[index].charAt(0).toUpperCase()
@@ -23,7 +24,7 @@ const LawVP = ({ name, agendas, data }: LawVPProps) => {
         <div className="flex flex-row gap-1">
             {agendas.filter(agenda => agenda && agenda.name === name).map(agenda => {
                 return agenda.scored.filter(player => player === 1).map((_, index) => {
-                    return (<FactionIcon key={index} className="size-4" faction={normalizedFactionFromIndex(index)} />);
+                    return (<FactionIcon getImageSrc={getImageSrc} key={index} className="size-4" faction={normalizedFactionFromIndex(index)} />);
                 });
             })}
         </div>

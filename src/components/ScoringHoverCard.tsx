@@ -9,11 +9,12 @@ import { VICTORY_POINT_LAWS } from '../models/dictionaries';
 import LawVP from './DisplayComponents/General/LawVP';
 
 interface ScoringHoverCardProps {
-  data: GameDataV2
+  data: GameDataV2,
+  getImageSrc: (id: string) => string | undefined,
 }
 
 // Scoring hover card component
-const ScoringHoverCard = ({ data }: ScoringHoverCardProps) => {
+const ScoringHoverCard = ({ getImageSrc, data }: ScoringHoverCardProps) => {
 
   return (
     <>
@@ -34,7 +35,7 @@ const ScoringHoverCard = ({ data }: ScoringHoverCardProps) => {
                   {data.playerData.faction.map((faction: string, index: number) => (
                     <th key={index} className="font-normal text-black p-1 border-b border-gray-700 text-center w-7">
                       <div className="h-5 w-5 rounded-full mx-auto flex items-center justify-center" style={{ backgroundColor: data.playerData.color[index] }}>
-                        <FactionIcon faction={faction} />
+                        <FactionIcon getImageSrc={(id) => getImageSrc(id)} faction={faction} />
                       </div>
                     </th>
                   ))}
@@ -66,7 +67,7 @@ const ScoringHoverCard = ({ data }: ScoringHoverCardProps) => {
                       let isVictoryPointLaw = VICTORY_POINT_LAWS.includes(law.name);
                       if (isVictoryPointLaw) {
                         return (<div key={idx} className={`p-1 w-auto text-xs rounded-md border border-yellow-400 bg-yellow-400`}>
-                          <LawVP name={law.name} agendas={data.objectives.agenda} data={data} />
+                          <LawVP getImageSrc={(id) => getImageSrc(id)} name={law.name} agendas={data.objectives.agenda} data={data} />
                         </div>);
                       } else {
                         return (<div key={idx} className={`p-1 w-auto text-xs rounded-md border-1 border-blue-800 bg-gray-950`}>
@@ -82,7 +83,7 @@ const ScoringHoverCard = ({ data }: ScoringHoverCardProps) => {
 
               <div className="w-1/2 pl-2">
                 <div className=" font-avalors text-center">Relics</div>
-                {data.objectives.relics.filter((obj: Objective) => obj.points === 1).length > 0 ? (
+                {Array.isArray(data.objectives.relics) && data.objectives.relics.filter((obj: Objective) => obj.points === 1).length > 0 ? (
                   <div className="flex w-auto p-1 g-1">
                     {data.objectives.relics
                       .map((relic) => {

@@ -1,11 +1,12 @@
 import TechChip from "./TechChip";
 
 interface TechTreeProps {
+    getImageSrc: (id: string) => string | undefined,
     color: string,
     techsResearched: boolean[]
 }
 
-const TechTree = ({ color, techsResearched }: TechTreeProps) => {
+const TechTree = ({ getImageSrc, color, techsResearched }: TechTreeProps) => {
 
     const techs = getTechs(color);
 
@@ -51,7 +52,7 @@ function getRadialBG(colorInput: string) {
                     {techLevel.map((tech) => {
                         if (techsResearched[techIndex] === true) {
                             techIndex += 1;
-                            return (<TechChip key={tech} color={color} name={tech} />);
+                            return (<TechChip  key={tech} color={color} name={tech} />);
                         } else {
                             techIndex += 1;
                             return (<div key={tech} className="p-1 border-2 rounded h-10 w-16 m-1 text-slate-300 bg-slate-950 border-slate-950 opacity-50">

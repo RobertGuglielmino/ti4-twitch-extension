@@ -1,12 +1,18 @@
 import secretFront from "../../../assets/backgrounds/secretFront.png"; 
 import secretShort from "../../../assets/overlay_icons/secret.short.jpg";
+import useImageLoader from "../../../utils/useImageLoader";
 
 interface SecretObjItem {
+    getImageSrc: (id: string) => string | undefined,
     secrets: string[],
     inHand: number
 }
 
-const SecretObjItem = ({ secrets, inHand }: SecretObjItem) => {
+const SecretObjItem = ({ getImageSrc, secrets, inHand }: SecretObjItem) => {
+    const { loaded: ___, error: ____ } = useImageLoader(secretFront);
+    const { loaded: _, error: __ } = useImageLoader(secretShort);
+
+
     function getScoredSecrets() {
         const scoredSecrets = [];
         if (secrets === undefined) {
@@ -15,7 +21,7 @@ const SecretObjItem = ({ secrets, inHand }: SecretObjItem) => {
         for (let i = 0; i < secrets.length; i++) {
             scoredSecrets.push(<div key={i} className="relative border-2 rounded h-12 w-full m-1 border-red-700">
                 <img
-                    src={secretFront}
+                    src={getImageSrc("secret_front")}
                     alt=""
                     className="w-full h-full object-cover opacity-50"
                 />
@@ -38,7 +44,7 @@ const SecretObjItem = ({ secrets, inHand }: SecretObjItem) => {
         for (let i = 0; i < inHand; i++) {
             unscoredSecrets.push(<div key={i} className="relative border-2 rounded h-12 w-full m-1 border-red-950">
                 <img
-                    src={secretShort}
+                    src={getImageSrc("secret")}
                     alt=""
                     className="w-full h-full object-cover opacity-50"
                 />
