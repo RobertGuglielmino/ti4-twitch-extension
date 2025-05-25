@@ -19,6 +19,16 @@
   font-family: 'ndastroneer', sans-serif !important;
 }
 
+
+@theme {
+  --color-tiwhite: rgb(255, 255, 255); 
+  --color-tiblue: rgb(1, 169, 203); 
+  --color-tipurple: rgb(190, 70, 229); 
+  --color-tired: rgb(178, 59, 77);
+  --color-tiyellow: rgb(19, 170, 28); 
+  --color-tigreen: rgb(1, 121, 55); 
+}
+
 /* Add custom text stroke classes */
 .text-stroke {
   -webkit-text-stroke: 1px black;

@@ -1,5 +1,3 @@
-import action from "@icons/overlay_icons/action.short.jpg";
-
 interface ActionCardsProps {
     getImageSrc: (id: string) => string | undefined,
     children: React.ReactNode

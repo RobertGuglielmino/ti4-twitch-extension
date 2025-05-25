@@ -94,7 +94,7 @@ export interface Objectives {
     public2: ProgressObjective[],
     secret: Objective,
     mecatol: Objective,
-    agenda: Objective[],
+    agenda: Objective,
     relics: Objective[],
 }
 

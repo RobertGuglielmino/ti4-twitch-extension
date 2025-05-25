@@ -15,10 +15,10 @@ const overlaySchema = z.array(z.object({
     speaker: z.boolean()
 }));
 
-const mockDataConfig= [
+const mockDataConfig = [
     {
         playerName: "Robert",
-        color: "White",
+        color: "white",
         score: 5,
         faction: "Mentak",
         strategyCard: "Warfare",
@@ -27,7 +27,7 @@ const mockDataConfig= [
     },
     {
         playerName: "Matt",
-        color: "Blue",
+        color: "blue",
         score: 6,
         faction: "Arborec",
         strategyCard: "Leadership",
@@ -36,7 +36,7 @@ const mockDataConfig= [
     },
     {
         playerName: "Jeff",
-        color: "Green",
+        color: "green",
         score: 7,
         faction: "Letnev",
         strategyCard: "Trade",
@@ -45,7 +45,7 @@ const mockDataConfig= [
     },
     {
         playerName: "Jeff",
-        color: "Yellow",
+        color: "yellow",
         score: 7,
         faction: "Muaat",
         strategyCard: "Trade",
@@ -63,7 +63,7 @@ const mockDataConfig= [
     },
     {
         playerName: "Jeff",
-        color: "white",
+        color: "red",
         score: 7,
         faction: "Xxcha",
         strategyCard: "Trade",
@@ -71,7 +71,6 @@ const mockDataConfig= [
         speaker: false
     }
 ];
-
 
 interface OverlayPlayer {
     playerName: string;
@@ -84,16 +83,115 @@ interface OverlayPlayer {
 }
 
 function VideoPage() {
-  const {
-    getImageSrc
-  }: UseImageBusReturn = useImageBus(preload_images);
-  const [data, setData] = useState<OverlayPlayer[]>(mockDataConfig);
+    const {
+        getImageSrc,
+        isImageLoaded
+    }: UseImageBusReturn = useImageBus(preload_images);
+    const [data, setData] = useState<OverlayPlayer[]>(mockDataConfig);
 
+    useEffect(() => {
+        window.Twitch.ext.listen(
+            "broadcast",
+            (_: string, contentType: string, message: string) => {
+                if (contentType !== "application/json") {
+                    console.debug(`Unexpected contentType "${contentType}"`);
+                    return;
+                }
 
+                const processedData = handlePubSubMessage(message);
+                const structuredData: OverlayPlayer[] = formatForOverlay(processedData);
+                if (structuredData) {
+                    try {
+                        const validatedData: OverlayPlayer[] = overlaySchema.parse(processedData);
+                        setData(
+                            validatedData
+                        );
+                    } catch (error) {
+                        console.error('Invalid data format:', error);
+                    }
+                }
+            },
+        );
+    }, []);
 
+    function handlePubSubMessage(message: string) {
+        try {
+            const parsedMessage = JSON.parse(message);
 
+            // Check if the message is compressed
+            if (parsedMessage.compressed) {
+                const compressedData = parsedMessage.data;
+                const binaryData = atob(compressedData);
 
-    // get player color
+                const charData = binaryData.split('').map(x => x.charCodeAt(0));
+                const binData = new Uint8Array(charData);
+
+                const decompressedData = pako.inflate(binData, { to: 'string' });
+
+                return JSON.parse(decompressedData);
+            } else {
+                return parsedMessage;
+            }
+        } catch (error) {
+            console.error('Error processing message:', error);
+            return null;
+        }
+    }
+
+    function formatForOverlay(data: any): OverlayPlayer[] {
+
+        let players = [];
+
+        for (let i = 0; i < data.playerData.name.length; i++) {
+            players[i] = {
+                playerName: data.playerData.name[i],
+                color: data.playerData.color[i],
+                score: data.playerData.victoryPoints[i],
+                faction: data.playerData.faction[i],
+                strategyCard: data.playerData.strategyCard[i],
+                strategyCardFlipped: data.playerData.strategyCardsFaceDown[i],
+                speaker: data.playerData.speaker === i
+            };
+
+        }
+        return players;
+    }
+
+    return <div className="grid grid-cols-3 bg-tipurple h-45 w-200">
+
+        {data.map(player => {
+            const factionId = player.faction.toLowerCase();
+            const speakerId = "speaker";
+            return (<div key={player.color} className="flex flex-row text-tiyellow w-auto h-auto justify-between items-center bg-gray-900 border border-gray-500 gap-2 p-2">
+                <div className={`${getBGColor(player.color)} p-1 min-w-14 size-14 rounded-full relative`}>
+                    {isImageLoaded(factionId) ? (
+                        <img src={getImageSrc(factionId)} alt={player.faction} />
+                    ) : (
+                        <div className="w-full h-full bg-gray-700 animate-pulse"></div>
+                    )}
+                    {player.speaker && isImageLoaded(speakerId) && (
+                        <div className="absolute -bottom-1 left-0 w-full h-4">
+                            <img src={getImageSrc(speakerId)} alt="Speaker" className="object-cover w-full h-full" />
+                        </div>
+                    )}
+                </div>
+                <div className=" flex flex-col min-w-auto items-center">
+                    <div className={`text-xl ${getTextColor(player.color)} `}>
+                        {player.playerName}
+                    </div>
+                    <div className={`text-lg ${player.strategyCardFlipped ? 'line-through text-slate-500' : 'text-slate-200'}`}>
+                        {player.strategyCard}
+                    </div>
+                </div>
+                <div className={`${getTextColor(player.color)}  min-w-auto text-6xl`}>
+                    {player.score}
+                </div>
+            </div>)
+        })}
+
+    </div>
+        ;
+
     function getBGColor(color: string) {
         switch (color.toLowerCase()) {
             case 'red':
@@ -128,105 +226,8 @@ function VideoPage() {
             case 'purple':
                 return 'text-tipurple';
             default:
-                return 'text-gray';
+                return 'text-gray-500';
         }
     }
-
-
-        useEffect(() => {
-          window.Twitch.ext.listen(
-            "broadcast",
-            (_: string, contentType: string, message: string) => {
-              if (contentType !== "application/json") {
-                console.debug(`Unexpected contentType "${contentType}"`);
-                return;
-              }
-              
-              const processedData = handlePubSubMessage(message);
-              const structuredData: OverlayPlayer[] = formatForOverlay(processedData);
-              if (structuredData) {
-                try {
-                  const validatedData: OverlayPlayer[] = overlaySchema.parse(processedData);
-                  setData(
-                    validatedData
-                  );
-                } catch (error) {
-                  console.error('Invalid data format:', error);
-                }
-              }
-            },
-          );
-        }, []);
-    
-      // Add the decompression function
-      function handlePubSubMessage(message: string) {
-        try {
-          const parsedMessage = JSON.parse(message);
-          
-          // Check if the message is compressed
-          if (parsedMessage.compressed) {
-            const compressedData = parsedMessage.data;
-            const binaryData = atob(compressedData); 
-            
-            const charData = binaryData.split('').map(x => x.charCodeAt(0));
-            const binData = new Uint8Array(charData);
-            
-            const decompressedData = pako.inflate(binData, { to: 'string' });
-            
-            return JSON.parse(decompressedData);
-          } else {
-            return parsedMessage;
-          }
-        } catch (error) {
-          console.error('Error processing message:', error);
-          return null;
-        }
-      }
-
-      function formatForOverlay(data: any): OverlayPlayer[] {
-
-        let players = [];
-
-        for (let i = 0; i < data.playerData.name.length; i++) {
-            players[i] = {
-                playerName: data.playerData.name[i],
-                color: data.playerData.color[i],
-                score: data.playerData.victoryPoints[i],
-                faction: data.playerData.faction[i],
-                strategyCard: data.playerData.strategyCard[i],
-                strategyCardFlipped: data.playerData.strategyCardsFaceDown[i],
-                speaker: data.playerData.speaker === i
-            };
-
-        }
-        return players;
-      }
-
-    return <div className="grid grid-cols-3 bg-gray-950 h-45 w-200">
-
-    {data.map(player =>{return (<div key={player.color} className="flex flex-row w-auto h-auto justify-between items-center bg-gray-900 border border-gray-500 gap-2 p-2">
-        <div className={`bg-blue-500 p-1 min-w-14 size-14 rounded-full relative`}>
-            <img src={getImageSrc(player.faction.toLowerCase())} alt={player.faction} />
-            {player.speaker && (
-                <div className="absolute -bottom-1 left-0 w-full h-4">
-                    <img src={getImageSrc("speaker")} alt="Speaker" className="object-cover w-full h-full" />
-                </div>
-            )}
-        </div>
-        <div className=" flex flex-col min-w-auto items-center">
-            <div className={`text-xl ${getTextColor(player.color)} `}>
-                {player.playerName}
-            </div>
-            <div className={`text-lg ${player.strategyCardFlipped ? 'line-through text-slate-500' : 'text-slate-200'}`}>
-                {player.strategyCard}
-            </div>
-        </div>
-        <div className={`${getTextColor(player.color)}  min-w-auto text-6xl`}>
-            {player.score}
-        </div>
-    </div>)})}
-
-    </div>
-    ;
 }
 export default VideoPage;

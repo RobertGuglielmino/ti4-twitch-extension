@@ -3,7 +3,7 @@ import { Award, Shield, Zap, Database, ChevronUp, ChevronDown } from 'lucide-rea
 import PlayerIcon from './PlayerIcon';
 import ScoringHoverCard from './ScoringHoverCard';
 import { HOVER_STATES } from '../models/enums';
-import { Player, ProgressObjective } from '../models/interfaces';
+import { Player } from '../models/interfaces';
 import { mockData2 } from '../models/mockDataV2';
 import pako from 'pako';
 import { z } from 'zod';
@@ -75,12 +75,12 @@ const gameDataSchema = z.object({
       points: z.number(),
       scored: z.array(z.number())
     }),
-    agenda: z.array(z.object({
+    agenda: z.object({
       name: z.string(),
       description: z.string(),
       points: z.number(),
       scored: z.array(z.number())
-    })),
+    }),
     relics: z.array(z.object({
       name: z.string(),
       description: z.string(),

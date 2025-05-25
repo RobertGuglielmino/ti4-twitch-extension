@@ -6,7 +6,7 @@ interface TechTreeProps {
     techsResearched: boolean[]
 }
 
-const TechTree = ({ getImageSrc, color, techsResearched }: TechTreeProps) => {
+const TechTree = ({  color, techsResearched }: TechTreeProps) => {
 
     const techs = getTechs(color);
 

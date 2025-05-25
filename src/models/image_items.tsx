@@ -1,4 +1,4 @@
-import { ImageItem } from "../utils/useImageBus";
+import { ImageItem } from "../utils/useImageBus.tsx";
 
 export const preload_images: ImageItem[] = [
   {

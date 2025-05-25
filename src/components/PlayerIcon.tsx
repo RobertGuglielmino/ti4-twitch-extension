@@ -1,6 +1,4 @@
-import { FACTION_ICONS } from "../assets/icons";
 import { Player, StrategyCards } from "../models/interfaces";
-import useImageLoader from "../utils/useImageLoader";
 import PlayerHoverCard from "./PlayerHoverCard";
 
 const strategyCards: StrategyCards = {
@@ -29,8 +27,6 @@ interface PlayerIconProps {
 
 // Player icon component
 const PlayerIcon = ({ player, isActive, isSpeaker, isActivePlayer, getImageSrc, isImageLoaded, onMouseEnter, onMouseLeave }: PlayerIconProps) => {
-
-  const normalizedFaction = player.faction.charAt(0).toUpperCase() + player.faction.slice(1).toLowerCase();
 
   return (
     <div

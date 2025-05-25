@@ -1090,34 +1090,20 @@ export const mockData2: GameDataV2 = {
         0
       ]
     },
-    "agenda": [
-      {
-        "name": "Mutiny",
-        "description": "",
-        "points": 1,
-        "scored": [
-          1,
-          1,
-          1,
-          1,
-          1,
-          1
-        ]
-      },
-      {
-        "name": "Seed of an Empire",
-        "description": "",
-        "points": 1,
-        "scored": [
-          0,
-          1,
-          0,
-          0,
-          0,
-          0
-        ]
-      }
-    ],
+    "agenda":
+    {
+      "name": "Agenda",
+      "description": "",
+      "points": 1,
+      "scored": [
+        1,
+        1,
+        1,
+        1,
+        1,
+        1
+      ]
+    },
     "relics": [
       {
         "name": "Shard of the Throne",

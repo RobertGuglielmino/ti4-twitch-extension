@@ -2,6 +2,8 @@
 export default {
   content: [
     "./index.html",
+    "./src/video_index.html",
+    "./src/config.html",
     "./src/**/*.{js,ts,jsx,tsx}",
   ],
   theme: {

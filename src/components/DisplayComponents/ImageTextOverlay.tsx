@@ -1,4 +1,3 @@
-import useImageLoader from "../../utils/useImageLoader";
 
 interface ImageTextProps {
   image: string;
@@ -6,7 +5,6 @@ interface ImageTextProps {
 }
 
 const ImageTextOverlay = ({ image, text }: ImageTextProps) => {
-    const { loaded: _, error: __ } = useImageLoader(image);
     
   return (<div className="relative inline-block p-4">
     <img src={image} alt="" className="opacity-50" />

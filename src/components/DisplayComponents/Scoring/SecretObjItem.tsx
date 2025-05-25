@@ -1,7 +1,3 @@
-import secretFront from "../../../assets/backgrounds/secretFront.png"; 
-import secretShort from "../../../assets/overlay_icons/secret.short.jpg";
-import useImageLoader from "../../../utils/useImageLoader";
-
 interface SecretObjItem {
     getImageSrc: (id: string) => string | undefined,
     secrets: string[],
@@ -9,8 +5,6 @@ interface SecretObjItem {
 }
 
 const SecretObjItem = ({ getImageSrc, secrets, inHand }: SecretObjItem) => {
-    const { loaded: ___, error: ____ } = useImageLoader(secretFront);
-    const { loaded: _, error: __ } = useImageLoader(secretShort);
 
 
     function getScoredSecrets() {
