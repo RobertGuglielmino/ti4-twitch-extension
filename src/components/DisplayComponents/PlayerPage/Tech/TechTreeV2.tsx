@@ -43,7 +43,6 @@ const TechTreeV2 = ({ color, techsResearched, getImageSrc, faction, factionTechs
                 const techIndex = techs.indexOf(tech);
 
                 const techProps = {
-                    key: `tech-${tech.name}`,
                     color: color,
                     level: tech.level,
                     name: tech.name,
@@ -52,6 +51,7 @@ const TechTreeV2 = ({ color, techsResearched, getImageSrc, faction, factionTechs
                 if (tech.isFactionTech) {
                     return (
                         <FactionTechChip 
+                            key = {`tech-${tech.name}`}
                             {...techProps}
                             faction={faction!}
                             getImageSrc={(id) => getImageSrc(id)}
@@ -60,6 +60,7 @@ const TechTreeV2 = ({ color, techsResearched, getImageSrc, faction, factionTechs
                 } else if (techIndex >= 0 && techsResearched[techIndex]) {
                     return (
                         <TechChipV2 
+                            key = {`tech-${tech.name}`}
                             {...techProps}
                         />
                     );
@@ -109,8 +110,8 @@ const blueTechs: TechInfo[] = [
 const redTechs: TechInfo[] = [
     { name: "PLASMA SCORING", level: 0 },
     { name: "AI DEV", level: 0 },
-    { name: "SELF ASSEMBLY", level: 1 },
     { name: "MAGEN DEFENSE", level: 1 },
+    { name: "SELF ASSEMBLY", level: 1 },
     { name: "DURANIUM ARMOR", level: 2 },
     { name: "ASSAULT CANNON", level: 3 }
 ];
@@ -118,8 +119,8 @@ const redTechs: TechInfo[] = [
 const yellowTechs: TechInfo[] = [
     { name: "SARWEEN TOOLS", level: 0 },
     { name: "SCANLINK DRONES", level: 0 },
-    { name: "PREDICTIVE INTLLGNCE", level: 1 },
     { name: "GRAVITON LASER", level: 1 },
+    { name: "PREDICTIVE INTLLGNCE", level: 1 },
     { name: "TRANSIT DIODES", level: 2 },
     { name: "INT. ECONOMY", level: 3 }
 ];
@@ -127,8 +128,8 @@ const yellowTechs: TechInfo[] = [
 const greenTechs: TechInfo[] = [
     { name: "NEURAL MOTIVATOR", level: 0 },
     { name: "PSYCHO ARCH.", level: 0 },
-    { name: "BIO STIMS", level: 1 },
     { name: "DAXCIVE ANIMATORS", level: 1 },
+    { name: "BIO STIMS", level: 1 },
     { name: "HYPER METAB.", level: 2 },
     { name: "X-89 WEAPON", level: 3 }
 ];

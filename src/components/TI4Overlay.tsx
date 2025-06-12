@@ -1,10 +1,9 @@
 import { useEffect, useState } from 'react';
-import { Award, Shield, Zap, Database, ChevronUp, ChevronDown } from 'lucide-react';
+import { ChevronRight, ChevronLeft } from 'lucide-react';
 import PlayerIcon from './PlayerIcon';
-import ScoringHoverCard from './DisplayComponents/ObjectivePage/ScoringHoverCard';
 import { HOVER_STATES } from '../models/enums';
 import { Player } from '../models/interfaces';
-import { mockData2 } from '../models/mockDataV2';
+import { initialData } from '../models/mockDataV2';
 import pako from 'pako';
 import { z } from 'zod';
 import useImageBus, { UseImageBusReturn } from '../utils/useImageBus';
@@ -38,6 +37,7 @@ const gameDataSchema = z.object({
     maxCommodities: z.array(z.number()),
     actionCards: z.array(z.number()),
     promissoryNotes: z.array(z.number()),
+    secretsInHand: z.array(z.number()),
     leaders: z.object({
       agent: z.array(z.boolean()),
       commander: z.array(z.boolean()),
@@ -104,7 +104,7 @@ const gameDataSchema = z.object({
 
 // Main overlay component
 const TI4Overlay = () => {
-  const [data, setData] = useState(mockData2);
+  const [data, setData] = useState(initialData);
   const [activeHover, setActiveHover] = useState(HOVER_STATES.NONE);
   const [minimized, setMinimized] = useState(false);
   const {
@@ -121,13 +121,10 @@ const TI4Overlay = () => {
           return;
         }
 
-        // Process the message with decompression if needed
         const processedData = handlePubSubMessage(message);
         if (processedData) {
-          // Validate data with zod before setting state
           try {
             const validatedData = gameDataSchema.parse(processedData);
-            // Filter out null values from public1 and public2 arrays
             setData(validatedData);
           } catch (error) {
             console.error('Invalid data format:', error);
@@ -138,14 +135,32 @@ const TI4Overlay = () => {
   }, []);
 
   // Add the decompression function
-  function handlePubSubMessage(message: string) {
-    try {
-      const parsedMessage = JSON.parse(message);
+function handlePubSubMessage(message: string) {
+  try {
+    console.log("Raw message received:", message);
+    console.log("Message length:", message.length);
+    
+    const parsedMessage = JSON.parse(message);
+    console.log("Parsed message:", parsedMessage);
 
-      // Check if the message is compressed
-      if (parsedMessage.compressed) {
-        const compressedData = parsedMessage.data;
-        const binaryData = atob(compressedData);
+    // Check if the message is compressed
+    if (parsedMessage.compressed) {
+      const compressedData = parsedMessage.data;
+      console.log("Compressed data type:", typeof compressedData);
+      console.log("Compressed data length:", compressedData?.length);
+      console.log("Compressed data sample:", compressedData?.substring(0, 50));
+      
+      // Validate base64 format before atob
+      const base64Regex = /^[A-Za-z0-9+/]*={0,2}$/;
+      const isValidBase64 = base64Regex.test(compressedData);
+      console.log("Is valid base64 format:", isValidBase64);
+      
+      if (!isValidBase64) {
+        console.error("Invalid base64 characters found in:", compressedData);
+        return null;
+      }
+      
+      const binaryData = atob(compressedData);
 
         const charData = binaryData.split('').map(x => x.charCodeAt(0));
         const binData = new Uint8Array(charData);
@@ -194,6 +209,7 @@ const TI4Overlay = () => {
       maxCommodities: playerData.maxCommodities[index],
       actionCards: playerData.actionCards[index],
       promissoryNotes: playerData.promissoryNotes[index],
+      secretsInHand: playerData.secretsInHand[index],
       leaders: {
         agent: playerData.leaders.agent[index],
         commander: playerData.leaders.commander[index],
@@ -203,46 +219,21 @@ const TI4Overlay = () => {
   }
 
   return (
-    <div className="font-header fixed bottom-0 left-0 right-0 p-4 flex flex-col items-center">
-      {/* Toggle minimize button */}
-      <button
-        className="flex items-center justify-center bg-gray-900 bg-opacity-90 text-white rounded-t-lg p-2 -mb-2 z-10 hover:bg-opacity-100 transition-all duration-150"
-        onClick={() => setMinimized(!minimized)}
-      >
-        {minimized ? <ChevronUp size={20} /> : <ChevronDown size={20} />}
+    <div className="font-header fixed bottom-0 right-0 p-2 flex flex-col items-end">
+      <button onClick={() => setMinimized(!minimized)} className="bg-gray-800 rounded-full p-2 mb-1 text-white w-auto justify-center items-center border-b border-gray-700">
+        {minimized ? <ChevronLeft size={20} /> : <ChevronRight size={20} />}
       </button>
 
+      {/* Div visible only when minimized */}
+      <div className={`[writing-mode:sideways-lr] flex justify-center items-center font-avalors absolute bottom-0 h-26 right-0 bg-gray-800 text-white p-2 rounded-lg m-2 transition-all duration-300 ${minimized ? 'w-9' : 'opacity-0 w-0'}`}>
+        <span className=" font-avalors text-lg">PLAYERS</span>
+      </div>
 
       {/* Main overlay container */}
-      <div className={`bg-gray-900 bg-opacity-90 rounded-lg shadow-lg border border-gray-700 h-50 max-w-screen-xl w-auto transition-all duration-300 ${minimized ? 'max-h-11 overflow-hidden' : ' max-h-40 '}`}>
-        {/* Top status bar */}
-        <div className="bg-gray-800 rounded-t-lg p-2 text-white text-sm flex justify-between items-center border-b border-gray-700">
-          <div className="flex items-center">
-            <Shield className="mr-2 text-yellow-500" size={18} />
-            <span className="font-bold">Twilight Imperium IV</span>
-            <span className="ml-4 text-gray-400">Round {data.general.round}</span>
-          </div>
-
-          <div className="flex items-center px-2 space-x-4">
-            <div className="flex items-center bg-yellow-900 bg-opacity-50 px-3 py-1 rounded-lg">
-              <span className="font-bold">Speaker: {data.playerData.name[data.playerData.speaker]}</span>
-            </div>
-            <div className="flex items-center">
-              <Zap size={16} className="mr-1 text-green-400" />
-              <span>Active: {data.playerData.name[data.playerData.active]}</span>
-            </div>
-            <div className="flex items-center">
-              <Database size={16} className="mr-1 text-purple-400" />
-              <span>Last Updated: {new Date().toLocaleTimeString()}</span>
-            </div>
-          </div>
-        </div>
-
-        {/* Main content area */}
-        <div className="p-4 font-astro">
-          {/* Player icons row */}
+      <div className={`bg-gray-900 z-10 font-avalors bg-opacity-90 rounded-lg shadow-lg border border-gray-700 h-auto transition-all duration-300 ${minimized ? 'opacity-0 w-0 overflow-hidden' : 'w-124'}`}>
+        <div className="p-2 font-astro">
           <div className="flex justify-between items-center">
-            <div className="flex space-x-6">
+            <div className="flex">
               {data.playerData.name.map((name: string, index: number) => (
                 <PlayerIcon
                   key={index}
@@ -252,25 +243,12 @@ const TI4Overlay = () => {
                   isActivePlayer={data.playerData.color[index] === data.general.activePlayer}
                   getImageSrc={(id) => getImageSrc(id)}
                   isImageLoaded={(id) => isImageLoaded(id)}
+                  onTouchStart={() => setActiveHover(index)}
+                  onTouchEnd={() => setActiveHover(HOVER_STATES.NONE)}
                   onMouseEnter={() => setActiveHover(index)}
                   onMouseLeave={() => setActiveHover(HOVER_STATES.NONE)}
                 />
               ))}
-            </div>
-
-            {/* Scoring icon */}
-            <div
-              className="relative flex items-center justify-center h-16 w-16 bg-gray-800 rounded-full cursor-pointer hover:ring-2 hover:ring-yellow-400 transition-all duration-150 shadow-lg"
-              onMouseEnter={() => setActiveHover(HOVER_STATES.OBJECTIVE)}
-              onMouseLeave={() => setActiveHover(HOVER_STATES.NONE)}
-            >
-              <Award size={32} className="text-yellow-400" />
-              <div className="absolute -bottom-1 -right-1 bg-gray-900 rounded-full h-6 w-6 flex items-center justify-center text-xs text-white border border-gray-700">
-                {getVictoryTarget()}
-              </div>
-              {activeHover === HOVER_STATES.OBJECTIVE && (
-                <ScoringHoverCard getImageSrc={(id) => getImageSrc(id)} data={data} />
-              )}
             </div>
           </div>
         </div>
@@ -278,10 +256,5 @@ const TI4Overlay = () => {
     </div>
   );
 };
-
-function getVictoryTarget() {
-  return 10;
-};
-
 
 export default TI4Overlay;

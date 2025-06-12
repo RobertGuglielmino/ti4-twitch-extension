@@ -15,7 +15,7 @@ const LeaderItem = ({ agent, commander, hero, getImageSrc }: LeaderItemProps) =>
                 Object.entries(leaders).map(([leader, available]) => {
                     const leaderId = leader.toLowerCase();
                     return (
-                        <div key={leader} className={`relative h-12 w-18 flex flex-col justify-center bg-top-right border-2 rounded-sm p-1 my-1 overflow-hidden ${available ? "border-slate-300" : "border-gray-600 opacity-50"}`}>
+                        <div key={leader} className={`relative h-12 w-20 flex flex-col justify-center bg-top-right border-2 rounded-sm p-1 my-1 overflow-hidden ${available ? "border-slate-300" : "border-gray-600 opacity-50"}`}>
                             <img
                                 src={getImageSrc(leaderId)}
                                 alt={leader}

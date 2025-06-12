@@ -18,16 +18,16 @@ const PlayerHoverCard = ({ player, hoverIcon, getImageSrc }: PlayerHoverCardProp
     const techColors = ["blue","red","yellow","green"];
 
     return (
-        <div className="border-red-400 text-center font-astro border-2 absolute left-0 bottom-16 z-50 rounded-lg p-3 shadow-xl border border-gray-700 w-150 max-h-[100vh] text-white">
+        <div className="border-red-400 text-center font-astro border-2 absolute right-0 bottom-16 z-50 rounded-lg p-3 shadow-xl w-150 max-h-[100vh] text-white">
             <div className="absolute inset-0 bg-[url(@icons/backgrounds/tile_049.png)] bg-scale-[auto_200px] bg-[length:auto_300%] bg-center brightness-25"></div>
             <div className="relative z-10">
                 <div className="flex items-center mb-3">
                     <div className="h-10 w-10 rounded-full mr-2 flex items-center justify-center" style={{ backgroundColor: player.color }}>
-                        <img
+                        {player.faction != "" ? <img
                             src={getImageSrc(hoverIcon)}
                             alt={player.faction}
                             className="w-8 h-8 object-contain"
-                        />
+                        /> : <div className="flex text-4xl text-center text-black font-avalors">?</div>}
                     </div>
                     <div className="flex-1 min-w-0">
                         <h3 className="font-bold font-astro text-lg truncate">{player.name}</h3>
@@ -38,7 +38,7 @@ const PlayerHoverCard = ({ player, hoverIcon, getImageSrc }: PlayerHoverCardProp
                     </div>
                 </div>
 
-                <div className="flex flew-row gap-8 justify-evenly">
+                <div className="flex flew-row gap-4 justify-evenly">
                     <div className="flex flex-col">
                         <div className="w-auto">
                             <SectionHeader>Trade</SectionHeader>
@@ -55,12 +55,6 @@ const PlayerHoverCard = ({ player, hoverIcon, getImageSrc }: PlayerHoverCardProp
                                     </Commodities>
                                 <TradeGoods getImageSrc={(id) => getImageSrc(id)}>{player.tradeGoods}</TradeGoods>
                             </div>
-                            {/* <div className="grid grid-cols-2 w-auto gap-1">
-                                <ActionCards>{player.actionCards}</ActionCards>
-                                <Promissory>{player.promissoryNotes}</Promissory>
-                                <Commodities>{player.commodities}/{player.maxCommodities}</Commodities>
-                                <TradeGoods>{player.tradeGoods}</TradeGoods>
-                            </div> */}
                         </div>
 
                         <SectionHeader>Counters</SectionHeader>
@@ -74,12 +68,12 @@ const PlayerHoverCard = ({ player, hoverIcon, getImageSrc }: PlayerHoverCardProp
                     <div>
                         
                         <SectionHeader>Secrets</SectionHeader>
-                        <SecretObjItem getImageSrc={(id) => getImageSrc(id)} secrets={player.secretObjectives} inHand={1} />
+                        <SecretObjItem getImageSrc={(id) => getImageSrc(id)} secrets={player.secretObjectives} inHand={player.secretsInHand} />
                     </div>
-                    <div className="w-auto shrink">
+                    <div className="w-full shrink">
                         
                         <SectionHeader>Unit Upgrades</SectionHeader>
-                        <div className="flex flex-row flex-wrap w-auto">
+                        <div className="flex flex-row flex-wrap justify-center w-full">
                             {player.technologies.unit.map(tech => tech === true) &&
                                 <UnitUpgrades getImageSrc={(id) => getImageSrc(id)} techs={player.technologies.unit} faction={player.faction} factionTechs={player.technologies.faction} />}
                         </div>
@@ -97,10 +91,9 @@ const PlayerHoverCard = ({ player, hoverIcon, getImageSrc }: PlayerHoverCardProp
                     <div className="col-span-3">
                         <SectionHeader>Technologies</SectionHeader>
                         <div className="flex flex-row gap-2">
-
                         {
                             Object.entries(player.technologies).map(([k, v]) => 
-                                (techColors.includes(k) &&<TechTreeV2 
+                                (techColors.includes(k) && <TechTreeV2 
                                     getImageSrc={(id) => getImageSrc(id)} 
                                     key={k} 
                                     color={k} 

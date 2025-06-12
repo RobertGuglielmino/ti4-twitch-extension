@@ -44,6 +44,7 @@ export interface PlayerArrayV2 {
     maxCommodities: number[],
     actionCards: number[],
     promissoryNotes: number[],
+    secretsInHand: number[],
     leaders: { commander: boolean[], hero: boolean[], agent: boolean[] },
     active: number,
     speaker: number,
@@ -86,6 +87,7 @@ export interface Player {
     maxCommodities: number,
     actionCards: number,
     promissoryNotes: number,
+    secretsInHand: number,
     leaders: { commander: boolean, hero: boolean, agent: boolean }
 }
 

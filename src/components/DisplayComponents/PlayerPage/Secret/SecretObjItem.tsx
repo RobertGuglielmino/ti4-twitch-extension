@@ -14,7 +14,7 @@ const SecretObjItem = ({ getImageSrc, secrets, inHand }: SecretObjItem) => {
         }
         for (let i = 0; i < secrets.length; i++) {
             scoredSecrets.push(
-                <div key={i} className="relative h-12 w-18 flex flex-col justify-center bg-top-right border-2 rounded-sm p-1 my-1 border-red-700 overflow-hidden">
+                <div key={i} className="relative h-12 w-20 flex flex-col justify-center bg-top-right border-2 rounded-sm p-1 my-1 border-red-700 overflow-hidden">
                     <img
                         src={getImageSrc("secret_front")}
                         alt=""
@@ -39,7 +39,7 @@ const SecretObjItem = ({ getImageSrc, secrets, inHand }: SecretObjItem) => {
         }
         for (let i = 0; i < inHand; i++) {
             unscoredSecrets.push(
-                <div key={i} className="relative h-12 w-18 flex flex-col justify-center bg-top-right border-2 rounded-sm p-1 my-1 border-red-950">
+                <div key={i} className="relative h-12 w-20 flex flex-col justify-center bg-top-right border-2 rounded-sm p-1 my-1 border-red-950">
                     <img
                         src={getImageSrc("secret")}
                         alt=""
@@ -61,7 +61,7 @@ const SecretObjItem = ({ getImageSrc, secrets, inHand }: SecretObjItem) => {
         }
         for (let i = 0; i < (3 - secrets.length - inHand); i++) {
             unclaimedSecrets.push(
-                <div key={i} className="relative h-12 w-18 flex flex-col justify-center bg-top-right border-2 rounded-sm p-1 my-1 bg-slate-950 opacity-50 border-slate-700">
+                <div key={i} className="relative h-12 w-20 flex flex-col justify-center bg-top-right border-2 rounded-sm p-1 my-1 bg-slate-950 opacity-50 border-slate-700">
                 </div>
             );
         }
